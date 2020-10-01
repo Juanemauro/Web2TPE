@@ -1,27 +1,4 @@
-<?php
-/* Smarty version 3.1.34-dev-7, created on 2020-10-01 03:20:25
-  from 'C:\xampp\htdocs\Proyectos\TPEWEB2\templates\header.tpl' */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5f752ed96c4b90_61549634',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    '8cf524bb395f97b8a47f5500fc19483424bde2be' => 
-    array (
-      0 => 'C:\\xampp\\htdocs\\Proyectos\\TPEWEB2\\templates\\header.tpl',
-      1 => 1601515223,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-  ),
-),false)) {
-function content_5f752ed96c4b90_61549634 (Smarty_Internal_Template $_smarty_tpl) {
-?><html lang="en">
+<html lang="en">
 <head>
     <base href="BASE_URL">    
     <meta charset="UTF-8">
@@ -30,8 +7,7 @@ function content_5f752ed96c4b90_61549634 (Smarty_Internal_Template $_smarty_tpl)
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <title><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
-</title>
+    <title>{$titulo}</title>
 </head>
 <body>
     <div class="contenedor">
@@ -56,8 +32,8 @@ function content_5f752ed96c4b90_61549634 (Smarty_Internal_Template $_smarty_tpl)
                         <a class="nav-link" href="showFaq">FAQ</a>
                     </li>
                 </ul>
-                        </div>
+            {*{include 'templates/login.tpl'} ---- acá pondríamos el template para loguearse *}
+            </div>
             </nav>
         </div>
-        <?php }
-}
+        

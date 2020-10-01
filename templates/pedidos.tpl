@@ -1,32 +1,9 @@
-<?php
-/* Smarty version 3.1.34-dev-7, created on 2020-09-30 23:43:02
-  from 'C:\xampp\htdocs\Proyectos\TPEWEB2\templates\pedidos.tpl' */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5f74fbe6c03a85_42626980',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    '5672f43db810ef3bc41594d13fc9112df4d2cd92' => 
-    array (
-      0 => 'C:\\xampp\\htdocs\\Proyectos\\TPEWEB2\\templates\\pedidos.tpl',
-      1 => 1601502049,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-    'file:templates/header.tpl' => 1,
-    'file:templates/footer.tpl' => 1,
-  ),
-),false)) {
-function content_5f74fbe6c03a85_42626980 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_subTemplateRender('file:templates/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
+{include 'templates/header.tpl'}
 <div class="slide">
-        <p>
+    {*{if $loggeado == true}
+    {include 'templates/pedidosAdm.tpl'}* ---- acá pondríamos el template si es que el usuario está logueado 
+    {else}*}
+    <p>
     <form method= "GET" action="addPedido" class="form">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -46,18 +23,9 @@ $_smarty_tpl->_subTemplateRender('file:templates/header.tpl', $_smarty_tpl->cach
             <label for="inputPedido">Producto</label>
             <select class="form-control" name="inputPedido" id="inputPedido">
             <option value="" selected>Elegir...</option>
-                <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['productos']->value, 'producto');
-$_smarty_tpl->tpl_vars['producto']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['producto']->value) {
-$_smarty_tpl->tpl_vars['producto']->do_else = false;
-?>
-                    <option value="<?php echo $_smarty_tpl->tpl_vars['producto']->value->id_producto;?>
-"> <?php echo $_smarty_tpl->tpl_vars['producto']->value->nombre;?>
-</option>
-                <?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>            
+                {foreach from=$productos item=$producto}
+                    <option value="{$producto->id_producto}"> {$producto->nombre}</option>
+                {/foreach}            
             </select>
         </div>
         <div>
@@ -112,27 +80,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             <td>Dirección</td>
             <td>Detalle</td>
         </tr>
-        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['pedidos']->value, 'pedido');
-$_smarty_tpl->tpl_vars['pedido']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['pedido']->value) {
-$_smarty_tpl->tpl_vars['pedido']->do_else = false;
-?>
+        {foreach  from=$pedidos item=$pedido}
             <tr>
-                <td><?php echo $_smarty_tpl->tpl_vars['pedido']->value->cliente;?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['pedido']->value->nombre;?>
-</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['pedido']->value->direccion;?>
-</td>
-                <td><a href="detailPedido/<?php echo $_smarty_tpl->tpl_vars['pedido']->value->id_pedido;?>
-" class="btn btn-primary">Detalle</a></td>
+                <td>{$pedido->cliente}</td>
+                <td>{$pedido->nombre}</td>
+                <td>{$pedido->direccion}</td>
+                <td><a href="detailPedido/{$pedido->id_pedido}" class="btn btn-primary">Detalle</a></td>
             </tr>
-        <?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+        {/foreach}
     </table>
 </div>
-<?php $_smarty_tpl->_subTemplateRender('file:templates/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-}
-}
+{include 'templates/footer.tpl'}
+{*{/if}*}

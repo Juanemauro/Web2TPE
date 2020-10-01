@@ -1,30 +1,4 @@
-<?php
-/* Smarty version 3.1.34-dev-7, created on 2020-10-01 03:11:09
-  from 'C:\xampp\htdocs\Proyectos\TPEWEB2\templates\faq.tpl' */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5f752cadad5ea1_68153889',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    'baa8a47f8eda57906d1ff8c4ef1a8593f37098b9' => 
-    array (
-      0 => 'C:\\xampp\\htdocs\\Proyectos\\TPEWEB2\\templates\\faq.tpl',
-      1 => 1601514444,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-    'file:templates/header.tpl' => 1,
-    'file:templates/footer.tpl' => 1,
-  ),
-),false)) {
-function content_5f752cadad5ea1_68153889 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_subTemplateRender('file:templates/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
+{include 'templates/header.tpl'}
 <div class="slide">
     <p>
         <div class="accordion" id="accordionExample">
@@ -70,6 +44,4 @@ $_smarty_tpl->_subTemplateRender('file:templates/header.tpl', $_smarty_tpl->cach
         </div>
     </p>
 </div>
-<?php $_smarty_tpl->_subTemplateRender('file:templates/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-}
-}
+{include 'templates/footer.tpl'}
