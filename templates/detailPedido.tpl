@@ -1,6 +1,6 @@
 {include 'templates/header.tpl'}
 <div class="slide">
-    <table class="pedidos_tabla"
+    <table class="pedidos_tabla">
         <tr>
             <td>Cliente</td>
             <td>Producto</td>
