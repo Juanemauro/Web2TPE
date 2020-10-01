@@ -1,0 +1,150 @@
+*{box-sizing: border-box;}
+body{
+    background-color:white;
+}
+
+.contenedor{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
+.logo{
+    grid-column:1/3 ;
+    grid-row:1 ;
+    background-color: white;
+}
+.navbar{
+    display: none;
+}
+.slide{
+    grid-column:1/3 ;
+    grid-row:2/5 ;
+}
+.pedidos{
+    grid-column:1/3 ;
+    grid-row:4 ;
+}
+.productos{
+    grid-column:1/3 ;
+    grid-row:5 ;
+}
+.listnav{
+    grid-column:1 ;
+    grid-row:6 ;
+    background-color: black;
+    color: white;
+}
+
+footer{
+    background-color: black;
+    color: black;
+}
+
+h5{
+    color:white;
+}
+
+.social{
+    color:white;
+
+}
+p{
+    color:white;
+}
+
+.img{
+    width: 100%;
+}.logo{
+    padding: 5px;
+}
+.lista{
+    line-height: 1.5em;
+}
+.lista>ul{
+    list-style: none;
+}
+.lista>ul>li>a{
+    color: white;
+    text-decoration: none;
+}
+.logosredes{
+    width: 22px;
+}
+
+
+@media(min-width: 1200px){
+    .contenedor{
+        grid-template-columns: repeat(4,1fr);
+        grid-auto-rows: minmax(50px, auto);
+        padding: 0;
+        margin: 0;
+    }
+    .logo{
+        grid-column:1/5;
+        grid-row:1 ;
+        background-color: white;
+        text-align: center;
+    }
+    .navbar{
+        grid-column:1/5 ;
+        grid-row:2;
+        display: block;
+    }
+    .slide{
+        grid-column:2/4 ;
+        grid-row:3/5 ;
+    }
+    .pedidos{
+        grid-column:2 ;
+        grid-row:5 ;
+        text-align: center;
+    }
+    .productos{
+        grid-column:3;
+        grid-row:5 ;
+        text-align: center; 
+    }
+    .listnav{
+        grid-column:1/3;
+        grid-row:7 ;
+    }
+    footer{
+        grid-column:1/6 ;
+        grid-row:8 ;
+    }
+    img{
+        width: auto;
+    }
+}
+
+/* TABLA */
+
+table{
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td{
+	padding: 20px;
+}
+
+thead{
+	background-color: #246355;
+	border-bottom: solid 5px #0F362D;
+	color: white;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover td{
+	background-color: #369681;
+	color: white;
+}
+
+.tick{
+    width: 20px;
+}
