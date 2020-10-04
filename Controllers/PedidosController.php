@@ -8,21 +8,35 @@ class PedidosController {
     private $pedidosModel;
     private $pedidosView;
     private $productosController;
+    private $user;
     // CONSTRUCTOR
     function __construct(){
         $this->pedidosModel = new PedidosModel();
         $this->pedidosView = new PedidosView();
         $this->productosModel = new ProductosModel();
-        $this->productosController = new ProductosController();  
+        $this->productosController = new ProductosController(); 
+        $this->user = new UsersController();
     } 
     // ------------------------ MÉTODOS 
     // MOSTRAR PEDIDOS
-    function showPedidos(){
+    function Pedidos(){
         $pedidos = $this->pedidosModel->getPedidos();
         $productos = $this->productosModel->getProductos();
-        $this->pedidosView->showPedidosView($pedidos, $productos);
+        $loggeado = $this->user->checkLoggedIn();
+        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado);
     }
-    // CARGAR PEDIDOS
+    // NEW PEDIDO
+    function newPedido(){
+        $pedidos = $this->pedidosModel->getPedidos();
+        $productos = $this->productosModel->getProductos();
+        $loggeado = $this->user->checkLoggedIn();
+        if ($loggeado == true){
+            $this->pedidosView->showPedidoForm($pedidos, $productos);
+        }else{
+            header("Location: " . PEDIDOS);
+        }         
+    }    
+    // CARGAR PEDIDO
     function addPedido(){
         $cliente=$_GET["inputName"] . " ". $_GET["inputLastname"]; //concateno los datos que vienen por form
         $direccion=$_GET["inputAddress"];
@@ -37,14 +51,30 @@ class PedidosController {
             $this->pedidosView->showError("Faltan campos obligatorios.");
         }
     }
-    // EDITAR PEDIDO
+    // MUESTRA TABLA CON LOS PEDIDOS
+    function menuEditPedido(){
+        $pedidos = $this->pedidosModel->getPedidos();
+        $productos = $this->productosModel->getProductos();
+        $loggeado = $this->user->checkLoggedIn();
+        if ($loggeado == true){
+            $this->pedidosView->showMenuEditPedido($pedidos, $productos);
+        }else{
+            header("Location: " . PEDIDOS);
+        }    
+    }
+    // EDITAR PEDIDO X
     function editPedido($params = null){
         //agregar la parte de usuario, acá sólo debería poder editar el dueño de la página (administrador)
         $id = $params[':ID'];
         $pedido = $this->pedidosModel->getPedido($id);
         $productos = $this->productosModel->getProductos();
-        $this->pedidosView->showUpdatedPedido($pedido, $productos, $id);
-    }
+        $loggeado = $this->user->checkLoggedIn();
+        if ($loggeado == true){
+            $this->pedidosView->showUpdatedPedido($pedido, $productos, $id);
+        }else{
+            header("Location: " . PEDIDOS);
+        }        
+    }    
     // MOSTRAR PEDIDOS ACTUALIZADOS
     function showEditedPedido(){
         $cliente = $_GET["nombrePedidoEditado"];
@@ -69,35 +99,55 @@ class PedidosController {
         if ($pedido)
             $this->pedidosView->showDetailPedido($pedido);
     } 
-    // BORRAR PEDIDOS
+    // MUESTRA TABLA CON PEDIDOS A BORRAR
+    function menuDeletePedido(){
+        $pedidos = $this->pedidosModel->getPedidos();
+        $productos = $this->productosModel->getProductos();
+        $loggeado = $this->user->checkLoggedIn();
+        if ($loggeado == true){
+            $this->pedidosView->showMenuDeletePedido($pedidos, $productos);
+        }else{
+            header("Location: " . PEDIDOS);
+        }    
+    }
+    // BORRA PEDIDO X
     function deletePedido($params = null){
-        $id=$params[':ID'];
-        $this->pedidosModel->deletePedido($id);
-        header("Location: " . PEDIDOS);
+        $id = $params[':ID'];
+        $loggeado = $this->user->checkLoggedIn();
+        if ($loggeado == true){
+            $this->pedidosModel->deletePedido($id);
+            header("Location: " . PEDIDOS);
+        }else{        
+            header("Location: " . PEDIDOS);
+        }
     }
     // MOSTRAR PEDIDOS EN FORMA DESCENDENTE SEGÚN ID_PRODUCTO
     function showOrderedPedidosByProductoDesc(){
         $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoDesc();
         $productos = $this->productosModel->getProductos();
-        $this->pedidosView->showPedidosView($pedidos, $productos);
+        $loggeado = $this->user->checkLoggedIn();
+        $this->pedidosView->showPedidosView($pedidos, $productos, $$loggeado);
     }
     // MOSTRAR PEDIDOS EN FORMA ASCENDENTE SEGÚN ID_PRODUCTO
     function showOrderedPedidosByProductoAsc(){
         $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoAsc();
         $productos = $this->productosModel->getProductos();
-        $this->pedidosView->showPedidosView($pedidos, $productos);
+        $loggeado = $this->user->checkLoggedIn();
+        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado);
     }
     // MOSTRAR PEDIDOS EN FORMA DESCENDENTE SEGÚN NOMBRE DE CLIENTE
     function showOrderedPedidosByClienteDesc(){
         $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteDesc();
         $productos = $this->productosModel->getProductos();
-        $this->pedidosView->showPedidosView($pedidos, $productos);
+        $loggeado = $this->user->checkLoggedIn();
+        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado);
     }
     // MOSTRAR PEDIDOS EN FORMA ASCENDENTE SEGÚN NOMBRE DE CLIENTE
     function showOrderedPedidosByClienteAsc(){
         $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteAsc();
         $productos = $this->productosModel->getProductos();
-        $this->pedidosView->showPedidosView($pedidos, $productos);
+        $loggeado = $this->user->checkLoggedIn();
+        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado);
     }
 }
 ?>

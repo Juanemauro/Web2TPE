@@ -8,11 +8,7 @@
         <div>
             <label for="direccionPedidoEditado">Dirección:</label>
             <input type="text" class="form-control" name="direccionPedidoEditado" id="direccionPedidoEditado" value="{$pedidos->direccion}">
-        </div>
-        {*<div>
-            <label for="nombreProductoDelPedidoEdtiado">Producto:</label>
-            <input type="text" class="form-control" name="nombreProductoDelPedidoEdtiado" id="nombreProductoDelPedidoEdtiado" value="{$pedido->nombre}">
-        </div>*}        
+        </div>        
         <div>
             <label for="idProductoEditado">Producto</label>
             <select class="form-control" name="idProductoEditado" id="idProductoEditado">

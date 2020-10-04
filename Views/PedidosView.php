@@ -9,18 +9,40 @@ class PedidosView{
         $this->smarty->assign('basehref', BASE_URL);
     }
     // Muestra los pedidos
-    function showPedidosView($pedidos, $productos){
+    function showPedidosView($pedidos, $productos, $loggeado){
         $this->smarty->assign('titulo', "Pedidos");
         $this->smarty->assign('pedidos', $pedidos);
         $this->smarty->assign('productos', $productos);
+        $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->display('templates/pedidos.tpl');
+    }
+    // Muestra form para realizar un nuevo pedido
+    function showPedidoForm($pedidos, $productos){
+        $this->smarty->assign('pedidos', $pedidos);
+        $this->smarty->assign('productos', $productos);
+        $this->smarty->assign('titulo', "Nuevo Pedido");
+        $this->smarty->display('templates/newPedido.tpl');
+    }
+    // Muestra la tabla con todos los pedidos para elegir el que quiero editar
+    function showMenuEditPedido($pedidos, $productos){
+        $this->smarty->assign('pedidos', $pedidos);
+        $this->smarty->assign('productos', $productos);
+        $this->smarty->assign('titulo', "Editar Pedidos");
+        $this->smarty->display('templates/menuEditPedido.tpl');
+    }
+    // Muestra la tabla con todos los pedidos para elegir el que quiero borrar
+    function showMenuDeletePedido($pedidos, $productos){
+        $this->smarty->assign('pedidos', $pedidos);
+        $this->smarty->assign('productos', $productos);
+        $this->smarty->assign('titulo', "Borrar Pedidos");
+        $this->smarty->display('templates/menuDeletePedido.tpl');
     }
     // Muestra un mensaje de error al usuario cuando no completó todos los campos del formulario
     function showError($mensajeError){
         echo "<h1>ERROR!</h1>";
         echo "<h2>{$mensajeError}</h2>";
     }
-    // Muestra un form para hacer el update de un pedido
+    // Muestra un form con los pedidos actualizados
     function showUpdatedPedido($pedidos, $productos, $id){
         $this->smarty->assign('titulo', "editar pedidos");
         $this->smarty->assign('pedidos', $pedidos);

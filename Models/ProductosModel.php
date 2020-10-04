@@ -47,10 +47,12 @@ class ProductosModel {
         $sentencia = $this->db->prepare('INSERT INTO producto(nombre, descripcion, precio) VALUES(?,?,?)');
         $sentencia->execute(array($nombre, $descripcion, $precio));
     }  
+    // Actualiza un pedido en la BDD
     function updateProducto($nombre, $descripcion, $precio, $id){
         $sentencia = $this->db->prepare('UPDATE producto SET nombre=? , descripcion=?, precio=? WHERE id_producto = ?' );
         $sentencia->execute(array($nombre, $descripcion, $precio, $id));
     }
+    // Borra un producto de la BDD
     function deleteProducto($id){
         $sentencia = $this->db->prepare('DELETE FROM producto WHERE producto.id_producto = ?' );
         $sentencia->execute(array($id));

@@ -14,6 +14,7 @@ class HomeView {
         $this->smarty->assign('titulo',"Home");
         $this->smarty->display('templates/Home.tpl');
     }
+    // MOSTRAR FAQ
     function showFaq(){
         $this->smarty->assign('titulo', "FAQ");
         $this->smarty->display('templates/faq.tpl');

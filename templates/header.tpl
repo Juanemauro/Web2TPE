@@ -23,16 +23,18 @@
                         <a class="nav-link" href="Home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="showPedidos">Pedidos</a>
+                        <a class="nav-link" href="Pedidos">Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="showProductos">Productos</a>
+                        <a class="nav-link" href="Productos">Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="showFaq">FAQ</a>
                     </li>
+                    <a href="login" class="btn btn-primary">Login</a>
+                    <a href="logout" class="btn btn-primary">Logout</a>
+                    <a href="registroForm" class="btn btn-primary">Registrarse</a>
                 </ul>
-            {*{include 'templates/login.tpl'} ---- acá pondríamos el template para loguearse *}
             </div>
             </nav>
         </div>

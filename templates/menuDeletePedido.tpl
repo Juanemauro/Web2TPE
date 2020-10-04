@@ -1,9 +1,5 @@
 {include 'templates/header.tpl'}
 <div class="slide">
-    {if $loggeado == true}
-        {include 'templates/pedidosAdmin.tpl'}
-    {else}
-    <p>
     <table class="pedidos_tabla">
         <tr>
             <td><form>
@@ -35,10 +31,9 @@
                 <td>{$pedido->cliente}</td>
                 <td>{$pedido->nombre}</td>
                 <td>{$pedido->direccion}</td>
-                <td><a href="detailPedido/{$pedido->id_pedido}" class="btn btn-primary">Detalle</a></td>
+                <td><a href="deletePedido/{$pedido->id_pedido}" class="btn btn-primary">Borrar</a></td>
             </tr>
         {/foreach}
     </table>
-    {/if}
 </div>
 {include 'templates/footer.tpl'}

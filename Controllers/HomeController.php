@@ -2,7 +2,7 @@
 include_once './Views/HomeView.php';
 
 class HomeController{
-    // DECLARACIÓN DE VARIABLES
+    // DECLARACIÓN DE ATRIBUTOS
     private $view;
     // CONSTRUCTOR
     function __construct(){
@@ -12,6 +12,7 @@ class HomeController{
     function showHome(){
         $this->view->showHomeView();
     }
+    // SHOW FAQS
     function showFaq(){
         $this->view->showFaq();
     }

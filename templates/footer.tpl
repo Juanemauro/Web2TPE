@@ -1,12 +1,3 @@
-    
-    {*<div class="social">
-        <ul class="der">
-            <li> <a href="http://www.twitter.com/elazuleniocomidas"><img src="images/logotwitter.png" class="logosredes"> Twitter </a></li>
-            <li> <a href="http://www.instagram.com/elazuleniocomidas"><img src="images/logoinstagram.png" class="logosredes"> Instagram </a></li>
-            <li> <a href="http://www.Facebook.com/elazuleniocomidas"><img src="images/logofacebook.png" class="logosredes"> Facebook </a></li>
-            <li> <a href="http://www.Youtube.com/elazuleniocomidas"><img src="images/logoyoutube.png" class="logosredes"> Youtube </a></li>
-        </ul>
-    </div>*}
 </div>
 
 <!-- Footer -->
@@ -24,8 +15,8 @@
                 <h5 class="text-uppercase">SECCIONES</h5>
                 <ul class="list-unstyled">
                 <li><a href="showHome">Home</a></li>
-                <li><a href="showPedidos">Pedidos</a></li>
-                <li><a href="showProductos">Productos</a></li>
+                <li><a href="Pedidos">Pedidos</a></li>
+                <li><a href="Productos">Productos</a></li>
                 <li><a href="showFaq">FAQ</a></li>          
                 </ul>
             </div>

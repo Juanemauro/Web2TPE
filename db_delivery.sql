@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2020 a las 03:11:33
+-- Tiempo de generación: 05-10-2020 a las 01:41:08
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -42,9 +42,8 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_producto`, `direccion`, `cliente`, `entregado`, `cantidad`) VALUES
-(1, 1, '25 de Mayo 0075', 'Juan Mauro', 1, 2),
-(2, 2, 'San Martín 150', 'María Pérez', 0, 10),
-(4, 1, 'Las Heras 800', 'Diego Vásquez', 0, 10);
+(1, 1, '25 de Mayo 0075', 'Juan Mauro', 1, 20),
+(6, 1, 'Las Heras 8000', 'Diego Vásquez', 0, 15);
 
 -- --------------------------------------------------------
 
@@ -64,8 +63,29 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `precio`, `descripcion`, `nombre`) VALUES
-(1, 100, 'Precio por docena.', 'Empanadas'),
-(2, 170, 'Pizza grande', 'Pizza Grande');
+(1, 150, 'Precio por docena.', 'Empanadas'),
+(3, 300, 'Pizza grande', 'Pizza'),
+(5, 500, 'Acelga', 'Tarta');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `alias` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `alias`, `password`) VALUES
+(2, 'JM', '$2y$10$EMbyiIAT43itAf5tVt5Q9OWjH3Ud11MB2i1i2gnWNHopo0ZbI8kVW'),
+(3, 'javito', '$2y$10$7IjoPSLcBXXVhAEIhL.lCeFZgVZ0/FrEuMMUoT8rxQtLj.MXrhqfy');
 
 --
 -- Índices para tablas volcadas
@@ -85,6 +105,12 @@ ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`);
 
 --
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -92,13 +118,19 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

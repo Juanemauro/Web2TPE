@@ -72,6 +72,8 @@ p{
 }
 
 
+
+
 @media(min-width: 1200px){
     .contenedor{
         grid-template-columns: repeat(4,1fr);
