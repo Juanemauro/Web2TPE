@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-10-2020 a las 01:41:08
+-- Tiempo de generación: 08-10-2020 a las 05:00:07
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -42,7 +42,7 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_producto`, `direccion`, `cliente`, `entregado`, `cantidad`) VALUES
-(1, 1, '25 de Mayo 0075', 'Juan Mauro', 1, 20),
+(1, 1, '25 de Mayo 222', 'Juan Mauro', 1, 1),
 (6, 1, 'Las Heras 8000', 'Diego Vásquez', 0, 15);
 
 -- --------------------------------------------------------
@@ -85,7 +85,9 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `alias`, `password`) VALUES
 (2, 'JM', '$2y$10$EMbyiIAT43itAf5tVt5Q9OWjH3Ud11MB2i1i2gnWNHopo0ZbI8kVW'),
-(3, 'javito', '$2y$10$7IjoPSLcBXXVhAEIhL.lCeFZgVZ0/FrEuMMUoT8rxQtLj.MXrhqfy');
+(7, 'Diego', '$2y$10$/t37R9zZl7CedmDzkI9hQeBJAFZqXod254CXNIHQvrAUJdkB8Tzwa'),
+(8, 'ui', '$2y$10$ekhCZEMNWOGcGblmQ2yLVOxRzWpofY2HRqEcmjxfrjXN/AXPsXpKe'),
+(9, 'ioooo', '$2y$10$hGGfwtg6/Ih.iFOk0LQcVO/fElvA0o4ayPM4kIeTTs8o7A7FlR59q');
 
 --
 -- Índices para tablas volcadas
@@ -118,7 +120,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -130,7 +132,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

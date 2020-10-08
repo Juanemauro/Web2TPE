@@ -31,7 +31,7 @@
                 <td>{$pedido->cliente}</td>
                 <td>{$pedido->nombre}</td>
                 <td>{$pedido->direccion}</td>
-                <td><a href="deletePedido/{$pedido->id_pedido}" class="btn btn-primary">Borrar</a></td>
+                <td><a href="deletePedido/{$pedido->id_pedido}" class="btn btn-info">Borrar</a></td>
             </tr>
         {/foreach}
     </table>

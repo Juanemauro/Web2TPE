@@ -31,7 +31,7 @@
                 <td>{$producto->nombre}</td>                    
                 <td>{$producto->descripcion}</td>
                 <td>{$producto->precio}</td>
-                <td><a href="deleteProducto/{$producto->id_producto}" class="btn btn-primary">Borrar</a></td>
+                <td><a href="deleteProducto/{$producto->id_producto}" class="btn btn-info">Borrar</a></td>
             </tr>
         {/foreach}
     </table>

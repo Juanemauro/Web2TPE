@@ -64,9 +64,9 @@ class UsersController {
     // REGISTRA USUARIO -> no funciona, pero funcionó una vez
     function registrarUsuario(){
         $alias = $_POST['username'];
-        $pass = $_POST['password'];
-        $contraseña = password_hash($pass, PASSWORD_DEFAULT);
-        $this->usersModel->registrarUsuario($alias, $contraseña);
+        $passForm = $_POST['password'];
+        $password = password_hash($passForm, PASSWORD_DEFAULT);
+        $this->usersModel->registrarUsuario($alias, $password);
         header("Location: " . LOGIN);
     }
 

@@ -84,13 +84,12 @@ class PedidosController {
         $id_pedido = $_GET["idPedidoEditado"];
         $id_producto = $_GET["idProductoEditado"];
         ////Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
-        //if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($entregado) && !empty($id_producto)) {
+        if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($entregado) && !empty($id_producto)) {
             $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $entregado, $id_pedido, $id_producto);
             header("Location: " . PEDIDOS);
-          // echo $id_producto;
-        //}else{   
-          //  $this->pedidosView->showError("Faltan campos obligatorios.");
-        //}
+        }else{   
+          $this->pedidosView->showError("Faltan campos obligatorios.");
+        }
     }
     // VER DETALLE DE PEDIDO
     function detailPedido($params=null){

@@ -22,7 +22,7 @@ $r->addRoute("login", "GET", "UsersController", "loginForm"); // Muestra el form
 $r->addRoute("verificarUser", "POST", "UsersController", "verificarUser"); // Verificar usuario y contraseña
 $r->addRoute("logout", "GET", "UsersController", "logout"); // Desloggearse
 $r->addRoute("registroForm", "GET", "UsersController", "registroForm"); // Muestra form para registrarse
-$r->addRoute("registarse", "POST", "UsersController", "registrarUsuario"); // Registra el usuario en la BDD
+$r->addRoute("registrarse", "POST", "UsersController", "registrarUsuario"); // Registra el usuario en la BDD
 
 // HOME & FAQ
 $r->addRoute("home", "GET", "HomeController", "showHome"); // Mostrar Home
