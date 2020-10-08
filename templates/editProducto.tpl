@@ -1,4 +1,8 @@
-{include 'templates/header.tpl'}
+{if $loggeado == true}
+    {include 'templates/headerLoggeado.tpl'}
+{else}
+    {include 'templates/headerPublico.tpl'}
+{/if}
 <div class="slide">
     <form class="form-group" method= "GET" action="refreshProducto" >
         <div class="form-group">
@@ -17,6 +21,6 @@
         </div class="form-group">
         <button type="submit" class="btn btn-primary">Editar Producto</button> 
     </form>
-
+    <a href="Productos" class="btn btn-info">Volver a Productos</a>
  </div>
 {include 'templates/footer.tpl'} 

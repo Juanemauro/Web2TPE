@@ -1,8 +1,10 @@
-{include 'templates/header.tpl'}
+
+    {include 'templates/headerPublico.tpl'}
+
 <div class="slide">
     <form action="verificarUser" method="post">
         <div class="form-group">
-            <label for="user">Usuario</label>
+            <label for="user">Alias</label>
             <input class="form-control" id="alias" name="alias" aria-describedby="emailHelp" placeholder="Alias">
         </div>
         <div class="form-group">

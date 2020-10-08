@@ -1,4 +1,8 @@
-{include 'templates/header.tpl'}
+{if $loggeado == true}
+    {include 'templates/headerLoggeado.tpl'}
+{else}
+    {include 'templates/headerPublico.tpl'}
+{/if}
     <div class="slide">
         <form method= "POST" action="registrarse" class="form" >
             <div class="form-group">

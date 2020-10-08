@@ -1,4 +1,8 @@
-{include 'templates/header.tpl'}
+{if $loggeado == true}
+    {include 'templates/headerLoggeado.tpl'}
+{else}
+    {include 'templates/headerPublico.tpl'}
+{/if}
 <div class="slide">
     <table class="pedidos_tabla">
         <tr>
@@ -20,5 +24,6 @@
             {/if}
         </tr>
     </table>
+    <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
 </div>
 {include 'templates/footer.tpl'}

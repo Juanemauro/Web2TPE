@@ -17,14 +17,20 @@ class ProductosController{
     function Productos(){
         $productos = $this->model->getProductos();
         $loggeado = $this->user->checkLoggedIn();
-        $this->productosView->showProductosView($productos, $loggeado);
+        if ($loggeado == true){
+            $usuario = $_SESSION["ALIAS"];
+        }else{
+            $usuario = "";
+        }            
+        $this->productosView->showProductosView($productos, $loggeado, $usuario);
     }
     // MUESTRA FORM PARA AGREGAR UN PRODUCTO
     function newProducto(){
         $productos = $this->model->getProductos();
         $loggeado = $this->user->checkLoggedIn();
         if ($loggeado == true){
-            $this->productosView->showAddProductoForm($productos);
+            $usuario = $_SESSION["ALIAS"];
+            $this->productosView->showAddProductoForm($productos, $loggeado, $usuario);
         }else{
             header("Location: " . PRODUCTOS);
         }         
@@ -47,7 +53,8 @@ class ProductosController{
         $productos = $this->model->getProductos();
         $loggeado = $this->user->checkLoggedIn();
         if ($loggeado == true){
-            $this->productosView->showMenuEditProducto($productos);
+            $usuario = $_SESSION["ALIAS"];
+            $this->productosView->showMenuEditProducto($productos, $loggeado, $usuario);
         }else{
             header("Location: " . PRODUCTOS);
         }    
@@ -58,7 +65,8 @@ class ProductosController{
         $producto = $this->model->getProducto($id);
         $loggeado = $this->user->checkLoggedIn();
         if ($loggeado == true){
-            $this->productosView->showUpdatedProductos($producto, $id);
+            $usuario = $_SESSION["ALIAS"];
+            $this->productosView->showUpdatedProductos($producto, $id, $loggeado, $usuario);
         }else{
             header("Location: " . PEDIDOS);
         }
@@ -70,7 +78,7 @@ class ProductosController{
         $descripcion = $_GET["descripcionProductoEditado"];
         $precio = $_GET["precioProductoEditado"];
         $id = $_GET["idProductoEditado"];
-        ////Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
+        ////Verifico que los parámetros (campos del form de editar el producto) no estén vacíos
         if (!empty($nombre) && !empty($descripcion) && !empty($precio)) {
             $this->model->updateProducto($nombre, $descripcion, $precio, $id);
             header("Location: " . PRODUCTOS);
@@ -83,7 +91,8 @@ class ProductosController{
         $productos = $this->model->getProductos();
         $loggeado = $this->user->checkLoggedIn();
         if ($loggeado == true){
-            $this->productosView->showMenuDeleteProducto($productos);
+            $usuario = $_SESSION["ALIAS"];
+            $this->productosView->showMenuDeleteProducto($productos, $loggeado, $usuario);
         }else{
             header("Location: " . PEDIDOS);
         }    
@@ -93,6 +102,7 @@ class ProductosController{
         $id=$params[':ID'];
         $loggeado = $this->user->checkLoggedIn();
         if ($loggeado == true){
+            $usuario = $_SESSION["ALIAS"];
             $this->model->deleteProducto($id);
             header("Location: " . PRODUCTOS);
         }else{
@@ -102,26 +112,30 @@ class ProductosController{
     // MOSTRAR PRODUCTOS EN FORMA DESCENDENTE SEGÚN NOMBRE DE CLIENTE DESC
     function showOrderedProductosByNameDesc(){
         $loggeado = $this->user->checkLoggedIn();
+        $usuario = $_SESSION["ALIAS"];
         $productos = $this->model->getOrderedProductosByNameDesc();
-        $this->productosView->showProductosView($productos, $loggeado);
+        $this->productosView->showProductosView($productos, $loggeado, $usuario);
     }    
     // MOSTRAR PRODUCTOS EN FORMA DESCENDENTE SEGÚN NOMBRE DE CLIENTE ASC
     function showOrderedProductosByNameAsc(){
         $productos = $this->model->getOrderedProductosByNameAsc();
         $loggeado = $this->user->checkLoggedIn();
-        $this->productosView->showProductosView($productos, $loggeado);
+        $usuario = $_SESSION["ALIAS"];
+        $this->productosView->showProductosView($productos, $loggeado, $usuario);
     }
     /// MOSTRAR PRODUCTOS EN FORMA DESCENDENTE SEGÚN ID_PRODUCTO DESC
     function showOrderedProductosByPriceDesc(){
         $productos = $this->model->getOrderedProductosByPriceDesc();
         $loggeado = $this->user->checkLoggedIn();
-        $this->productosView->showProductosView($productos, $loggeado);
+        $usuario = $_SESSION["ALIAS"];
+        $this->productosView->showProductosView($productos, $loggeado, $usuario);
     }
     // MOSTRAR PRODUCTOS EN FORMA ASCENDENTE SEGÚN ID_PRODUCTO ASC
     function showOrderedProductosByPriceAsc(){
         $productos = $this->model->getOrderedProductosByPriceAsc();
         $loggeado = $this->user->checkLoggedIn();
-        $this->productosView->showProductosView($productos, $loggeado);
+        $usuario = $_SESSION["ALIAS"];
+        $this->productosView->showProductosView($productos, $loggeado, $usuario);
     }    
 }
 ?>

@@ -13,9 +13,9 @@ class UsersModel{
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
     // Agrega un usuario a la BDD
-    function registrarUsuario($alias, $contraseña) {
+    function registrarUsuario($alias, $password) {
         $sentencia = $this->db->prepare('INSERT INTO usuario(alias, password) VALUES(?,?)');
-        $sentencia->execute(array($alias, $contraseña));
-    }      
+        $sentencia->execute(array($alias, $password));
+    }
 }
 ?>

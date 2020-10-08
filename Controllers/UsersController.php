@@ -33,7 +33,7 @@ class UsersController {
         $pass = $_POST["password"];
         if(isset($user)){
             $usuarioLoggeado = $this->usersModel->getUser($user);
-            if(isset($usuarioLoggeado) && $usuarioLoggeado) {
+            if(isset($usuarioLoggeado) && $usuarioLoggeado){
                 // Existe el usuario
                 if (password_verify($pass, $usuarioLoggeado->password)){
                     session_start();
@@ -61,7 +61,7 @@ class UsersController {
     function registroForm(){
         $this->usersView->showRegistro();
     }
-    // REGISTRA USUARIO -> no funciona, pero funcionó una vez
+    // REGISTRA USUARIO
     function registrarUsuario(){
         $alias = $_POST['username'];
         $passForm = $_POST['password'];

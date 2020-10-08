@@ -28,8 +28,9 @@ $r->addRoute("registrarse", "POST", "UsersController", "registrarUsuario"); // R
 $r->addRoute("home", "GET", "HomeController", "showHome"); // Mostrar Home
 $r->addRoute("showFaq", "GET", "HomeController", "showFaq"); // Mostrar FAQ
 
-// RUTAS PEDIDOS PARA USUARIO LOGGEADO
+// RUTAS PEDIDOS
 $r->addRoute("Pedidos", "GET", "PedidosController", "Pedidos"); //-> varía para usuario público
+$r->addRoute("showFiltroPedidos", "GET", "PedidosController", "showFilteredPedidos"); // Muestra los pedidos filtrados por un determinado producto
 $r->addRoute("newPedido", "GET", "PedidosController", "newPedido"); // Agregar nuevo pedido a través de un form
 $r->addRoute("addPedido", "GET", "PedidosController", "addPedido"); // Agrega el pedido a la BDD
 $r->addRoute("menuEditPedido", "GET", "PedidosController", "menuEditPedido"); // Menu para seleccionar el pedido a editar
@@ -43,7 +44,7 @@ $r->addRoute("showOrderedPedidosByProductoAsc", "GET", "PedidosController", "sho
 $r->addRoute("showOrderedPedidosByClienteDesc", "GET", "PedidosController", "showOrderedPedidosByClienteDesc"); // Ver pedidos ordenados por cliente desc
 $r->addRoute("showOrderedPedidosByClienteAsc", "GET", "PedidosController", "showOrderedPedidosByClienteAsc"); // Ver pedidos ordenados por cliente asc
 
-// RUTAS PRODUCTOS PARA USUARIO LOGGEADO
+// RUTAS PRODUCTOS
 $r->addRoute("Productos", "GET", "ProductosController", "Productos"); //-> varía para usuario público
 $r->addRoute("newProducto", "GET", "ProductosController", "newProducto"); // Agregar nuevo producto a través de un form
 $r->addRoute("addProducto", "POST", "ProductosController", "addProductos"); // Agrega el producto a la BDD

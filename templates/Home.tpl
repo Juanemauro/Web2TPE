@@ -1,4 +1,8 @@
-{include 'templates/header.tpl'}
+{if $loggeado == true}
+    {include 'templates/headerLoggeado.tpl'}
+{else}
+    {include 'templates/headerPublico.tpl'}
+{/if}
 <div class="slide">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -22,6 +26,6 @@
     </a>
     </div>
 </div>
-<div class="pedidos"><a href="showPedidos"><img src="images/pedidos.jpg" alt="Pedidos" class="pedidos"></a></div>
-<div class="productos"><a href="showProductos"><img src="images/productos.jpg" alt="Productos" class="pedidos"></a></div>
+<div class="pedidos"><a href="Pedidos"><img src="images/pedidos.jpg" alt="Pedidos" class="pedidos"></a></div>
+<div class="productos"><a href="Productos"><img src="images/productos.jpg" alt="Productos" class="pedidos"></a></div>
 {include 'templates/footer.tpl'}
