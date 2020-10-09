@@ -59,10 +59,10 @@ class PedidosController {
     }    
     // CARGAR PEDIDO
     function addPedido(){
-        $cliente=$_GET["inputName"] . " ". $_GET["inputLastname"]; //concateno los datos que vienen por form
-        $direccion=$_GET["inputAddress"];
-        $producto=$_GET["inputPedido"];
-        $cantidad=$_GET["inputCantidad"];
+        $cliente=$_POST["inputName"] . " ". $_POST["inputLastname"]; //concateno los datos que vienen por form
+        $direccion=$_POST["inputAddress"];
+        $producto=$_POST["inputPedido"];
+        $cantidad=$_POST["inputCantidad"];
         //Verifico que ingrese todos los datos en el formulario
         if (!empty($cliente) && !empty($direccion) && !empty($producto) && !empty($cantidad)){
             $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad);
@@ -100,12 +100,12 @@ class PedidosController {
     }    
     // MOSTRAR PEDIDOS ACTUALIZADOS
     function showEditedPedido(){
-        $cliente = $_GET["nombrePedidoEditado"];
-        $direccion = $_GET["direccionPedidoEditado"];
-        $cantidad = $_GET["cantidadPedidoEditado"];
-        $entregado = $_GET["entregadoPedidoEditado"];
-        $id_pedido = $_GET["idPedidoEditado"];
-        $id_producto = $_GET["idProductoEditado"];
+        $cliente = $_POST["nombrePedidoEditado"];
+        $direccion = $_POST["direccionPedidoEditado"];
+        $cantidad = $_POST["cantidadPedidoEditado"];
+        $entregado = $_POST["entregadoPedidoEditado"];
+        $id_pedido = $_POST["idPedidoEditado"];
+        $id_producto = $_POST["idProductoEditado"];
         //Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
         if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($entregado) && !empty($id_producto)){
             $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $entregado, $id_pedido, $id_producto);

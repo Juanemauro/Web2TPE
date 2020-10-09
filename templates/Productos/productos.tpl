@@ -1,11 +1,11 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
     {if $loggeado == true}
-        {include 'templates/productosAdmin.tpl'}
+        {include 'templates/Productos/productosAdmin.tpl'}
     {else}
         <table class="pedidos_tabla">
             <thead>
@@ -23,4 +23,4 @@
         </table>
     {/if}
 </div>    
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}

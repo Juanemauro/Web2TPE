@@ -1,7 +1,7 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
     <table class="pedidos_tabla">
@@ -35,10 +35,10 @@
                 <td>{$pedido->cliente}</td>
                 <td>{$pedido->nombre}</td>
                 <td>{$pedido->direccion}</td>
-                <td><a href="editPedido/{$pedido->id_pedido}" class="btn btn-info">Editar</a></td>
+                <td><a href="deletePedido/{$pedido->id_pedido}" class="btn btn-info">Borrar</a></td>
             </tr>
         {/foreach}
     </table>
     <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
 </div>
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}

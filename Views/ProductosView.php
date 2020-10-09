@@ -14,7 +14,7 @@ class ProductosView {
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
-        $this->smarty->display('templates/productos.tpl');
+        $this->smarty->display('templates/Productos/productos.tpl');
     } 
     // Muestra un form para agregar un producto
     function showAddProductoForm($productos, $loggeado, $usuario){        
@@ -22,7 +22,7 @@ class ProductosView {
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
-        $this->smarty->display('templates/newProducto.tpl');
+        $this->smarty->display('templates/Productos/newProducto.tpl');
     }
     // Muestra la tabla con todos los productos para elegir el que quiero editar
     function showMenuEditProducto($productos, $loggeado, $usuario){
@@ -30,7 +30,7 @@ class ProductosView {
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
-        $this->smarty->display('templates/menuEditProducto.tpl');
+        $this->smarty->display('templates/Productos/menuEditProducto.tpl');
     }
     // Muestra mensaje de error
     function mostrarError($mensajeError){
@@ -43,7 +43,7 @@ class ProductosView {
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
-        $this->smarty->display('templates/menuDeleteProducto.tpl');
+        $this->smarty->display('templates/Productos/menuDeleteProducto.tpl');
     }
     // Muestra la tabla actualizada de los produ, ctos
     function showUpdatedProductos($producto, $id, $loggeado, $usuario){  
@@ -52,7 +52,7 @@ class ProductosView {
         $this->smarty->assign('id', $id);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
-        $this->smarty->display('templates/editProducto.tpl');
+        $this->smarty->display('templates/Productos/editProducto.tpl');
     }
 }
 ?>

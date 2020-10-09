@@ -32,10 +32,10 @@ $r->addRoute("showFaq", "GET", "HomeController", "showFaq"); // Mostrar FAQ
 $r->addRoute("Pedidos", "GET", "PedidosController", "Pedidos"); //-> varía para usuario público
 $r->addRoute("showFiltroPedidos", "GET", "PedidosController", "showFilteredPedidos"); // Muestra los pedidos filtrados por un determinado producto
 $r->addRoute("newPedido", "GET", "PedidosController", "newPedido"); // Agregar nuevo pedido a través de un form
-$r->addRoute("addPedido", "GET", "PedidosController", "addPedido"); // Agrega el pedido a la BDD
+$r->addRoute("addPedido", "POST", "PedidosController", "addPedido"); // Agrega el pedido a la BDD
 $r->addRoute("menuEditPedido", "GET", "PedidosController", "menuEditPedido"); // Menu para seleccionar el pedido a editar
 $r->addRoute("editPedido/:ID", "GET", "PedidosController", "editPedido"); // Form para editar el pedido X
-$r->addRoute("refreshPedido", "GET", "PedidosController", "showEditedPedido"); // 
+$r->addRoute("refreshPedido", "POST", "PedidosController", "showEditedPedido"); // 
 $r->addRoute("detailPedido/:ID", "GET", "PedidosController", "detailPedido"); // Ver detalle de un pedido
 $r->addRoute("menuDeletePedido", "GET", "PedidosController", "menuDeletePedido"); // Menu para seleccionar el pedido a borrar
 $r->addRoute("deletePedido/:ID", "GET", "PedidosController", "deletePedido"); // Borra el pedido de la BDD
@@ -49,7 +49,7 @@ $r->addRoute("newProducto", "GET", "ProductosController", "newProducto"); // Agr
 $r->addRoute("addProducto", "POST", "ProductosController", "addProductos"); // Agrega el producto a la BDD
 $r->addRoute("menuEditProducto", "GET", "ProductosController", "menuEditProducto"); // Menu para seleccionar el producto a editar
 $r->addRoute("editProducto/:ID", "GET", "ProductosController", "editProducto"); // Form para editar el producto X
-$r->addRoute("refreshProducto", "GET", "ProductosController", "showEditedProducto"); //
+$r->addRoute("refreshProducto", "POST", "ProductosController", "showEditedProducto"); //
 $r->addRoute("menuDeleteProducto", "GET", "ProductosController", "menuDeletePedido"); // Menu para seleccionar el pedido a borrar
 $r->addRoute("deleteProducto/:ID", "GET", "ProductosController", "deleteProducto"); // Borra el pedido de la BDD
 $r->addRoute("showOrderedProductosByNameDesc", "GET", "ProductosController", "showOrderedProductosByNameDesc"); // Ver pedidos ordenados por nombre desc

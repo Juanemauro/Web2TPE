@@ -1,11 +1,29 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
+    <form class="form-group" method= "POST" action="addProducto" >
+        <div class="form-group">
+            <label for="nombreProductoEditado">Nombre:</label>
+            <input type="text" class="form-control" name="nombreProductoNuevo" id="nombreProductoNuevo">
+        </div>
+        <div>
+            <label for="descripcionProductoEditado">Descripcion:</label>
+            <input type="text" class="form-control" name="descripcionProductoNuevo" id="descripcionProductoNuevo">
+        </div>
+        <div>
+            <label for="precioProductoEditado">Precio:</label>
+            <input type="number" class="form-control" name="precioProductoNuevo" id="precioProductoNuevo">
+            <input type="text" class="d-none" name="idProductoNuevo" id="idProductoNuevo" value="{$id}">
+
+        </div class="form-group">
+        <button type="submit" class="btn btn-primary">Agregar Producto</button> 
+    </form>
+    <a href="Productos" class="btn btn-info">Volver a Productos</a>
     <table class="pedidos_tabla">
-        <thead>
+        <tr>
             <td>
                 <form>
                     <div class="btn-group" role="group">
@@ -28,18 +46,15 @@
                         </div>
                     </div>
                 </form>
-            </td>
-            <td> Producto a editar</td> 
-        </thead>
+            </td> 
+        </tr>
         {foreach from=$productos item=$producto}
             <tr>
                 <td>{$producto->nombre}</td>                    
                 <td>{$producto->descripcion}</td>
                 <td>{$producto->precio}</td>
-                <td><a href="editProducto/{$producto->id_producto}" class="btn btn-info">Editar</a></td>
             </tr>
         {/foreach}
     </table>
-    <a href="Productos" class="btn btn-info">Volver a Productos</a>
 </div>
-{include 'templates/footer.tpl'}   
+{include 'templates/Acceso/footer.tpl'}   

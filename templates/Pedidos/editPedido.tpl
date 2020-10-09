@@ -1,10 +1,10 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
-    <form class="form-group" method= "GET" action="refreshPedido" >
+    <form class="form-group" method= "POST" action="refreshPedido" >
         <div class="form-group">
             <label for="nombrePedidoEditado">Nombre:</label>
             <input type="text" class="form-control" name="nombrePedidoEditado" id="nombrePedidoEditado" value="{$pedidos->cliente}">
@@ -35,4 +35,4 @@
     </form>
     <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
  </div>
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}

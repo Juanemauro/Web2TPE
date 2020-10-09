@@ -1,7 +1,7 @@
 <a href="newPedido" class="btn btn-success btn-lg btn-block">Agregar Pedido</a>
 <a href="menuEditPedido" class="btn btn-success btn-lg btn-block">Editar Pedido</a>
 <a href="menuDeletePedido" class="btn btn-success btn-lg btn-block">Borrar Pedido</a>
-{include 'templates/filtroPedidos.tpl'}
+{include 'templates/Pedidos/filtroPedidos.tpl'}
 <table class="pedidos_tabla">
     <thead>
         <td><form>

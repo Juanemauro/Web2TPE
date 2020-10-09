@@ -1,7 +1,7 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
     <div class="slide">
         <form method= "POST" action="registrarse" class="form" >
@@ -16,4 +16,4 @@
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>
 </div>
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}

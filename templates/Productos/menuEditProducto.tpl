@@ -1,7 +1,7 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
     <table class="pedidos_tabla">
@@ -28,18 +28,18 @@
                         </div>
                     </div>
                 </form>
-            </td> 
-            <td> Producto a borrar</td> 
+            </td>
+            <td> Producto a editar</td> 
         </thead>
-        {foreach  from=$productos item=$producto}
+        {foreach from=$productos item=$producto}
             <tr>
                 <td>{$producto->nombre}</td>                    
                 <td>{$producto->descripcion}</td>
                 <td>{$producto->precio}</td>
-                <td><a href="deleteProducto/{$producto->id_producto}" class="btn btn-info">Borrar</a></td>
+                <td><a href="editProducto/{$producto->id_producto}" class="btn btn-info">Editar</a></td>
             </tr>
         {/foreach}
     </table>
     <a href="Productos" class="btn btn-info">Volver a Productos</a>
 </div>
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}   

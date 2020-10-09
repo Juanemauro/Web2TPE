@@ -74,10 +74,10 @@ class ProductosController{
     }  
     // ACTUALIZA LA TABLA DE PRODUCTO
     function showEditedProducto(){
-        $nombre = $_GET["nombreProductoEditado"];
-        $descripcion = $_GET["descripcionProductoEditado"];
-        $precio = $_GET["precioProductoEditado"];
-        $id = $_GET["idProductoEditado"];
+        $nombre = $_POST["nombreProductoEditado"];
+        $descripcion = $_POST["descripcionProductoEditado"];
+        $precio = $_POST["precioProductoEditado"];
+        $id = $_POST["idProductoEditado"];
         ////Verifico que los parámetros (campos del form de editar el producto) no estén vacíos
         if (!empty($nombre) && !empty($descripcion) && !empty($precio)) {
             $this->model->updateProducto($nombre, $descripcion, $precio, $id);

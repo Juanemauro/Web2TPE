@@ -1,7 +1,7 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
     <div class="accordion" id="accordionExample">
@@ -46,4 +46,4 @@
         </div>
     </div>
 </div>
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}

@@ -1,10 +1,10 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
-    <form method= "GET" action="addPedido" class="form">
+    <form method= "POST" action="addPedido" class="form">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputName4">Nombre</label>
@@ -90,4 +90,4 @@
         {/foreach}
     </table>
 </div>    
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}

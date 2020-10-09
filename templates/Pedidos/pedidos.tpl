@@ -1,14 +1,14 @@
 {if $loggeado == true}
-    {include 'templates/headerLoggeado.tpl'}
+    {include 'templates/Acceso/headerLoggeado.tpl'}
 {else}
-    {include 'templates/headerPublico.tpl'}
+    {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
     {if $loggeado == true}
-        {include 'templates/pedidosAdmin.tpl'}
+        {include 'templates/Pedidos/pedidosAdmin.tpl'}
     {else}
     <p>
-    {include 'templates/filtroPedidos.tpl'}
+    {include 'templates/Pedidos/filtroPedidos.tpl'}
     <table class="pedidos_tabla">
         <thead>
             <td>Cliente</td>
@@ -27,4 +27,4 @@
     </table>
     {/if}
 </div>
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}

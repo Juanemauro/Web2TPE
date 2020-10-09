@@ -1,5 +1,4 @@
-
-{include 'templates/headerPublico.tpl'}
+{include 'templates/Acceso/headerPublico.tpl'}
 <div class="slide">
     <form action="verificarUser" method="post">
         <div class="form-group">
@@ -19,4 +18,4 @@
         {/if}
     </form>
 </div>
-{include 'templates/footer.tpl'}
+{include 'templates/Acceso/footer.tpl'}
