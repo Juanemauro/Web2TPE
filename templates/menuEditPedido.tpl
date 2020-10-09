@@ -5,7 +5,7 @@
 {/if}
 <div class="slide">
     <table class="pedidos_tabla">
-        <tr>
+        <thead>
             <td><form>
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cliente</button>
@@ -28,8 +28,8 @@
                 </form>
             </td>    
             <td>Dirección</td>
-            <td>Detalle</td>
-        </tr>
+            <td>Pedido a editar</td> 
+        </thead>
         {foreach  from=$pedidos item=$pedido}
             <tr>
                 <td>{$pedido->cliente}</td>

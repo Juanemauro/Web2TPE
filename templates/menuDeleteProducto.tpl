@@ -5,7 +5,7 @@
 {/if}
 <div class="slide">
     <table class="pedidos_tabla">
-        <tr>
+        <thead>
             <td>
                 <form>
                     <div class="btn-group" role="group">
@@ -29,7 +29,8 @@
                     </div>
                 </form>
             </td> 
-        </tr>
+            <td> Producto a borrar</td> 
+        </thead>
         {foreach  from=$productos item=$producto}
             <tr>
                 <td>{$producto->nombre}</td>                    

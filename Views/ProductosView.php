@@ -9,7 +9,7 @@ class ProductosView {
         $this->smarty->assign('basehref', BASE_URL);
     }
     // Muestra los productos
-    function showProductosView($productos, $loggeado, $usuario = ""){
+    function showProductosView($productos, $loggeado, $usuario = " "){
         $this->smarty->assign('titulo', "Productos");
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);

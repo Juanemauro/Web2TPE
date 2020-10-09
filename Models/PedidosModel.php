@@ -8,11 +8,12 @@ class PedidosModel {
     }
     // Devuelve una tabla con todos los datos de TODOS los pedidos y una columna extra con el nombre del producto
     function getPedidos(){
-        $sentencia = $this->db->prepare('SELECT *,producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto');
+        $sentencia = $this->db->prepare('SELECT *,producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto order by cliente asc');
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
-    // Deuvele una tabla con todo
+
+    // Deuvele una tabla con todos los pedidos filtrados por nombre de producto
     function getPedidosByProducto($producto){
         $sentencia = $this->db->prepare('SELECT *,producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto WHERE producto.nombre=?');
         $sentencia->execute(array($producto));
@@ -36,12 +37,7 @@ class PedidosModel {
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
-    // Devuelve una tabla con todos los datos de los pedidos (ORDENADOS POR CLIENTE EN FORMA ASCENDENTE) y una columna extra con el nombre del producto
-    function getPedidosOrdenadosByClienteAsc(){
-        $sentencia = $this->db->prepare('SELECT pedido.*,producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto ORDER BY cliente asc');
-        $sentencia->execute();
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }
+    
     // Devuelve una tabla con todos los datos de UN DETERMINADO PRODUCTO y una columna extra con el nombre del producto
     function getPedido($id){
         $sentencia = $this->db->prepare('SELECT *, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where id_pedido= ?');

@@ -9,7 +9,7 @@ class PedidosView{
         $this->smarty->assign('basehref', BASE_URL);
     }
     // Muestra los pedidos
-    function showPedidosView($pedidos, $productos, $loggeado, $usuario = ""){
+    function showPedidosView($pedidos, $productos, $loggeado, $usuario = " "){
         $this->smarty->assign('titulo', "Pedidos");
         $this->smarty->assign('pedidos', $pedidos);
         $this->smarty->assign('productos', $productos);

@@ -4,48 +4,46 @@
     {include 'templates/headerPublico.tpl'}
 {/if}
 <div class="slide">
-    <p>
-        <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">¿Cuáles son los medios de pago habilitados para pagar?</button>
-                        </h2>
-                    </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Podés pagar a través tarjetas de crédito y tarjetas de débito.</br>
-                            arjetas de crédito: American Express, MasterCard, VISA, Cabal, Diners, Naranja,
-                            Credimás.</br>
-                            Tarjetas de débito: Visa Débito y Cabal Débito.
-                        </div>
-                    </div>
+    <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">¿Cuáles son los medios de pago habilitados para pagar?</button>
+                    </h2>
                 </div>
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">¿Cuales son los horarios en de delivery?</button>
-                        </h2>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Podés pagar a través tarjetas de crédito y tarjetas de débito.</br>
+                        arjetas de crédito: American Express, MasterCard, VISA, Cabal, Diners, Naranja,
+                        Credimás.</br>
+                        Tarjetas de débito: Visa Débito y Cabal Débito.
                     </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Desde las 11:00 hasta las 02:00hs
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">¿Cuanto tarda en llegar mi pedido?</button>
-                        </h2>
-                    </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Entre 40 y 60 minutos.
-                        </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">¿Cuales son los horarios en de delivery?</button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Desde las 11:00 hasta las 02:00hs
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">¿Cuanto tarda en llegar mi pedido?</button>
+                    </h2>
+                </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Entre 40 y 60 minutos.
+                    </div>
+            </div>
         </div>
-    </p>
+    </div>
 </div>
 {include 'templates/footer.tpl'}

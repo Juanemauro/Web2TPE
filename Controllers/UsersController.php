@@ -18,9 +18,7 @@ class UsersController {
         $this->homeView = new HomeView();
     }
     // MUESTRA FORMULARIO PARA LOGGEARSE
-    function loginForm(){
-        $this->usersView->showLogin();
-    }
+    
     // CIERRA SESIÓN
     function logout(){
         session_start();        
@@ -57,10 +55,7 @@ class UsersController {
                 return true;
             }
     }
-    // MUESTRA FORM PARA REGISTRARSE
-    function registroForm(){
-        $this->usersView->showRegistro();
-    }
+    
     // REGISTRA USUARIO
     function registrarUsuario(){
         $alias = $_POST['username'];
@@ -69,8 +64,4 @@ class UsersController {
         $this->usersModel->registrarUsuario($alias, $password);
         header("Location: " . LOGIN);
     }
-
-    
-
-
 }

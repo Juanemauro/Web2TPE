@@ -157,7 +157,7 @@ class PedidosController {
         $productos = $this->productosModel->getProductos();
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        $this->pedidosView->showPedidosView($pedidos, $productos, $$loggeado, $usuario);
+        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
     }
     // MOSTRAR PEDIDOS EN FORMA ASCENDENTE SEGÚN ID_PRODUCTO
     function showOrderedPedidosByProductoAsc(){

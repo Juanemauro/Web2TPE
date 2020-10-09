@@ -8,7 +8,7 @@ class ProductosModel {
     }
     // Devuelve la lista de productos en forma ascendente SEGÚN SU NOMBRE
     function getProductos(){
-        $sentencia = $this->db->prepare('SELECT * FROM producto');
+        $sentencia = $this->db->prepare('SELECT * FROM producto ORDER BY nombre asc');
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
@@ -25,12 +25,7 @@ class ProductosModel {
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
         echo $sentencia;
     }
-    // Devuelve una tabla con todos los  datos de los productos ORDENADOS POR NOMBRE EN FORMA ASCENDENTE
-    function getOrderedProductosByNameAsc(){
-        $sentencia = $this->db->prepare('SELECT * FROM producto ORDER BY nombre asc');
-        $sentencia->execute();
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }
+    // Devuelve una tabla con todos los  datos de los productos ORDENADOS POR NOMBRE EN FORMA DESCENDENTE
     function getOrderedProductosByPriceDesc(){
         $sentencia = $this->db->prepare('SELECT * FROM producto ORDER BY precio desc');
         $sentencia->execute();

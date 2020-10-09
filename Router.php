@@ -18,10 +18,10 @@ define("LOGIN", BASE_URL . 'login');
 $r = new Router();
 
 ///////////////////// LOGIN, LOGOUT, REGISTRARSE
-$r->addRoute("login", "GET", "UsersController", "loginForm"); // Muestra el form para loggearse
+$r->addRoute("login", "GET", "HomeController", "loginForm"); // Muestra el form para loggearse
 $r->addRoute("verificarUser", "POST", "UsersController", "verificarUser"); // Verificar usuario y contraseña
 $r->addRoute("logout", "GET", "UsersController", "logout"); // Desloggearse
-$r->addRoute("registroForm", "GET", "UsersController", "registroForm"); // Muestra form para registrarse
+$r->addRoute("registroForm", "GET", "HomeController", "registroForm"); // Muestra form para registrarse
 $r->addRoute("registrarse", "POST", "UsersController", "registrarUsuario"); // Registra el usuario en la BDD
 
 // HOME & FAQ
@@ -42,7 +42,6 @@ $r->addRoute("deletePedido/:ID", "GET", "PedidosController", "deletePedido"); //
 $r->addRoute("showOrderedPedidosByProductoDesc", "GET", "PedidosController", "showOrderedPedidosByProductoDesc");// Ver pedidos ordenados por id_producto desc
 $r->addRoute("showOrderedPedidosByProductoAsc", "GET", "PedidosController", "showOrderedPedidosByProductoAsc"); // Ver pedidos ordenados por id_producto asc
 $r->addRoute("showOrderedPedidosByClienteDesc", "GET", "PedidosController", "showOrderedPedidosByClienteDesc"); // Ver pedidos ordenados por cliente desc
-$r->addRoute("showOrderedPedidosByClienteAsc", "GET", "PedidosController", "showOrderedPedidosByClienteAsc"); // Ver pedidos ordenados por cliente asc
 
 // RUTAS PRODUCTOS
 $r->addRoute("Productos", "GET", "ProductosController", "Productos"); //-> varía para usuario público
@@ -54,7 +53,6 @@ $r->addRoute("refreshProducto", "GET", "ProductosController", "showEditedProduct
 $r->addRoute("menuDeleteProducto", "GET", "ProductosController", "menuDeletePedido"); // Menu para seleccionar el pedido a borrar
 $r->addRoute("deleteProducto/:ID", "GET", "ProductosController", "deleteProducto"); // Borra el pedido de la BDD
 $r->addRoute("showOrderedProductosByNameDesc", "GET", "ProductosController", "showOrderedProductosByNameDesc"); // Ver pedidos ordenados por nombre desc
-$r->addRoute("showOrderedProductosByNameAsc", "GET", "ProductosController", "showOrderedProductosByNameAsc"); // Ver pedidos ordenados por nombre asc
 $r->addRoute("showOrderedProductosByPriceDesc", "GET", "ProductosController", "showOrderedProductosByPriceDesc"); // Ver pedidos ordenados por precio desc
 $r->addRoute("showOrderedProductosByPriceAsc", "GET", "ProductosController", "showOrderedProductosByPriceAsc"); // Ver pedidos ordenados por precio asc
 

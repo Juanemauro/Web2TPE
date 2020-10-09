@@ -1,6 +1,5 @@
 
-    {include 'templates/headerPublico.tpl'}
-
+{include 'templates/headerPublico.tpl'}
 <div class="slide">
     <form action="verificarUser" method="post">
         <div class="form-group">

@@ -4,7 +4,6 @@
     {include 'templates/headerPublico.tpl'}
 {/if}
 <div class="slide">
-    <p>
     <form method= "GET" action="addPedido" class="form">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -55,7 +54,6 @@
         <button type="submit" class="btn btn-primary" id="realizpedido">Realizar pedido</button>
     </form>
     <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
-    </p>
     <table class="pedidos_tabla">
         <tr>
             <td><form>
