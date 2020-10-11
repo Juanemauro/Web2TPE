@@ -31,6 +31,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="showFaq">FAQ</a>
                         </li>
+                    </ul>
+                    <ul class="navbar-nav mr-auto"> 
                         <li class="nav-item">
                             <a href="login" class="btn btn-primary">Login</a>
                         </li>
