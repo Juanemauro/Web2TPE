@@ -17,7 +17,7 @@ define("LOGIN", BASE_URL . 'login');
 // Creo instancia de router
 $r = new Router();
 
-///////////////////// LOGIN, LOGOUT, REGISTRARSE
+///////////////////// LOGIN, LOGOUT, REGISTRO
 $r->addRoute("login", "GET", "HomeController", "loginForm"); // Muestra el form para loggearse
 $r->addRoute("verificarUser", "POST", "UsersController", "verificarUser"); // Verificar usuario y contraseña
 $r->addRoute("logout", "GET", "UsersController", "logout"); // Desloggearse
@@ -50,7 +50,7 @@ $r->addRoute("addProducto", "POST", "ProductosController", "addProductos"); // A
 $r->addRoute("menuEditProducto", "GET", "ProductosController", "menuEditProducto"); // Menu para seleccionar el producto a editar
 $r->addRoute("editProducto/:ID", "GET", "ProductosController", "editProducto"); // Form para editar el producto X
 $r->addRoute("refreshProducto", "POST", "ProductosController", "showEditedProducto"); //
-$r->addRoute("menuDeleteProducto", "GET", "ProductosController", "menuDeletePedido"); // Menu para seleccionar el pedido a borrar
+$r->addRoute("menuDeleteProducto", "GET", "ProductosController", "menuDeleteProducto"); // Menu para seleccionar el pedido a borrar
 $r->addRoute("deleteProducto/:ID", "GET", "ProductosController", "deleteProducto"); // Borra el pedido de la BDD
 $r->addRoute("showOrderedProductosByNameDesc", "GET", "ProductosController", "showOrderedProductosByNameDesc"); // Ver pedidos ordenados por nombre desc
 $r->addRoute("showOrderedProductosByPriceDesc", "GET", "ProductosController", "showOrderedProductosByPriceDesc"); // Ver pedidos ordenados por precio desc

@@ -33,7 +33,7 @@ class ProductosView {
         $this->smarty->display('templates/Productos/menuEditProducto.tpl');
     }
     // Muestra mensaje de error
-    function mostrarError($mensajeError){
+    function showError($mensajeError){
         echo "<h1>ERROR!</h1>";
         echo "<h2>{$mensajeError}</h2>";
     }

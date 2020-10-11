@@ -7,12 +7,14 @@ class PedidosController {
     // DECLARACIÓN DE ATRIBUTOS
     private $pedidosModel;
     private $pedidosView;
+    private $homeView;
     private $productosController;
     private $user;
     // CONSTRUCTOR
     function __construct(){
         $this->pedidosModel = new PedidosModel();
         $this->pedidosView = new PedidosView();
+        $this->homeView = new HomeView();
         $this->productosModel = new ProductosModel();
         $this->productosController = new ProductosController(); 
         $this->user = new UsersController();
@@ -59,6 +61,10 @@ class PedidosController {
     }    
     // CARGAR PEDIDO
     function addPedido(){
+        $loggeado = $this->user->checkLoggedIn();
+        if ($loggeado == true){
+            $usuario = $_SESSION["ALIAS"];
+        }
         $cliente=$_POST["inputName"] . " ". $_POST["inputLastname"]; //concateno los datos que vienen por form
         $direccion=$_POST["inputAddress"];
         $producto=$_POST["inputPedido"];
@@ -68,8 +74,9 @@ class PedidosController {
             $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad);
             header("Location: " . PEDIDOS);
         }else{
-            //Muestra un mensaje de error si falta algun campo del form  
-            $this->pedidosView->showError("Faltan campos obligatorios.");
+            //Muestra un mensaje de error si falta algun campo del form
+            $seccion = "agregar pedido";  
+            $this->homeView->showError("Faltan campos obligatorios.", "newPedido", $seccion, $loggeado, $usuario);
         }
     }
     // MUESTRA TABLA CON LOS PEDIDOS
@@ -86,7 +93,6 @@ class PedidosController {
     }
     // EDITAR PEDIDO X
     function editPedido($params = null){
-        //agregar la parte de usuario, acá sólo debería poder editar el dueño de la página (administrador)
         $id = $params[':ID'];
         $pedido = $this->pedidosModel->getPedido($id);
         $productos = $this->productosModel->getProductos();
@@ -100,18 +106,24 @@ class PedidosController {
     }    
     // MOSTRAR PEDIDOS ACTUALIZADOS
     function showEditedPedido(){
+        $loggeado = $this->user->checkLoggedIn();
+        if ($loggeado == true){
+            $usuario = $_SESSION["ALIAS"];
+        }
         $cliente = $_POST["nombrePedidoEditado"];
         $direccion = $_POST["direccionPedidoEditado"];
         $cantidad = $_POST["cantidadPedidoEditado"];
         $entregado = $_POST["entregadoPedidoEditado"];
         $id_pedido = $_POST["idPedidoEditado"];
         $id_producto = $_POST["idProductoEditado"];
+        
         //Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
         if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($entregado) && !empty($id_producto)){
             $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $entregado, $id_pedido, $id_producto);
             header("Location: " . PEDIDOS);
-        }else{   
-            $this->pedidosView->showError("Faltan campos obligatorios.");
+        }else{
+            $seccion = "seleccionar un pedido";    
+            $this->homeView->showError("Faltan campos obligatorios.", "menuEditPedido", $seccion, $loggeado, $usuario);
         }
     }    
     // VER DETALLE DE PEDIDO
@@ -152,36 +164,53 @@ class PedidosController {
         }
     }
     // MOSTRAR PEDIDOS EN FORMA DESCENDENTE SEGÚN ID_PRODUCTO
-    function showOrderedPedidosByProductoDesc(){
-        $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoDesc();
-        $productos = $this->productosModel->getProductos();
+    function showOrderedPedidosByProductoDesc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
+        if ($loggeado == true){
+            $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoDesc();
+            $productos = $this->productosModel->getProductos();
+            $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
+        }else{
+            header("Location: " . PEDIDOS);
+        }
     }
     // MOSTRAR PEDIDOS EN FORMA ASCENDENTE SEGÚN ID_PRODUCTO
-    function showOrderedPedidosByProductoAsc(){
-        $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoAsc();
-        $productos = $this->productosModel->getProductos();
+    function showOrderedPedidosByProductoAsc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
+        if ($loggeado == true){
+            $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoAsc();
+            $productos = $this->productosModel->getProductos();
+            $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);            
+        }else{
+            header("Location: " . PEDIDOS);
+        }
+
     }
     // MOSTRAR PEDIDOS EN FORMA DESCENDENTE SEGÚN NOMBRE DE CLIENTE
-    function showOrderedPedidosByClienteDesc(){
-        $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteDesc();
-        $productos = $this->productosModel->getProductos();
+    function showOrderedPedidosByClienteDesc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
+        if ($loggeado == true){
+            $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteDesc();
+            $productos = $this->productosModel->getProductos();
+            $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
+        }else{
+            header("Location: " . PEDIDOS);
+        }
     }
     // MOSTRAR PEDIDOS EN FORMA ASCENDENTE SEGÚN NOMBRE DE CLIENTE
-    function showOrderedPedidosByClienteAsc(){
-        $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteAsc();
-        $productos = $this->productosModel->getProductos();
+    function showOrderedPedidosByClienteAsc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
+        if ($loggeado == true){
+            $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteAsc();
+            $productos = $this->productosModel->getProductos();
+            $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
+        }else{
+            header("Location: " . PEDIDOS);
+        }
     }
 }
 ?>

@@ -29,22 +29,27 @@ class UsersController {
     function verificarUser(){
         $user = $_POST["alias"];
         $pass = $_POST["password"];
-        if(isset($user)){
-            $usuarioLoggeado = $this->usersModel->getUser($user);
-            if(isset($usuarioLoggeado) && $usuarioLoggeado){
-                // Existe el usuario
-                if (password_verify($pass, $usuarioLoggeado->password)){
-                    session_start();
-                    $_SESSION["ALIAS"] = $usuarioLoggeado->alias;
-                    header("Location: ". HOME);                    
+        if (!empty($user) && !empty($pass)){
+            if(isset($user)){
+                $usuarioLoggeado = $this->usersModel->getUser($user);
+                if(isset($usuarioLoggeado) && $usuarioLoggeado){
+                    // Existe el usuario
+                    if (password_verify($pass, $usuarioLoggeado->password)){
+                        session_start();
+                        $_SESSION["ALIAS"] = $usuarioLoggeado->alias;
+                        header("Location: ". HOME);                    
+                    }else{
+                        $this->usersView->ShowLogin("Contraseña incorrecta");
+                    }
                 }else{
-                    $this->usersView->ShowLogin("Contraseña incorrecta");
+                    // No existe el user en la DB
+                    $this->usersView->ShowLogin("Usuario incorrecto");
                 }
-            }else{
-                // No existe el user en la DB
-                $this->usersView->ShowLogin("Usuario incorrecto");
-            }
-        }
+            }      
+        }else{
+            $seccion = "agregar pedido";  
+            $this->usersView->ShowLogin("Faltan campos obligatorios.");
+        }        
     }
     // VERIFICA QUE SE HAYA INICIADO UNA SESIÓN
     function checkLoggedIn(){
@@ -54,14 +59,17 @@ class UsersController {
             }else{
                 return true;
             }
-    }
-    
+    }    
     // REGISTRA USUARIO
     function registrarUsuario(){
         $alias = $_POST['username'];
         $passForm = $_POST['password'];
-        $password = password_hash($passForm, PASSWORD_DEFAULT);
-        $this->usersModel->registrarUsuario($alias, $password);
-        header("Location: " . LOGIN);
+        if (!empty($alias) && !empty($passForm)){
+            $password = password_hash($passForm, PASSWORD_DEFAULT);
+            $this->usersModel->registrarUsuario($alias, $password);
+            header("Location: " . HOME);
+        }else{
+            $this->usersView->showRegistro("Faltan campos obligatorios.");
+        }            
     }
 }

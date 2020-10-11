@@ -22,5 +22,15 @@ class HomeView {
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->display('templates/Acceso/faq.tpl');
     }
+    // Muestra un mensaje de error al usuario cuando no completó todos los campos del formulario
+    function showError($mensajeError, $redireccion, $seccion, $loggeado, $usuario){
+        $this->smarty->assign('titulo', "Error!");
+        $this->smarty->assign('loggeado', $loggeado);
+        $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('mensajeError', $mensajeError);
+        $this->smarty->assign('seccion', $seccion);
+        $this->smarty->assign('redireccion', $redireccion);
+        $this->smarty->display('templates/Acceso/errorForm.tpl');
+    }
  }
 ?>

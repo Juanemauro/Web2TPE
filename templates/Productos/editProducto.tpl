@@ -4,7 +4,7 @@
     {include 'templates/Acceso/headerPublico.tpl'}
 {/if}
 <div class="slide">
-    <form class="form-group" method= "GET" action="refreshProducto" >
+    <form class="form-group" method= "POST" action="refreshProducto" >
         <div class="form-group">
             <label for="nombreProductoEditado">Nombre:</label>
             <input type="text" class="form-control" name="nombreProductoEditado" id="nombreProductoEditado" value="{$producto->nombre}">

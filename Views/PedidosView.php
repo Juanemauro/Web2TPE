@@ -53,11 +53,6 @@ class PedidosView{
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->display('templates/Pedidos/menuDeletePedido.tpl');
     }
-    // Muestra un mensaje de error al usuario cuando no completó todos los campos del formulario
-    function showError($mensajeError){
-        echo "<h1>ERROR!</h1>";
-        echo "<h2>{$mensajeError}</h2>";
-    }
     // Muestra un form con los pedidos actualizados
     function showUpdatedPedido($pedidos, $productos, $id, $loggeado, $usuario){
         $this->smarty->assign('titulo', "Editar pedidos");

@@ -12,38 +12,38 @@
 <body>
     <div class="contenedor">
         <div class="logo"><img src="images/logo.png" alt="El Azuleño" class="logo"></div>
-        <div class="navbar">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="Home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Pedidos">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Productos">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="showFaq">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login" class="btn btn-primary">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="logout" class="btn btn-primary">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="registroForm" class="btn btn-primary">Registrarse</a>
-                    </li>
-                </ul>
+            <div class="navbar">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Pedidos">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Productos">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="showFaq">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="login" class="btn btn-primary">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="logout" class="btn btn-primary">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="registroForm" class="btn btn-primary">Registrarse</a>
+                        </li>
+                    </ul>
+                </div>
+                </nav>
             </div>
-            </nav>
-        </div>
 
 
         
