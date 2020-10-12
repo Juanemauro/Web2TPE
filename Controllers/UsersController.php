@@ -46,8 +46,7 @@ class UsersController {
                     $this->usersView->ShowLogin("Usuario incorrecto");
                 }
             }      
-        }else{
-            $seccion = "agregar pedido";  
+        }else{ 
             $this->usersView->ShowLogin("Faltan campos obligatorios.");
         }        
     }
