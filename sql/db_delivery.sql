@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2020 a las 05:00:07
+-- Tiempo de generación: 14-10-2020 a las 03:22:09
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -33,7 +33,7 @@ CREATE TABLE `pedido` (
   `id_producto` int(11) NOT NULL,
   `direccion` varchar(110) NOT NULL,
   `cliente` varchar(110) NOT NULL,
-  `entregado` tinyint(1) NOT NULL,
+  `estado` varchar(100) NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -41,9 +41,9 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id_pedido`, `id_producto`, `direccion`, `cliente`, `entregado`, `cantidad`) VALUES
-(1, 1, '25 de Mayo 222', 'Juan Mauro', 1, 1),
-(6, 1, 'Las Heras 8000', 'Diego Vásquez', 0, 15);
+INSERT INTO `pedido` (`id_pedido`, `id_producto`, `direccion`, `cliente`, `estado`, `cantidad`) VALUES
+(13, 3, '25 de Mayo YYYY', 'Juan Mauro', 'En camino', 10),
+(14, 1, '25 de Mayo XXXX', 'Juan Mauro', 'En preparación', 10);
 
 -- --------------------------------------------------------
 
@@ -64,8 +64,7 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`id_producto`, `precio`, `descripcion`, `nombre`) VALUES
 (1, 150, 'Precio por docena.', 'Empanadas'),
-(3, 300, 'Pizza grande', 'Pizza'),
-(5, 500, 'Acelga', 'Tarta');
+(3, 300, 'Pizza grande', 'Pizza');
 
 -- --------------------------------------------------------
 
@@ -86,8 +85,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `alias`, `password`) VALUES
 (2, 'JM', '$2y$10$EMbyiIAT43itAf5tVt5Q9OWjH3Ud11MB2i1i2gnWNHopo0ZbI8kVW'),
 (7, 'Diego', '$2y$10$/t37R9zZl7CedmDzkI9hQeBJAFZqXod254CXNIHQvrAUJdkB8Tzwa'),
-(8, 'ui', '$2y$10$ekhCZEMNWOGcGblmQ2yLVOxRzWpofY2HRqEcmjxfrjXN/AXPsXpKe'),
-(9, 'ioooo', '$2y$10$hGGfwtg6/Ih.iFOk0LQcVO/fElvA0o4ayPM4kIeTTs8o7A7FlR59q');
+(8, 'ad', '$2y$10$2R2Vf/jLyAQnLZYuswu6r.l4qiEQSiNRODc5m5P9tFD9CPYhtoKa.'),
+(9, 'v', '$2y$10$WEBrKZ7MtN/qLOZcvU8EFeglizaYEHX3kp5SQG4M8cfH1d80dD2Zy');
 
 --
 -- Índices para tablas volcadas
@@ -120,13 +119,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

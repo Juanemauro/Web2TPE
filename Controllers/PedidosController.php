@@ -69,9 +69,11 @@ class PedidosController {
         $direccion=$_POST["inputAddress"];
         $producto=$_POST["inputPedido"];
         $cantidad=$_POST["inputCantidad"];
+        $estado = "En preparación.";
+
         //Verifico que ingrese todos los datos en el formulario
         if (!empty($cliente) && !empty($direccion) && !empty($producto) && !empty($cantidad)){
-            $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad);
+            $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado);
             header("Location: " . PEDIDOS);
         }else{
             //Muestra un mensaje de error si falta algun campo del form
@@ -113,13 +115,12 @@ class PedidosController {
         $cliente = $_POST["nombrePedidoEditado"];
         $direccion = $_POST["direccionPedidoEditado"];
         $cantidad = $_POST["cantidadPedidoEditado"];
-        $entregado = $_POST["entregadoPedidoEditado"];
+        $estado = $_POST["estadoPedidoEditado"];
         $id_pedido = $_POST["idPedidoEditado"];
         $id_producto = $_POST["idProductoEditado"];
-        
         //Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
-        if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($entregado) && !empty($id_producto)){
-            $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $entregado, $id_pedido, $id_producto);
+        if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($estado) && !empty($id_producto)){
+            $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido);
             header("Location: " . PEDIDOS);
         }else{
             $seccion = "seleccionar un pedido";    

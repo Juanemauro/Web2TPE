@@ -13,11 +13,7 @@
             <td>{$pedido->nombre}</td>
             <td>{$pedido->direccion}</td>
             <td>{$pedido->cantidad}</td>
-            {if $pedido->entregado eq 0}{* si el campo entregado tiene un 0 -> no está entregado*}
-                <td>Aun no entregado</td>
-                {else} {* si el campo entregado tiene algo distinto a 0 (1, porque es entregado es boolean) -> no está entregado*}
-                <td>Entregado</td>
-            {/if}
+            <td>{$pedido->estado}</td>
         </tr>
     </table>
     <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>

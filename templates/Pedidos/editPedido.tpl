@@ -12,7 +12,7 @@
         <div>
             <label for="idProductoEditado">Producto</label>
             <select class="form-control" name="idProductoEditado" id="idProductoEditado">
-            <option value="" selected>Elegir..</option>
+            <option value="{$pedidos->id_producto}" selected>{$pedidos->nombre}</option>
                 {foreach from=$productos item=$producto}
                     <option value="{$producto->id_producto}"> {$producto->nombre}</option>
                 {/foreach}            
@@ -23,8 +23,13 @@
             <input type="number" class="form-control" name="cantidadPedidoEditado" id="cantidadPedidoEditado" value="{$pedidos->cantidad}">
         </div class="form-group">
             <div>
-            <label for="entregadoPedidoEditado">Estado:</label>
-                <input type="number" class="form-control" name="entregadoPedidoEditado" id="entregadoPedidoEditado" value="{$pedidos->entregado}">
+            <label for="estadoPedidoEditado">Estado:</label>
+                <select class="form-control" name="estadoPedidoEditado" id="estadoPedidoEditado">
+                <option value="" selected>{$pedidos->estado}</option>
+                    <option value="Entregado">Entregado</option>
+                    <option value="En preparación">En preparación</option>
+                    <option value="En camino">En camino</option>
+                </select>
                 <input type="text" class="d-none" name="idPedidoEditado" id="idPedidoEditado" value="{$id}">
             </div>
         <button type="submit" class="btn btn-primary">Editar Pedido</button> 

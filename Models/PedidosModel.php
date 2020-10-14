@@ -45,14 +45,14 @@ class PedidosModel {
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
     // Agrega un pedido a la tabla
-    function addPedido($cliente, $direccion, $producto, $cantidad){
-        $sentencia = $this->db->prepare('INSERT INTO pedido(cliente, direccion, id_producto,cantidad) VALUES(?,?,?,?)');
-        $sentencia->execute(array($cliente, $direccion, $producto, $cantidad));
+    function addPedido($cliente, $direccion, $producto, $cantidad, $estado){
+        $sentencia = $this->db->prepare('INSERT INTO pedido(cliente, direccion, id_producto, cantidad, estado) VALUES(?,?,?,?,?)');
+        $sentencia->execute(array($cliente, $direccion, $producto, $cantidad, $estado));
     }
     // Actualiza un pedido
-    function updatePedido($cliente, $direccion, $cantidad, $entregado, $id_pedido, $id_producto){
-        $sentencia = $this->db->prepare('UPDATE pedido SET cliente=?, direccion=?, cantidad=?, entregado=?, id_producto=? WHERE id_pedido = ?' );
-        $sentencia->execute(array($cliente, $direccion, $cantidad, $entregado, $id_producto, $id_pedido));
+    function updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido){
+        $sentencia = $this->db->prepare('UPDATE pedido SET cliente=?, direccion=?, cantidad=?, estado=?, id_producto=? WHERE id_pedido = ?');
+        $sentencia->execute(array($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido));
     }    
     // Borra un pedido
     function deletePedido($id){

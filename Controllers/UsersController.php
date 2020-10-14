@@ -64,10 +64,6 @@ class UsersController {
     }    
     // REGISTRA USUARIO
     function registrarUsuario(){
-        //$loggeado = $this->checkLoggedIn();
-        //if ($loggeado == true){
-          //  header("Location: " . HOME);
-        //}else{
             $alias = $_POST['username'];
             $passForm = $_POST['password'];
             if (!empty($alias) && !empty($passForm)){
@@ -77,7 +73,6 @@ class UsersController {
             }else{
                 $loggeado = false;
                 $this->usersView->showRegistro("Faltan campos obligatorios.", $loggeado);
-            }   
-        //}                     
+            }                     
     }
 }
