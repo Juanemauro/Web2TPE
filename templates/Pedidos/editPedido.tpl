@@ -25,7 +25,7 @@
             <div>
             <label for="estadoPedidoEditado">Estado:</label>
                 <select class="form-control" name="estadoPedidoEditado" id="estadoPedidoEditado">
-                <option value="" selected>{$pedidos->estado}</option>
+                <option value="{$pedidos->estado}" selected>{$pedidos->estado}</option>
                     <option value="Entregado">Entregado</option>
                     <option value="En preparación">En preparación</option>
                     <option value="En camino">En camino</option>
