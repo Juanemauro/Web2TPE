@@ -1,8 +1,4 @@
-{if $loggeado == true}
-    {include 'templates/Acceso/headerLoggeado.tpl'}
-{else}
-    {include 'templates/Acceso/headerPublico.tpl'}
-{/if}
+{include 'templates/Acceso/header.tpl'}
 <div class="slide">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">

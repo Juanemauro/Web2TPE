@@ -32,14 +32,25 @@
                         <a class="nav-link" href="showFaq">FAQ</a>
                     </li>                    
                 </ul>
-                <ul class="navbar-nav mr-auto">  
-                    <li class="nav-item">
-                        <a class="navbar-brand mb-0 h1" href="#">Hola, {$usuario}!</a>
-                    </li>                  
-                    <li class="nav-item">
-                        <a href="logout" class="btn btn-primary">Logout</a>
-                    </li>
-                </ul>
+                {if $loggeado == true}
+                    <ul class="navbar-nav mr-auto">  
+                        <li class="nav-item">
+                            <a class="navbar-brand mb-0 h1" href="#">Hola, {$usuario}!</a>
+                        </li>                  
+                        <li class="nav-item">
+                            <a href="logout" class="btn btn-primary">Logout</a>
+                        </li>
+                    </ul>
+                {else}
+                    <ul class="navbar-nav mr-auto"> 
+                        <li class="nav-item">
+                            <a href="login" class="btn btn-primary">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="registroForm" class="btn btn-primary">Registrarse</a>
+                        </li>
+                    </ul>
+                {/if}
             </div>
             </nav>
         </div>

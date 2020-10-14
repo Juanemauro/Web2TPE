@@ -1,4 +1,4 @@
-{include 'templates/Acceso/headerPublico.tpl'}
+{include 'templates/Acceso/header.tpl'}
     <div class="slide">
         <form method= "POST" action="registrarse" class="form" >
             <div class="form-group">

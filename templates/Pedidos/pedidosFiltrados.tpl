@@ -1,8 +1,4 @@
-{if $loggeado == true}
-    {include 'templates/Acceso/headerLoggeado.tpl'}
-{else}
-    {include 'templates/Acceso/headerPublico.tpl'}
-{/if}
+{include 'templates/Acceso/header.tpl'}
 <div class="slide">
     <table class="pedidos_tabla">
             <tr>

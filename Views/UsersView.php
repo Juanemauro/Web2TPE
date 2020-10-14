@@ -8,15 +8,17 @@ class UsersView{
         $this->smarty = new Smarty();
     }
     // Muestra form para loggearse
-    function showLogin($aviso = ""){
+    function showLogin($aviso = "", $loggeado){
         $this->smarty->assign('titulo', "Login");
         $this->smarty->assign('aviso', $aviso);
+        $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->display('templates/Acceso/login.tpl');
     }
     // Muestra form para registrarse
-    function showRegistro($aviso = ""){
+    function showRegistro($aviso = "", $loggeado){
         $this->smarty->assign('titulo', "Registro");
         $this->smarty->assign('aviso', $aviso);
+        $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->display('templates/Acceso/registro.tpl');
     }
 }

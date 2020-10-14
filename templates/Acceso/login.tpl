@@ -1,4 +1,4 @@
-{include 'templates/Acceso/headerPublico.tpl'}
+{include 'templates/Acceso/header.tpl'}
 <div class="slide">
     <form action="verificarUser" method="post">
         <div class="form-group">

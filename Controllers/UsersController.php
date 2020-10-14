@@ -39,15 +39,18 @@ class UsersController {
                         $_SESSION["ALIAS"] = $usuarioLoggeado->alias;
                         header("Location: ". HOME);                    
                     }else{
-                        $this->usersView->ShowLogin("Contraseña incorrecta");
+                        $loggeado = false;
+                        $this->usersView->ShowLogin("Contraseña incorrecta", $loggeado);
                     }
                 }else{
                     // No existe el user en la DB
-                    $this->usersView->ShowLogin("Usuario incorrecto");
+                    $loggeado = false;
+                    $this->usersView->ShowLogin("Usuario incorrecto", $loggeado);
                 }
             }      
         }else{ 
-            $this->usersView->ShowLogin("Faltan campos obligatorios.");
+            $loggeado = false;
+            $this->usersView->ShowLogin("Faltan campos obligatorios.", $loggeado);
         }        
     }
     // VERIFICA QUE SE HAYA INICIADO UNA SESIÓN
@@ -61,14 +64,20 @@ class UsersController {
     }    
     // REGISTRA USUARIO
     function registrarUsuario(){
-        $alias = $_POST['username'];
-        $passForm = $_POST['password'];
-        if (!empty($alias) && !empty($passForm)){
-            $password = password_hash($passForm, PASSWORD_DEFAULT);
-            $this->usersModel->registrarUsuario($alias, $password);
-            header("Location: " . HOME);
-        }else{
-            $this->usersView->showRegistro("Faltan campos obligatorios.");
-        }            
+        //$loggeado = $this->checkLoggedIn();
+        //if ($loggeado == true){
+          //  header("Location: " . HOME);
+        //}else{
+            $alias = $_POST['username'];
+            $passForm = $_POST['password'];
+            if (!empty($alias) && !empty($passForm)){
+                $password = password_hash($passForm, PASSWORD_DEFAULT);
+                $this->usersModel->registrarUsuario($alias, $password);
+                header("Location: " . HOME);
+            }else{
+                $loggeado = false;
+                $this->usersView->showRegistro("Faltan campos obligatorios.", $loggeado);
+            }   
+        //}                     
     }
 }

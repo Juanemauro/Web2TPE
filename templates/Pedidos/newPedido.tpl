@@ -1,8 +1,4 @@
-{if $loggeado == true}
-    {include 'templates/Acceso/headerLoggeado.tpl'}
-{else}
-    {include 'templates/Acceso/headerPublico.tpl'}
-{/if}
+{include 'templates/Acceso/header.tpl'}
 <div class="slide">
     <form method= "POST" action="addPedido" class="form">
         <div class="form-row">

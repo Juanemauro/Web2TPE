@@ -1,4 +1,4 @@
-{include 'templates/Acceso/headerLoggeado.tpl'}
+{include 'templates/Acceso/header.tpl'}
 <div class="slide">
     <h1>ERROR!</h1>
     <h2>{$mensajeError}</h2>
