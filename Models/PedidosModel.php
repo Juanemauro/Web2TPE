@@ -13,10 +13,16 @@ class PedidosModel {
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // Deuvele una tabla con todos los pedidos filtrados por nombre de producto
+    // Devuelve una tabla con todos los pedidos filtrados por NOMBRE de producto
     function getPedidosByProducto($producto){
         $sentencia = $this->db->prepare('SELECT *,producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto WHERE producto.nombre=?');
         $sentencia->execute(array($producto));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    // Devuelve una tabla con todos los pedidos filtrados por ID de producto -> utilizado para el restrict
+    function getPedidosByIdProducto($id_producto){
+        $sentencia = $this->db->prepare('SELECT *,producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto WHERE producto.id_producto=?');
+        $sentencia->execute(array($id_producto));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
     // Devuelve una tabla con todos los datos de los pedidos (ORDENADOS POR ID_PRODUCTO EN FORMA ASCENDENTE) y una columna extra con el nombre del producto

@@ -9,11 +9,12 @@ class ProductosView {
         $this->smarty->assign('basehref', BASE_URL);
     }
     // Muestra los productos
-    function showProductosView($productos, $loggeado, $usuario = " "){
+    function showProductosView($productos, $loggeado, $usuario = " ", $mensaje = " "){
         $this->smarty->assign('titulo', "Productos");
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('mensaje', $mensaje);
         $this->smarty->display('templates/Productos/productos.tpl');
     } 
     // Muestra un form para agregar un producto

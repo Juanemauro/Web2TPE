@@ -18,5 +18,10 @@
             {/foreach}
         </table>
     {/if}
+    {if $mensaje != ''}
+            <div class="alert alert-danger" role="alert">
+                {$mensaje}
+            </div>
+     {/if}
 </div>    
 {include 'templates/Acceso/footer.tpl'}

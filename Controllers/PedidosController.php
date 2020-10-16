@@ -25,7 +25,7 @@ class PedidosController {
         $pedidos = $this->pedidosModel->getPedidos();
         $productos = $this->productosModel->getProductos();
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";
@@ -38,7 +38,7 @@ class PedidosController {
         $productos = $this->productosModel->getProductos();
         $nombreProducto = $_GET["nombreProductoParaFiltrar"];
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";
@@ -52,7 +52,7 @@ class PedidosController {
         $pedidos = $this->pedidosModel->getPedidos();
         $productos = $this->productosModel->getProductos();
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
             $this->pedidosView->showPedidoForm($pedidos, $productos, $loggeado, $usuario);
         }else{
@@ -62,7 +62,7 @@ class PedidosController {
     // CARGAR PEDIDO
     function addPedido(){
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
         }
         $cliente=$_POST["inputName"] . " ". $_POST["inputLastname"]; //concateno los datos que vienen por form
@@ -86,7 +86,7 @@ class PedidosController {
         $pedidos = $this->pedidosModel->getPedidos();
         $productos = $this->productosModel->getProductos();
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
             $this->pedidosView->showMenuEditPedido($pedidos, $productos, $loggeado, $usuario);
         }else{
@@ -99,7 +99,7 @@ class PedidosController {
         $pedido = $this->pedidosModel->getPedido($id);
         $productos = $this->productosModel->getProductos();
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
             $this->pedidosView->showUpdatedPedido($pedido, $productos, $id, $loggeado, $usuario);
         }else{
@@ -109,7 +109,7 @@ class PedidosController {
     // MOSTRAR PEDIDOS ACTUALIZADOS
     function showEditedPedido(){
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
         }
         $cliente = $_POST["nombrePedidoEditado"];
@@ -132,7 +132,7 @@ class PedidosController {
         $id = $params[':ID'];
         $pedido = $this->pedidosModel->getPedido($id);
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";
@@ -156,7 +156,7 @@ class PedidosController {
     function deletePedido($params = null){
         $id = $params[':ID'];
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
             $this->pedidosModel->deletePedido($id);
             header("Location: " . PEDIDOS);
@@ -168,7 +168,7 @@ class PedidosController {
     function showOrderedPedidosByProductoDesc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        if ($loggeado == true){
+        if ($loggeado){
             $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoDesc();
             $productos = $this->productosModel->getProductos();
             $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
@@ -180,7 +180,7 @@ class PedidosController {
     function showOrderedPedidosByProductoAsc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        if ($loggeado == true){
+        if ($loggeado){
             $pedidos = $this->pedidosModel->getPedidosOrdenadosByProductoAsc();
             $productos = $this->productosModel->getProductos();
             $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);            
@@ -193,7 +193,7 @@ class PedidosController {
     function showOrderedPedidosByClienteDesc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        if ($loggeado == true){
+        if ($loggeado){
             $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteDesc();
             $productos = $this->productosModel->getProductos();
             $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);
@@ -205,7 +205,7 @@ class PedidosController {
     function showOrderedPedidosByClienteAsc(){        
         $loggeado = $this->user->checkLoggedIn();
         $usuario = $_SESSION["ALIAS"];
-        if ($loggeado == true){
+        if ($loggeado){
             $pedidos = $this->pedidosModel->getPedidosOrdenadosByClienteAsc();
             $productos = $this->productosModel->getProductos();
             $this->pedidosView->showPedidosView($pedidos, $productos, $loggeado, $usuario);

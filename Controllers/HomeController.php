@@ -15,7 +15,7 @@ class HomeController{
     // SHOW HOME
     function showHome(){
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";
@@ -25,7 +25,7 @@ class HomeController{
     // SHOW FAQS
     function showFaq(){
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";
@@ -36,7 +36,7 @@ class HomeController{
     // MUESTRA EL FORM PARA LOGGEARSE
     function loginForm(){
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             header("Location: ". HOME);
         }else{
             $usuario = "";
@@ -47,7 +47,7 @@ class HomeController{
     // MUESTRA FORM PARA REGISTRARSE
     function registroForm(){
         $loggeado = $this->user->checkLoggedIn();
-        if ($loggeado == true){
+        if ($loggeado){
             header("Location: ". HOME);
         }else{
             $usuario = "";
