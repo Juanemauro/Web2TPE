@@ -27,7 +27,7 @@
             </form>
         </td> 
     </thead>
-    {foreach from=$productos item=$producto}
+    {foreach from=$productos item=producto}
         <tr>
             <td>{$producto->nombre}</td>                    
             <td>{$producto->descripcion}</td>

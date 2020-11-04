@@ -19,7 +19,7 @@
             <label for="inputPedido">Producto</label>
             <select class="form-control" name="inputPedido" id="inputPedido">
             <option value="" selected>Elegir...</option>
-                {foreach from=$productos item=$producto}
+                {foreach from=$productos item=producto}
                     <option value="{$producto->id_producto}"> {$producto->nombre}</option>
                 {/foreach}            
             </select>
@@ -41,7 +41,7 @@
                 <input type="text" class="form-control" id="captcha" disabled />
                 </div>
                 <div class="form-group col-md-4">
-                <label for="button-captcha" class="text-white">a</label></br>
+                <label for="button-captcha" class="text-white">a</label>
                 <button type="button" class="btn btn-primary" id="actucaptcha">Actualizar</button>
                 </div>
                 </label>

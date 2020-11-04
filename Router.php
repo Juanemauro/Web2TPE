@@ -5,6 +5,7 @@ require_once './Controllers/HomeController.php';
 require_once './Controllers/PedidosController.php';
 require_once './Controllers/ProductosController.php';
 require_once './Controllers/UsersController.php';
+require_once './Controllers/AutenticacionController.php';
 
 // CONSTANTES PARA RUTEO
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
@@ -17,16 +18,25 @@ define("LOGIN", BASE_URL . 'login');
 // Creo instancia de router
 $r = new Router();
 
-///////////////////// LOGIN, LOGOUT, REGISTRO
+///////////////////// USUARIO
 $r->addRoute("login", "GET", "HomeController", "loginForm"); // Muestra el form para loggearse
 $r->addRoute("verificarUser", "POST", "UsersController", "verificarUser"); // Verificar usuario y contraseña
-$r->addRoute("logout", "GET", "UsersController", "logout"); // Desloggearse
+$r->addRoute("logout", "GET", "AutenticacionController", "logout"); // Desloggearse
 $r->addRoute("registroForm", "GET", "HomeController", "registroForm"); // Muestra form para registrarse
 $r->addRoute("registrarse", "POST", "UsersController", "registrarUsuario"); // Registra el usuario en la BDD
+$r->addRoute("selectUser", "GET", "UsersController", "selectUser"); // Mostrar form para ingresar el usuario
+$r->addRoute("verificarUsuario", "POST", "UsersController", "verificarUsuario"); // Mostrar form para verificar la pregunta secreta del usuario
+$r->addRoute("verificarPregunta", "POST", "UsersController", "verificarPregunta"); // Mostrar form para verificar la pregunta secreta del usuario
+$r->addRoute("updatePassword", "POST", "UsersController", "updatePassword"); // Mostrar form para verificar la pregunta secreta del usuario
+$r->addRoute("hacerAdmin/:ID", "GET", "UsersController", "hacerAdmin"); // hacer admin a un usuario
+$r->addRoute("sacarPermiso/:ID", "GET", "UsersController", "sacarPermiso"); // sacar admin a un usuario
+$r->addRoute("deleteUsuario/:ID", "GET", "UsersController", "deleteUsuario"); // hacer admin a un usuario
 
 // HOME & FAQ
 $r->addRoute("home", "GET", "HomeController", "showHome"); // Mostrar Home
 $r->addRoute("showFaq", "GET", "HomeController", "showFaq"); // Mostrar FAQ
+$r->addRoute("showMenuAdmin", "GET", "HomeController", "showMenuAdmin"); // Mostrar FAQ
+
 
 // RUTAS PEDIDOS
 $r->addRoute("Pedidos", "GET", "PedidosController", "Pedidos"); //-> varía para usuario público

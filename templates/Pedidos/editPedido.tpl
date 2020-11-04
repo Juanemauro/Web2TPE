@@ -13,7 +13,7 @@
             <label for="idProductoEditado">Producto</label>
             <select class="form-control" name="idProductoEditado" id="idProductoEditado">
             <option value="{$pedidos->id_producto}" selected>{$pedidos->nombre}</option>
-                {foreach from=$productos item=$producto}
+                {foreach from=$productos item=producto}
                     <option value="{$producto->id_producto}"> {$producto->nombre}</option>
                 {/foreach}            
             </select>

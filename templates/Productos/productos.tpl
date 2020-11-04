@@ -1,6 +1,6 @@
 {include 'templates/Acceso/header.tpl'}
 <div class="slide">
-    {if $loggeado == true}
+    {if $admin == true}
         {include 'templates/Productos/productosAdmin.tpl'}
     {else}
         <table class="pedidos_tabla">
@@ -9,7 +9,7 @@
                 <td>Descripcion</td>
                 <td>Precio</td> 
             </thead>
-            {foreach from=$productos item=$producto}
+            {foreach from=$productos item=producto}
                 <tr>
                     <td>{$producto->nombre}</td>                    
                     <td>{$producto->descripcion}</td>

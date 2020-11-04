@@ -9,9 +9,9 @@
                 </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
-                        Podés pagar a través tarjetas de crédito y tarjetas de débito.</br>
+                        Podés pagar a través tarjetas de crédito y tarjetas de débito.
                         arjetas de crédito: American Express, MasterCard, VISA, Cabal, Diners, Naranja,
-                        Credimás.</br>
+                        Credimás.
                         Tarjetas de débito: Visa Débito y Cabal Débito.
                     </div>
                 </div>

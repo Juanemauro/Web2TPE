@@ -30,10 +30,15 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="showFaq">FAQ</a>
-                    </li>                    
+                    </li>
+                    {if $admin == true}
+                        <li class="nav-item">
+                            <a class="nav-link" href="showMenuAdmin">Menú Admin</a>
+                        </li>
+                    {/if}                                      
                 </ul>
                 {if $loggeado == true}
-                    <ul class="navbar-nav mr-auto">  
+                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="navbar-brand mb-0 h1" href="#">Hola, {$usuario}!</a>
                         </li>                  
@@ -48,6 +53,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="registroForm" class="btn btn-primary">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="selectUser" class="btn btn-primary">Olvidé mi contraseña</a>
                         </li>
                     </ul>
                 {/if}

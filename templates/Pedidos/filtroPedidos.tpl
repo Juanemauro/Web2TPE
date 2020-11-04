@@ -2,7 +2,7 @@
     <label for="inputName4">Filtrar pedidos: </label>
     <select class="form-control" name="nombreProductoParaFiltrar" id="nombreProductoParaFiltrar">
         <option value="" selected>Elegir...</option>
-            {foreach from=$productos item=$producto}
+            {foreach from=$productos item=producto}
                 <option value="{$producto->nombre}"> {$producto->nombre}</option>
             {/foreach}            
     </select>

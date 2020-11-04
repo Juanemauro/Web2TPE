@@ -7,7 +7,7 @@
                 <td>Dirección</td>
                 <td>Detalle</td>
             </tr>
-            {foreach  from=$pedidos item=$pedido}
+            {foreach  from=$pedidos item=pedido}
                 <tr>
                     <td>{$pedido->cliente}</td>
                     <td>{$pedido->nombre}</td>

@@ -26,7 +26,7 @@
             <td>Dirección</td>
             <td>Pedido a editar</td> 
         </thead>
-        {foreach  from=$pedidos item=$pedido}
+        {foreach  from=$pedidos item=pedido}
             <tr>
                 <td>{$pedido->cliente}</td>
                 <td>{$pedido->nombre}</td>
