@@ -6,10 +6,10 @@
     <thead>
         <td><form>
                 <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cliente</button>
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Receptor</button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="Pedidos">Cliente ▲</a>
-                        <a class="dropdown-item" href="showOrderedPedidosByClienteDesc">Cliente ▼</a>
+                        <a class="dropdown-item" href="Pedidos">Receptor ▲</a>
+                        <a class="dropdown-item" href="showOrderedPedidosByClienteDesc">Receptor ▼</a>
                     </div>
                 </div>
             </form>

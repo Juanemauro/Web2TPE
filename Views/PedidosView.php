@@ -19,6 +19,17 @@ class PedidosView{
         $this->smarty->display('templates/Pedidos/pedidos.tpl');
     }
 
+    // Mostrar pedidos del usuario que está loggeado
+    function showMyPedidos($loggeado, $usuario, $pedidosByUser, $admin, $productos){
+        $this->smarty->assign('titulo', "Mis Pedidos");
+        $this->smarty->assign('pedidos', $pedidosByUser);
+        $this->smarty->assign('productos', $productos);
+        $this->smarty->assign('loggeado', $loggeado);
+        $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('admin', $admin);
+        $this->smarty->display('templates/Pedidos/misPedidos.tpl');
+    }
+
     function showPedidosFiltrados($pedidos, $loggeado, $usuario, $admin){
         $this->smarty->assign('titulo', "Pedidos");
         $this->smarty->assign('pedidos', $pedidos);
@@ -70,12 +81,13 @@ class PedidosView{
         $this->smarty->display('templates/Pedidos/editPedido.tpl');
     }  
     // Muestra el detelle de un determinado pedido
-    function showDetailPedido($pedido, $loggeado, $usuario, $admin){
+    function showDetailPedido($pedido, $loggeado, $usuario, $id_usuario = " ", $admin){
         $this->smarty->assign('titulo', "editar pedido");
         $this->smarty->assign('pedido', $pedido);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
+        $this->smarty->assign('id_usuario', $id_usuario);
         $this->smarty->display('templates/Pedidos/detailPedido.tpl');
     }  
 }

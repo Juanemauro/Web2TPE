@@ -18,9 +18,9 @@ class UsersModel{
         $sentencia->execute(array($user));
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
-    function getUsuarios(){
-        $sentencia = $this->db->prepare("SELECT * FROM usuario");
-        $sentencia->execute();
+    function getUsuarios($usuario){
+        $sentencia = $this->db->prepare("SELECT * FROM usuario WHERE alias <> ?");
+        $sentencia->execute(array($usuario));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
     // Agrega un usuario a la BDD
@@ -29,16 +29,19 @@ class UsersModel{
         $sentencia->execute(array($alias, $password, $pregunta, $respuesta));
     }
 
+    // Modifica la contraseña anterior 
     function updatePassword($password1, $id){
         $sentencia = $this->db->prepare('UPDATE usuario SET password=? WHERE id_usuario = ?');
         $sentencia->execute(array($password1, $id));
     }
 
+    // Modifica el permiso de un usuario
     function updatePermiso($permiso, $id){
         $sentencia = $this->db->prepare('UPDATE usuario SET admin=? WHERE id_usuario = ?');
         $sentencia->execute(array($permiso, $id));
     }
 
+    // Eimina un usuario
     function deleteUsuario($id){
         $sentencia = $this->db->prepare('DELETE FROM usuario WHERE usuario.id_usuario = ?' );
         $sentencia->execute(array($id));

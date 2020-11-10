@@ -8,8 +8,8 @@
             {include 'templates/Pedidos/filtroPedidos.tpl'}
             {include 'templates/Pedidos/tablaPedidos.tpl'}
         {else}
-        {include 'templates/Pedidos/filtroPedidos.tpl'}
-        {include 'templates/Pedidos/tablaPedidos.tpl'}
+            {include 'templates/Pedidos/filtroPedidos.tpl'}
+            {include 'templates/Pedidos/tablaPedidos.tpl'}
         {/if}
     {/if}
 </div>

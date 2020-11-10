@@ -18,7 +18,7 @@ define("LOGIN", BASE_URL . 'login');
 // Creo instancia de router
 $r = new Router();
 
-///////////////////// USUARIO
+///////////////////// LOGIN, ACCIONES DE USUARIOS Y LOGOUT
 $r->addRoute("login", "GET", "HomeController", "loginForm"); // Muestra el form para loggearse
 $r->addRoute("verificarUser", "POST", "UsersController", "verificarUser"); // Verificar usuario y contraseña
 $r->addRoute("logout", "GET", "AutenticacionController", "logout"); // Desloggearse
@@ -39,6 +39,7 @@ $r->addRoute("showMenuAdmin", "GET", "HomeController", "showMenuAdmin"); // Most
 
 
 // RUTAS PEDIDOS
+$r->addRoute("showMyPedidos", "GET", "PedidosController", "showMyPedidos"); // muestra todos los pedidos que realizó el usuario que está loggeado en ese momento
 $r->addRoute("Pedidos", "GET", "PedidosController", "Pedidos"); //-> varía para usuario público
 $r->addRoute("showFiltroPedidos", "GET", "PedidosController", "showFilteredPedidos"); // Muestra los pedidos filtrados por un determinado producto
 $r->addRoute("newPedido", "GET", "PedidosController", "newPedido"); // Agregar nuevo pedido a través de un form

@@ -31,9 +31,22 @@ class PedidosController {
         if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
-            $usuario = "";
+            $usuario = "";           
         } 
         $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin);
+    }
+    // MOSTRAR PEDIDOS DEL USUARIO QUE ESTÁ LOGGEADO EN ESTE MOMENTO
+    function showMyPedidos(){
+        if ($this->loggeado && !($this->admin)){ // preguntar esto en la práctica del miércoles
+            $usuario = $_SESSION["ALIAS"];
+            $id_usuario = $_SESSION["ID_USUARIO"];
+            $pedidosByUser = $this->pedidosModel->getPedidosByUser($id_usuario);
+            $productos = $this->productosModel->getProductos();
+            $this->pedidosView->showMyPedidos($this->loggeado, $usuario, $pedidosByUser, $this->admin, $productos);
+        }else{
+            $usuario = "";
+            header("Location: " . PEDIDOS); 
+        }        
     }
 
     // FILTRO DE PEDIDOS
@@ -70,9 +83,12 @@ class PedidosController {
         $producto=$_POST["inputPedido"];
         $cantidad=$_POST["inputCantidad"];
         $estado = "En preparación.";
+        $id_usuario = $_SESSION['ID_USUARIO'];
+        //echo $id_usuario;
+        //die();
         //Verifico que ingrese todos los datos en el formulario
         if (!empty($cliente) && !empty($direccion) && !empty($producto) && !empty($cantidad)){
-            $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado);
+            $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario);
             header("Location: " . PEDIDOS);
         }else{
             //Muestra un mensaje de error si falta algun campo del form
@@ -129,11 +145,13 @@ class PedidosController {
         $pedido = $this->pedidosModel->getPedido($id);
         if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"];
+            $id_usuario = $_SESSION["ID_USUARIO"];
         }else{
             $usuario = "";
+            $id_usuario = "";
         } 
         if ($pedido)
-            $this->pedidosView->showDetailPedido($pedido, $this->loggeado, $usuario, $this->admin);
+            $this->pedidosView->showDetailPedido($pedido, $this->loggeado, $usuario, $id_usuario, $this->admin);
     } 
     // MUESTRA TABLA CON PEDIDOS A BORRAR
     function menuDeletePedido(){

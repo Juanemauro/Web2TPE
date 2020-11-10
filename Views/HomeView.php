@@ -35,9 +35,9 @@ class HomeView {
         $this->smarty->assign('redireccion', $redireccion);
         $this->smarty->display('templates/Acceso/errorForm.tpl');
     }
-
+    // Muestra el menú para el ABM de usuario
     function showMenuAdmin($loggeado, $usuarios, $usuario, $admin){
-        $this->smarty->assign('titulo', "Error!");
+        $this->smarty->assign('titulo', "Menú Admin");
         $this->smarty->assign('admin', $admin);
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('usuarios', $usuarios);

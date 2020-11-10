@@ -100,7 +100,7 @@ class UsersController {
         }   
     }
 
-    // Verificar que la pregunta y la respuesta sean correctas
+    // Verificar que la pregunta y la respuesta sean correctas para poder realizar el cambio de contraseña
     function verificarPregunta(){
         $pregunta = $_POST['pregunta'];
         $respuesta = $_POST['respuesta'];
@@ -148,7 +148,8 @@ class UsersController {
             }
         }
     }  
-    
+
+    // Otorga permisos de admin a un usuario que no lo es
     function hacerAdmin($params = null){
         $id = $params[':ID'];
         if ($this->admin){
@@ -168,6 +169,7 @@ class UsersController {
         }        
     }
 
+    // Elimina el permiso de admin de un usuario
     function sacarPermiso($params = null){
         $id = $params[':ID'];
         if ($this->admin){
@@ -186,6 +188,8 @@ class UsersController {
             header("Location: " . HOME);
         }   
     }
+
+    // Eliminar usuario
     function deleteUsuario($params = null){
         $id = $params[':ID'];
         if ($this->admin){

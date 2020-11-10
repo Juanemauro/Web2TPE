@@ -1,6 +1,6 @@
 <table class="pedidos_tabla">
     <thead>
-        <td>Cliente</td>
+        <td>Recibió</td>
         <td>Producto</td>    
         <td>Dirección</td>
         <td>Detalle</td>

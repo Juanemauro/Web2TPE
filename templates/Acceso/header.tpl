@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>{$titulo}</title>
 </head>
@@ -31,6 +30,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="showFaq">FAQ</a>
                     </li>
+                    {if $loggeado == true and $admin == false}
+                        <li class="nav-item">
+                            <a class="nav-link" href="showMyPedidos">Mis pedidos</a>
+                        </li>
+                    {/if}
                     {if $admin == true}
                         <li class="nav-item">
                             <a class="nav-link" href="showMenuAdmin">Menú Admin</a>

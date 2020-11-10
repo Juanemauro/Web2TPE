@@ -25,8 +25,15 @@ class PedidosModel {
         //    $sql='SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where pedido.id_usuario=? order by cliente asc';        
         //} //continuar casos 5, 6 y 7
         //$sentencia = $this->db->prepare($sql);
-        $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto order by cliente asc'); 
+        $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto order by cliente asc'); 
         $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // Devuelve una tabla con los pedidos del usuario que está loggeado
+    function getPedidosByUser($usuario){
+        $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where pedido.id_usuario = ? order by cliente asc'); 
+        $sentencia->execute(array($usuario));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -59,8 +66,7 @@ class PedidosModel {
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto ORDER BY cliente desc');
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }
-    
+    }    
     // Devuelve una tabla con todos los datos de UN DETERMINADO PRODUCTO y una columna extra con el nombre del producto
     function getPedido($id){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where id_pedido= ?');
@@ -68,9 +74,9 @@ class PedidosModel {
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
     // Agrega un pedido a la tabla
-    function addPedido($cliente, $direccion, $producto, $cantidad, $estado){
-        $sentencia = $this->db->prepare('INSERT INTO pedido(cliente, direccion, id_producto, cantidad, estado) VALUES(?,?,?,?,?)');
-        $sentencia->execute(array($cliente, $direccion, $producto, $cantidad, $estado));
+    function addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario){
+        $sentencia = $this->db->prepare('INSERT INTO pedido(cliente, direccion, id_producto, cantidad, estado, id_usuario) VALUES(?,?,?,?,?,?)');
+        $sentencia->execute(array($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario));
     }
     // Actualiza un pedido
     function updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido){

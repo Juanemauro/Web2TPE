@@ -48,7 +48,7 @@ class HomeController{
         }else{
             $usuario = "";
         }
-        $usuarios = $this->usersModel->getUsuarios();
+        $usuarios = $this->usersModel->getUsuarios($usuario);
         $this->view->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
     }
     // MUESTRA EL FORM PARA LOGGEARSE

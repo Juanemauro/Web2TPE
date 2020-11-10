@@ -23,7 +23,7 @@ class ProductosController{
         $this->loggeado = $this->autenticacion->checkLoggedIn();
         $this->admin = $this->autenticacion->checkAdmin();
     }
-    // ------------------------ MÉTODOS 
+
     // Mostrar TODOS de productos
     function Productos(){
         $productos = $this->model->getProductos();

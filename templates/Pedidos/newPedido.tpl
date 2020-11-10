@@ -30,7 +30,7 @@
                 <input type="number" class="form-control" name="inputCantidad" id="inputCantidad" max="24" placeholder="1">
             </div>
         </div>
-        <div class="form-group">
+        {*<div class="form-group">
             <div class="form-row">
                 <div class="form-group col-md-4">
                 <label for="captcha">Captcha:</label>
@@ -46,7 +46,7 @@
                 </div>
                 </label>
             </div>
-        </div>
+        </div>*}
         <button type="submit" class="btn btn-primary" id="realizpedido">Realizar pedido</button>
     </form>
     <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
@@ -85,5 +85,6 @@
             </tr>
         {/foreach}
     </table>
-</div>    
+</div>
+{*<script src="js/main.js"></script>No lo necesito para esta materia*}    
 {include 'templates/Acceso/footer.tpl'}

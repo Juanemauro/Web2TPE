@@ -13,7 +13,10 @@ class AutenticacionController {
         session_start();
         $_SESSION["ALIAS"] = $usuarioLoggeado->alias;
         $_SESSION['ADMINISTRADOR'] = $usuarioLoggeado->admin;
+        $_SESSION['ID_USUARIO'] = $usuarioLoggeado->id_usuario;
     } 
+
+    // VERIFICA SI HAY UNA SESIÓN ABIERTA
     function checkLoggedIn(){
             //session_start();
             if (!isset($_SESSION['ALIAS'])) {
@@ -23,6 +26,7 @@ class AutenticacionController {
             }
     } 
 
+    // VERIFICA SI EL USUARIO LOGGEADO ES ADMIN O ES UN USUARIO REGISTRADO
     function checkAdmin(){
         if (isset($_SESSION['ALIAS'])) {
             if ($_SESSION['ADMINISTRADOR'] == 1)
