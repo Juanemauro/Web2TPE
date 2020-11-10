@@ -76,13 +76,16 @@ class ProductosController{
     function editProducto($params = null){
         $id = $params[':ID'];
         $producto = $this->model->getProducto($id);
-        if ($this->admin){
-            $usuario = $_SESSION["ALIAS"];
-            $this->productosView->showUpdatedProductos($producto, $id, $this->loggeado, $usuario, $this->admin);
+        if (!empty($producto)){
+            if ($this->admin){
+                $usuario = $_SESSION["ALIAS"];
+                $this->productosView->showUpdatedProductos($producto, $id, $this->loggeado, $usuario, $this->admin);
+            }else{
+                header("Location: " . PRODUCTOS);
+            }
         }else{
-            header("Location: " . PRODUCTOS);
-        }
-        
+            header("Location: " . PRODUCTOS); 
+        }     
     }  
     // ACTUALIZA LA TABLA DE PRODUCTO
     function showEditedProducto(){

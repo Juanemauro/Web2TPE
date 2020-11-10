@@ -16,6 +16,7 @@ class PedidosView{
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('admin', $admin);
         $this->smarty->assign('usuario', $usuario);
+        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/pedidos.tpl');
     }
 
@@ -27,6 +28,7 @@ class PedidosView{
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
+        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/misPedidos.tpl');
     }
 
@@ -36,6 +38,7 @@ class PedidosView{
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
+        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/pedidosFiltrados.tpl');
     }
 
@@ -88,6 +91,7 @@ class PedidosView{
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
         $this->smarty->assign('id_usuario', $id_usuario);
+        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/detailPedido.tpl');
     }  
 }

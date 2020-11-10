@@ -6,6 +6,7 @@ require_once './Controllers/PedidosController.php';
 require_once './Controllers/ProductosController.php';
 require_once './Controllers/UsersController.php';
 require_once './Controllers/AutenticacionController.php';
+require_once './Controllers/ImagenesController.php';
 
 // CONSTANTES PARA RUTEO
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
@@ -36,6 +37,10 @@ $r->addRoute("deleteUsuario/:ID", "GET", "UsersController", "deleteUsuario"); //
 $r->addRoute("home", "GET", "HomeController", "showHome"); // Mostrar Home
 $r->addRoute("showFaq", "GET", "HomeController", "showFaq"); // Mostrar FAQ
 $r->addRoute("showMenuAdmin", "GET", "HomeController", "showMenuAdmin"); // Mostrar FAQ
+
+// IMÁGENES
+//$r->addRoute("agregarImagen", "POST", "ImagenesController", "getDatosImagen"); // Agregar una imagen a un pedido
+//$r->addRoute("borrarImagen/:ID", "GET", "ImagenesController", "deleteImagen"); // Borrar una imagen
 
 
 // RUTAS PEDIDOS

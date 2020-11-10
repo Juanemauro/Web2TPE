@@ -3,6 +3,7 @@ require_once './Controllers/ProductosController.php';
 require_once './Models/PedidosModel.php';
 require_once './Views/PedidosView.php';
 require_once './Controllers/AutenticacionController.php';
+require_once './Controllers/ImagenesController.php';
 class PedidosController {
     // DECLARACIÓN DE ATRIBUTOS
     private $pedidosModel;
@@ -20,6 +21,7 @@ class PedidosController {
         $this->productosModel = new ProductosModel();
         $this->productosController = new ProductosController(); 
         $this->autenticacion = new AutenticacionController();
+        $this->imagenesController= new ImagenesController ();
         $this->loggeado = $this->autenticacion->checkLoggedIn();
         $this->admin = $this->autenticacion->checkAdmin();
     } 
@@ -28,6 +30,7 @@ class PedidosController {
     function Pedidos(){
         $pedidos = $this->pedidosModel->getPedidos();
         $productos = $this->productosModel->getProductos();
+        //$imagenes = $this->imagenesController->getImagenes();
         if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
@@ -112,12 +115,16 @@ class PedidosController {
         $id = $params[':ID'];
         $pedido = $this->pedidosModel->getPedido($id);
         $productos = $this->productosModel->getProductos();
-        if ($this->admin){
-            $usuario = $_SESSION["ALIAS"];
-            $this->pedidosView->showUpdatedPedido($pedido, $productos, $id, $this->loggeado, $usuario, $this->admin);
+        if (!empty($pedido)){
+            if ($this->admin){
+                $usuario = $_SESSION["ALIAS"];
+                $this->pedidosView->showUpdatedPedido($pedido, $productos, $id, $this->loggeado, $usuario, $this->admin);
+            }else{
+                header("Location: " . PEDIDOS);
+            } 
         }else{
             header("Location: " . PEDIDOS);
-        }        
+        }               
     }    
     // MOSTRAR PEDIDOS ACTUALIZADOS
     function showEditedPedido(){
@@ -143,15 +150,19 @@ class PedidosController {
     function detailPedido($params=null){
         $id = $params[':ID'];
         $pedido = $this->pedidosModel->getPedido($id);
-        if ($this->loggeado){
-            $usuario = $_SESSION["ALIAS"];
-            $id_usuario = $_SESSION["ID_USUARIO"];
+        //$imagenes = $this->imagenesController->getImagenes();
+        if (!empty($pedido)){
+            if ($this->loggeado){
+                $usuario = $_SESSION["ALIAS"];
+                $id_usuario = $_SESSION["ID_USUARIO"];
+            }else{
+                $usuario = "";
+                $id_usuario = "";
+            } 
+         $this->pedidosView->showDetailPedido($pedido, $this->loggeado, $usuario, $id_usuario, $this->admin); 
         }else{
-            $usuario = "";
-            $id_usuario = "";
-        } 
-        if ($pedido)
-            $this->pedidosView->showDetailPedido($pedido, $this->loggeado, $usuario, $id_usuario, $this->admin);
+            header("Location: " . PEDIDOS);
+        }        
     } 
     // MUESTRA TABLA CON PEDIDOS A BORRAR
     function menuDeletePedido(){

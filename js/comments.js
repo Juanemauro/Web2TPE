@@ -57,18 +57,16 @@ function addComentario(){
         id_usuario:  document.querySelector("input[name=id_usuario]").value,
         id_pedido:  document.querySelector("input[name=id_pedido]").value
     }
-    console.log(comentario);
+    //console.log("comentario nuevo:")
+    //console.log(comentario);
     fetch('api/comentario', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(comentario)
     })
-    //console.log(comentario);
-    //.then(response => response.json())
     .then(response => {
-        getComentarios(id_pedido); // Está bien hacer esto?
+        getComentarios(comentario.id_pedido); // Está bien hacer esto?
     })
-    //.then(comentario => app.comentarios.push(comentario)) -> así lo implementó Franco en la clase T-P
     .catch(error => console.log(error));
 }
 
