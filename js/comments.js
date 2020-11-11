@@ -35,16 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // GET COMENTARIOS 
 function getComentarios(id_pedido) {
     fetch('api/comentarios/' + id_pedido)
-        .then(response => response.json())
-        .then(comments =>
-            // Para mostrar si el pedido no tiene comentarios, pero no funciona xD
-            //{
-            //    if (JSON.stringify(comments) == '{}'){
-            //        comments = {'Este pedido no tiene comentarios.'};
-            //    }
-            //}
-            //,
-            app.comentarios = comments)
+        .then(response => response.json())    
+        .then(comments => app.comentarios = comments)  
         .catch(error => console.log(error));
 }
 
@@ -57,8 +49,6 @@ function addComentario(){
         id_usuario:  document.querySelector("input[name=id_usuario]").value,
         id_pedido:  document.querySelector("input[name=id_pedido]").value
     }
-    //console.log("comentario nuevo:")
-    //console.log(comentario);
     fetch('api/comentario', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

@@ -1,10 +1,11 @@
 {literal}
 <section id="vue-comentarios">
-    <h4> {{ title }}<h4>
+    
     <div v-if="!comentarios.length">
         <h2>Este pedido no tiene comentarios.</h2>
     </div>
-    <div v-else>    
+    <div v-else>
+        <h4> {{ title }}<h4>    
         <table class="pedidos_tabla"> 
             <thead>
                 <tr>

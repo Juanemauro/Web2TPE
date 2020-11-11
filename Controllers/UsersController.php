@@ -201,6 +201,7 @@ class UsersController {
                 $this->homeView->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
             }else{
                 $seccion = "al Menú Administrador";
+                $usuario = $_SESSION["ALIAS"];
                 $this->homeView->showError("No existe el usuario con ese ID.", "showMenuAdmin", $seccion, $this->loggeado, $usuario, $this->admin);
             }
         }else{

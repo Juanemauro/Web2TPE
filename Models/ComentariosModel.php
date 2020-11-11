@@ -23,7 +23,7 @@ class ComentariosModel {
         $sentencia->execute(array($texto,$puntaje,$id_usuario,$id_pedido));
         return $this->db->lastInsertId();
     }
-    // Actualiza un comentario
+    // Actualiza un comentario -> no hay que implementarlo
     function updateComentario($id, $texto, $puntaje){
         $sentencia = $this->db->prepare('UPDATE comentario SET texto=?, puntaje=? WHERE id_comentario = ?');
         $sentencia->execute(array($texto, $puntaje, $id));

@@ -22,11 +22,13 @@ class ComentariosController extends ApiController {
         $id_pedido = $this->pedidosModel->getPedido($id);
         if (!empty($id_pedido)){ // Verifico que exista el pedido con ese id
             $comentarios = $this->comentariosModel->getComentariosBypedido($id);
-            if (!empty($comentarios)){
-                $this->apiView->response($comentarios, 200); // Verifico que exista el comentario
-            }else{
-                $this->apiView->response("El pedido con id=$id no tiene comentarios.", 200);
-            }
+            $this->apiView->response($comentarios, 200); // Verifico que exista el comentario
+            
+            //if (!empty($comentarios)){
+            //    $this->apiView->response($comentarios, 200); // Verifico que exista el comentario
+            //}else{
+            //    $this->apiView->response($comentarios, 200);
+            //}
         }else{
             $this->apiView->response("El pedido con id=$id no existe.", 404);
         }        
@@ -49,7 +51,7 @@ class ComentariosController extends ApiController {
         else
             $this->apiView->response("El comentario no se pudo insertar.", 404);
     }
-    // ACTUALIZAR COMENTARIO
+    // ACTUALIZAR COMENTARIO -> no hay que implementarlo
     function updateComentario($params = null){
         $id = $params[':ID'];
         $body = $this->getData();
