@@ -30,7 +30,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="showFaq">FAQ</a>
                     </li>
-                    {if $loggeado == true and $admin == false}
+                    {if $loggeado == true }
                         <li class="nav-item">
                             <a class="nav-link" href="showMyPedidos">Mis pedidos</a>
                         </li>

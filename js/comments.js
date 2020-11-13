@@ -4,7 +4,6 @@
 let app = new Vue({
     el: '#vue-comentarios',
     data: {
-        title: 'Los usuarios que utilizaron El Azuleño opinaron..',
         comentarios: [],
         admin: ''
     },

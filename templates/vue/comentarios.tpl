@@ -1,6 +1,6 @@
 {literal}
 <section id="vue-comentarios">
-    
+    <h2>Opiniones:</h2>    
     <div v-if="!comentarios.length">
         <h2>Este pedido no tiene comentarios.</h2>
     </div>

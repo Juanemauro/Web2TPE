@@ -40,10 +40,10 @@ class PedidosController {
     }
     // MOSTRAR PEDIDOS DEL USUARIO QUE ESTÁ LOGGEADO EN ESTE MOMENTO
     function showMyPedidos(){
-        if ($this->loggeado && !($this->admin)){ // preguntar esto en la práctica del miércoles
+        if ($this->loggeado){ // preguntar esto en la práctica del miércoles
             $usuario = $_SESSION["ALIAS"];
             $id_usuario = $_SESSION["ID_USUARIO"];
-            $pedidosByUser = $this->pedidosModel->getPedidosByUser($id_usuario);
+            $pedidosByUser = $this->pedidosModel->getPedidosByUser($id_usuario); // ACOMODAR CON INNER JOIN CUANDO HAGA LA RELACIÓN
             $productos = $this->productosModel->getProductos();
             $this->pedidosView->showMyPedidos($this->loggeado, $usuario, $pedidosByUser, $this->admin, $productos);
         }else{
@@ -159,7 +159,7 @@ class PedidosController {
                 $usuario = "";
                 $id_usuario = "";
             } 
-         $this->pedidosView->showDetailPedido($pedido, $this->loggeado, $usuario, $id_usuario, $this->admin); 
+        $this->pedidosView->showDetailPedido($pedido, $this->loggeado, $usuario, $id_usuario, $this->admin); 
         }else{
             header("Location: " . PEDIDOS);
         }        
