@@ -39,8 +39,9 @@ $r->addRoute("showFaq", "GET", "HomeController", "showFaq"); // Mostrar FAQ
 $r->addRoute("showMenuAdmin", "GET", "HomeController", "showMenuAdmin"); // Mostrar FAQ
 
 // IMÁGENES
-//$r->addRoute("agregarImagen", "POST", "ImagenesController", "getDatosImagen"); // Agregar una imagen a un pedido
-//$r->addRoute("borrarImagen/:ID", "GET", "ImagenesController", "deleteImagen"); // Borrar una imagen
+$r->addRoute("verImagenes/:ID", "GET", "ImagenesController", "verImagenesPedido"); // Ver imágenes de un pedido
+$r->addRoute("agregarImagenes", "POST", "ImagenesController", "agregarImagenes"); // Agregar una imagen a un pedido
+$r->addRoute("eliminarImagen/:ID", "GET", "ImagenesController", "borrarImagen"); // Borrar una imagen
 
 
 // RUTAS PEDIDOS

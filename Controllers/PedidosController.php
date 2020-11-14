@@ -3,7 +3,9 @@ require_once './Controllers/ProductosController.php';
 require_once './Models/PedidosModel.php';
 require_once './Views/PedidosView.php';
 require_once './Controllers/AutenticacionController.php';
+require_once './Models/ImagenesModel.php';
 require_once './Controllers/ImagenesController.php';
+
 class PedidosController {
     // DECLARACIÓN DE ATRIBUTOS
     private $pedidosModel;
@@ -13,6 +15,8 @@ class PedidosController {
     private $loggeado;
     private $admin;
     private $autenticacion;
+    private $imagenesModel;
+    private $imagenesController;
     // CONSTRUCTOR
     function __construct(){
         $this->pedidosModel = new PedidosModel();
@@ -21,7 +25,8 @@ class PedidosController {
         $this->productosModel = new ProductosModel();
         $this->productosController = new ProductosController(); 
         $this->autenticacion = new AutenticacionController();
-        $this->imagenesController= new ImagenesController ();
+        $this->imagenesModel = new ImagenesModel();
+        $this->imagenesController = new ImagenesController();
         $this->loggeado = $this->autenticacion->checkLoggedIn();
         $this->admin = $this->autenticacion->checkAdmin();
     } 
@@ -87,14 +92,18 @@ class PedidosController {
         $cantidad=$_POST["inputCantidad"];
         $estado = "En preparación.";
         $id_usuario = $_SESSION['ID_USUARIO'];
+        $descripcion=$_POST["descripcion"];  
         //echo $id_usuario;
         //die();
         //Verifico que ingrese todos los datos en el formulario
         if (!empty($cliente) && !empty($direccion) && !empty($producto) && !empty($cantidad)){
-            $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario);
+            $id_pedido = $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario); // retorno el id del último pedido para asociar las imágenes
+            if ($this->admin && (!empty($_FILES['image']) && (!empty($descripcion)))){        
+                $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
+            }
             header("Location: " . PEDIDOS);
         }else{
-            //Muestra un mensaje de error si falta algun campo del form
+            // Muestra un mensaje de error si falta algun campo del form
             $seccion = "agregar pedido";  
             $this->homeView->showError("Faltan campos obligatorios.", "newPedido", $seccion, $this->loggeado, $usuario, $this->admin);
         }
@@ -115,10 +124,11 @@ class PedidosController {
         $id = $params[':ID'];
         $pedido = $this->pedidosModel->getPedido($id);
         $productos = $this->productosModel->getProductos();
+        $imagenes = $this->imagenesModel->getImagenesPorPedido($id);
         if (!empty($pedido)){
             if ($this->admin){
                 $usuario = $_SESSION["ALIAS"];
-                $this->pedidosView->showUpdatedPedido($pedido, $productos, $id, $this->loggeado, $usuario, $this->admin);
+                $this->pedidosView->showUpdatedPedido($pedido, $productos, $id, $this->loggeado, $usuario, $this->admin, $imagenes);
             }else{
                 header("Location: " . PEDIDOS);
             } 
@@ -140,6 +150,7 @@ class PedidosController {
         //Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
         if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($estado) && !empty($id_producto)){
             $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido);
+            $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario);
             header("Location: " . PEDIDOS);
         }else{
             $seccion = "seleccionar un pedido";    

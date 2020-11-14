@@ -1,6 +1,6 @@
 {include 'templates/Acceso/header.tpl'}
 <div class="slide">
-    <form method= "POST" action="addPedido" class="form">
+    <form method= "POST" action="addPedido" class="form" enctype="multipart/form-data">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputName4">Nombre</label>
@@ -30,7 +30,8 @@
                 <input type="number" class="form-control" name="inputCantidad" id="inputCantidad" max="24" placeholder="1">
             </div>
         </div>
-        {*<div class="form-group">
+        {* CAPTCHA QUE GENERA ERROR JS
+        <div class="form-group">
             <div class="form-row">
                 <div class="form-group col-md-4">
                 <label for="captcha">Captcha:</label>
@@ -47,6 +48,25 @@
                 </label>
             </div>
         </div>*}
+        {* AGREGAR IMAGEN DESDE PEDIDO ADMIN, VA O NO VA?}
+        {if $admin}
+            <div>
+                <label for="inputCantidad">Agregar imágenes al pedido</label>
+                <input type="file" REQUIRED name="image[]" multiple>        
+                <input type="hidden" name="id_pedido" value="{$id_pedido}">
+            </div>
+        {/if}
+        *}
+        {if $admin}
+            <div>
+                <label>Agregar imágenes</label>
+                <input type="file" REQUIRED name="image[]" multiple>
+            </div>
+            <div>
+                <label>Descripción de la/s imágenes</label>
+                <input name="descripcion" value="">
+            </div> 
+        {/if}
         <button type="submit" class="btn btn-primary" id="realizpedido">Realizar pedido</button>
     </form>
     <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>

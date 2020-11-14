@@ -196,8 +196,8 @@ class UsersController {
             $existe = $this->usersModel->getUserById($id);
             if ($existe){
                 $this->usersModel->deleteUsuario($id);
-                $usuarios = $this->usersModel->getUsuarios();
                 $usuario = $_SESSION["ALIAS"];
+                $usuarios = $this->usersModel->getUsuarios($usuario);                
                 $this->homeView->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
             }else{
                 $seccion = "al Menú Administrador";

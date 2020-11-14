@@ -16,7 +16,6 @@ class PedidosView{
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('admin', $admin);
         $this->smarty->assign('usuario', $usuario);
-        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/pedidos.tpl');
     }
 
@@ -38,7 +37,6 @@ class PedidosView{
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
-        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/pedidosFiltrados.tpl');
     }
 
@@ -59,7 +57,7 @@ class PedidosView{
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
-        $this->smarty->assign('admin', $admin);       
+        $this->smarty->assign('admin', $admin);    
         $this->smarty->display('templates//Pedidos/menuEditPedido.tpl');
     }
     // Muestra la tabla con todos los pedidos para elegir el que quiero borrar
@@ -73,7 +71,7 @@ class PedidosView{
         $this->smarty->display('templates/Pedidos/menuDeletePedido.tpl');
     }
     // Muestra un form con los pedidos actualizados
-    function showUpdatedPedido($pedidos, $productos, $id, $loggeado, $usuario, $admin){
+    function showUpdatedPedido($pedidos, $productos, $id, $loggeado, $usuario, $admin, $imagenes){
         $this->smarty->assign('titulo', "Editar pedidos");
         $this->smarty->assign('pedidos', $pedidos);
         $this->smarty->assign('productos', $productos);
@@ -81,6 +79,7 @@ class PedidosView{
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('id', $id);
         $this->smarty->assign('admin', $admin);
+        $this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/editPedido.tpl');
     }  
     // Muestra el detelle de un determinado pedido
@@ -91,8 +90,18 @@ class PedidosView{
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
         $this->smarty->assign('id_usuario', $id_usuario);
-        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/detailPedido.tpl');
     }  
+
+    // Muestra imágenes de un pedido
+    function showImagenesPedido($id_pedido, $imagenes, $loggeado, $usuario, $admin){
+        $this->smarty->assign('titulo', "Imágenes del pedido.");
+        $this->smarty->assign('loggeado', $loggeado);
+        $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('admin', $admin);
+        $this->smarty->assign('imagenes', $imagenes);
+        $this->smarty->assign('id_pedido', $id_pedido);
+        $this->smarty->display('templates/Pedidos/imagenesPedido.tpl');
+    }
 }
 ?>

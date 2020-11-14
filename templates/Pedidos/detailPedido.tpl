@@ -27,7 +27,7 @@
             </table>
         </div>
         <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
-        <a href="Pedidos" class="btn btn-success">Ver imágenes del pedido</a>
+        <a href="verImagenes/{$pedido->id_pedido}" class="btn btn-success">Ver imágenes del pedido</a>
         {*comentarios*}
         <div>
             {include 'vue/comentarios.tpl'}            

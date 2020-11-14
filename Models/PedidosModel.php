@@ -37,6 +37,7 @@ class PedidosModel {
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
+
     // Devuelve una tabla con todos los pedidos filtrados por NOMBRE de producto
     function getPedidosByProducto($producto){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto WHERE producto.nombre=?');
@@ -77,6 +78,7 @@ class PedidosModel {
     function addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario){
         $sentencia = $this->db->prepare('INSERT INTO pedido(cliente, direccion, id_producto, cantidad, estado, id_usuario) VALUES(?,?,?,?,?,?)');
         $sentencia->execute(array($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario));
+        return $this->db->lastInsertId();
     }
     // Actualiza un pedido
     function updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido){
