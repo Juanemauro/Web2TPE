@@ -5,10 +5,10 @@
     {else}        
         {if $loggeado == true}
             {include 'templates/Pedidos/pedidosLoggeado.tpl'}
-            {include 'templates/Pedidos/filtroPedidos.tpl'}
+            {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
             {include 'templates/Pedidos/tablaPedidos.tpl'}
         {else}
-            {include 'templates/Pedidos/filtroPedidos.tpl'}
+            {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
             {include 'templates/Pedidos/tablaPedidos.tpl'}
         {/if}
     {/if}

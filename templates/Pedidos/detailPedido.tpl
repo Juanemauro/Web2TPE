@@ -9,8 +9,9 @@
         {*tabla*}
         <div>
             <table class="pedidos_tabla">
-                <thead>
-                    <td>Cliente</td>
+                <thead> 
+                    <td>Usuario</td>
+                    <td>Recibió</td>
                     <td>Producto</td>
                     <td>Dirección</td>
                     <td>Cantidad</td>
@@ -18,6 +19,7 @@
                     </tr>
                 </thead>
                 <tr>
+                    <td>{$pedido->id_usuario}</td>
                     <td>{$pedido->cliente}</td>
                     <td>{$pedido->nombre}</td>
                     <td>{$pedido->direccion}</td>

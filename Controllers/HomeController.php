@@ -49,7 +49,16 @@ class HomeController{
             $usuario = "";
         }
         $usuarios = $this->usersModel->getUsuarios($usuario);
-        $this->view->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
+        //var_dump($usuarios);
+        //die();
+        if (!empty($usuarios)){
+            $this->view->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
+        }else{
+            $seccion = "a Home";
+            $this->view->showError("No existen otros usuarios, deberías promocionar la página..", "showHome", $seccion, $this->loggeado, $usuario, $this->admin);
+        }
+            
+        
     }
     // MUESTRA EL FORM PARA LOGGEARSE
     function loginForm(){

@@ -150,16 +150,20 @@ class UsersController {
     }  
 
     // Otorga permisos de admin a un usuario que no lo es
-    function hacerAdmin($params = null){
+    function updatePermiso($params = null){
         $id = $params[':ID'];
         if ($this->admin){
             $existe = $this->usersModel->getUserById($id);
             if ($existe){
-                $permiso = 1;
+                if ($existe->admin == 1){
+                    $permiso = 0;
+                }else{
+                    $permiso = 1; 
+                }                
                 $this->usersModel->updatePermiso($permiso, $id);
-                $usuarios = $this->usersModel->getUsuarios();
                 $usuario = $_SESSION["ALIAS"];
-                $this->homeView->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
+                $usuarios = $this->usersModel->getUsuarios($usuario);                
+                header("Location: " . MENUADMIN);
             }else{
                 $seccion = "al Menú Administrador";
                 $this->homeView->showError("No existe el usuario con ese ID.", "showMenuAdmin", $seccion, $this->loggeado, $usuario, $this->admin);
@@ -167,26 +171,6 @@ class UsersController {
         }else{
             header("Location: " . HOME);
         }        
-    }
-
-    // Elimina el permiso de admin de un usuario
-    function sacarPermiso($params = null){
-        $id = $params[':ID'];
-        if ($this->admin){
-            $existe = $this->usersModel->getUserById($id);
-            if ($existe){
-                $permiso = 0;
-                $this->usersModel->updatePermiso($permiso, $id);
-                $usuarios = $this->usersModel->getUsuarios();
-                $usuario = $_SESSION["ALIAS"];
-                $this->homeView->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
-            }else{
-                $seccion = "al Menú Administrador";
-                $this->homeView->showError("No existe el usuario con ese ID.", "showMenuAdmin", $seccion, $this->loggeado, $usuario, $this->admin);
-            }
-        }else{
-            header("Location: " . HOME);
-        }   
     }
 
     // Eliminar usuario

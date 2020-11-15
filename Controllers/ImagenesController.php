@@ -79,31 +79,18 @@ class ImagenesController {
         $pedido = $this->imagenesModel->getPedidoByImagen($id_imagen); // Obtengo el pedido para redireccionar
         if ($this->admin){
             $imagen = $this->imagenesModel->getImagenById($id_imagen); // Obtengo los datos de la imagen para eliminarla de la carpeta 
-            $_SESSION['url'] = $_SERVER['HTTP_REFERER']; 
-            //echo $_SESSION['url'];
-            //echo '<br>';
-            //echo BASE_URL ;
-            //echo '<br>';
-            //die();           
+            $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
             $this->imagenesModel->deleteImagen($id_imagen);
-            unlink($imagen->ruta); // Elimina el archivo de la carpeta 
-            
-            //////////////   CONSULTAR ///////////////////////////////// 
-            // Redirección según dónde lo elimina ----------      
-            $url_galeria = 'http://localhost/Proyectos/Entrega1/verImagenes/'. $pedido->id_pedido;
-            //echo $_SESSION['url'];
-            //echo '<br>';
-            
-            $url_edit_pedido = 'http://localhost/Proyectos/Entrega1/editPedido/'. $pedido->id_pedido;
-            //echo $url_edit_pedido;
-            //die();
-
-            if ($_SESSION['url'] = $url_galeria){
-                header('Location: ' .BASE_URL. 'verImagenes/'. $pedido->id_pedido);
-            }else if($_SESSION['url'] = $url_edit_pedido){
-                header('Location: ' . BASE_URL . 'editPedido/'. $pedido->id_pedido);
+            unlink($imagen->ruta); // Elimina el archivo de la carpeta             
+            $url_galeria = 'http://localhost/Proyectos/Entrega1/verImagenes/'. $pedido->id_pedido; // modificar cuando lo abra desde la carpeta local del repo (¿+ crear carpeta images?)     
+            $url_edit_pedido = 'http://localhost/Proyectos/Entrega1/editPedido/'. $pedido->id_pedido; // modificar cuando lo abra desde la carpeta local del repo 
+            if ($_SESSION['url'] == $url_galeria){
+                header('Location: ' . VERIMAGENES . $pedido->id_pedido);
+            }else if($_SESSION['url'] == $url_edit_pedido){
+                header('Location: '.EDITPEDIDO. $pedido->id_pedido);  
             } 
-        }
-        header('Location: '.BASE_URL.'verImagenes/'. $pedido->id_pedido);       
+        }else{
+            header('Location: '. HOME);    
+        }           
     }    
 }

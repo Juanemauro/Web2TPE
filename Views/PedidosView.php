@@ -31,7 +31,7 @@ class PedidosView{
         $this->smarty->display('templates/Pedidos/misPedidos.tpl');
     }
     // Muestra pedidos filtrados por producto
-    function showPedidosFiltrados($pedidos, $loggeado, $usuario, $admin){
+    function showPedidosFiltradosProducto($pedidos, $loggeado, $usuario, $admin){
         $this->smarty->assign('titulo', "Pedidos");
         $this->smarty->assign('pedidos', $pedidos);
         $this->smarty->assign('loggeado', $loggeado);

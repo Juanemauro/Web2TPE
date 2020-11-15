@@ -58,16 +58,23 @@ class PedidosController {
     }
 
     // FILTRO DE PEDIDOS
-    function showFilteredPedidos(){
-        $productos = $this->productosModel->getProductos();
-        $nombreProducto = $_GET["nombreProductoParaFiltrar"];
+    function showPedidosFiltradosProducto(){
         if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";
         } 
-        $pedidos = $this->pedidosModel->getPedidosByProducto($nombreProducto);
-        $this->pedidosView->showPedidosFiltrados($pedidos, $this->loggeado, $usuario, $this->admin);
+        $productos = $this->productosModel->getProductos();
+        $nombreProducto = $_GET["nombreProductoParaFiltrar"];  
+        //var_dump($nombreProducto);
+        //die();      
+        if(!empty($nombreProducto)){            
+            $pedidos = $this->pedidosModel->getPedidosByProducto($nombreProducto);
+            $this->pedidosView->showPedidosFiltradosProducto($pedidos, $this->loggeado, $usuario, $this->admin);
+        }else{
+            $seccion = "a pedidos";  
+            $this->homeView->showError("Faltan campos obligatorios.", "Pedidos", $seccion, $this->loggeado, $usuario, $this->admin);
+        }        
         
     }
     // NEW PEDIDO

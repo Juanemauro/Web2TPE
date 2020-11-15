@@ -13,6 +13,9 @@ define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"]
 define("HOME", BASE_URL . 'showHome');
 define("PEDIDOS", BASE_URL . 'Pedidos');
 define("PRODUCTOS", BASE_URL . 'Productos');
+define("MENUADMIN", BASE_URL . 'showMenuAdmin');
+define("VERIMAGENES", BASE_URL . 'verImagenes/');
+define("EDITPEDIDO", BASE_URL . 'editPedido/');
 define("FAQ", BASE_URL . 'showFaq');
 define("LOGIN", BASE_URL . 'login');
 
@@ -29,8 +32,7 @@ $r->addRoute("selectUser", "GET", "UsersController", "selectUser"); // Mostrar f
 $r->addRoute("verificarUsuario", "POST", "UsersController", "verificarUsuario"); // Mostrar form para verificar la pregunta secreta del usuario
 $r->addRoute("verificarPregunta", "POST", "UsersController", "verificarPregunta"); // Mostrar form para verificar la pregunta secreta del usuario
 $r->addRoute("updatePassword", "POST", "UsersController", "updatePassword"); // Mostrar form para verificar la pregunta secreta del usuario
-$r->addRoute("hacerAdmin/:ID", "GET", "UsersController", "hacerAdmin"); // hacer admin a un usuario
-$r->addRoute("sacarPermiso/:ID", "GET", "UsersController", "sacarPermiso"); // sacar admin a un usuario
+$r->addRoute("updatePermiso/:ID", "GET", "UsersController", "updatePermiso"); // hacer admin a un usuario
 $r->addRoute("deleteUsuario/:ID", "GET", "UsersController", "deleteUsuario"); // hacer admin a un usuario
 
 // HOME & FAQ
@@ -47,7 +49,7 @@ $r->addRoute("eliminarImagen/:ID", "GET", "ImagenesController", "borrarImagen");
 // RUTAS PEDIDOS
 $r->addRoute("showMyPedidos", "GET", "PedidosController", "showMyPedidos"); // muestra todos los pedidos que realizó el usuario que está loggeado en ese momento
 $r->addRoute("Pedidos", "GET", "PedidosController", "Pedidos"); //-> varía para usuario público
-$r->addRoute("showFiltroPedidos", "GET", "PedidosController", "showFilteredPedidos"); // Muestra los pedidos filtrados por un determinado producto
+$r->addRoute("showFiltroPedidos", "GET", "PedidosController", "showPedidosFiltradosProducto"); // Muestra los pedidos filtrados por un determinado producto
 $r->addRoute("newPedido", "GET", "PedidosController", "newPedido"); // Agregar nuevo pedido a través de un form
 $r->addRoute("addPedido", "POST", "PedidosController", "addPedido"); // Agrega el pedido a la BDD
 $r->addRoute("menuEditPedido", "GET", "PedidosController", "menuEditPedido"); // Menu para seleccionar el pedido a editar
