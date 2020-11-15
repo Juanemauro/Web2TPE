@@ -32,20 +32,32 @@ class PedidosController {
     } 
     // ------------------------ MÉTODOS 
     // MOSTRAR PEDIDOS
-    function Pedidos(){
-        $pedidos = $this->pedidosModel->getPedidos();
+    function Pedidos(){                   
         $productos = $this->productosModel->getProductos();
-        //$imagenes = $this->imagenesController->getImagenes();
+        $all_pedidos = $this->pedidosModel->getPedidos();
+        // CANTIDAD DE PEDIDOS y CANTIDAD DE PÁGINAS PARA CALCULAR LA PAGINACIÓN
+        $pedidos_por_pagina = 5; // opcional paginación  
+        $cant_pedidos = $this->pedidosModel->getCantidadPedidos(); // opcional paginación
+        $cant_paginas = ceil($cant_pedidos->cantidad/$pedidos_por_pagina); // función techo -> opcional paginación
+        // VERIFICO LA PÁGINA A LA QUE DEBE REDIRIGIRSE
+        if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas)){
+            header('Location: ' . PEDIDOS. '?pagina=1'); // si entro por primera vez a Pedidos o el usuario quiere entrar a un núm de página inválida, redirige a la 1
+        }else{
+            $pagina = $_GET['pagina']; // obtener página actual -> opcional paginación
+        } 
+        // DETERMINO LA CANTIDAD DE PEDIDOS POR PAGINA Y CON ESO, EL PRIMER Y ÚLTIMO PEDIDO DE CADA PÁGINA
+        $inicio = (($pagina-1)*$pedidos_por_pagina); // primer pedido de cada página
+        $pedidos = $this->pedidosModel->getPedidosPorPagina($inicio, $pedidos_por_pagina);      
         if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";           
         } 
-        $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin);
+        $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina);
     }
     // MOSTRAR PEDIDOS DEL USUARIO QUE ESTÁ LOGGEADO EN ESTE MOMENTO
     function showMyPedidos(){
-        if ($this->loggeado){ // preguntar esto en la práctica del miércoles
+        if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"];
             $id_usuario = $_SESSION["ID_USUARIO"];
             $pedidosByUser = $this->pedidosModel->getPedidosByUser($id_usuario); // ACOMODAR CON INNER JOIN CUANDO HAGA LA RELACIÓN

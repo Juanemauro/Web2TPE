@@ -6,6 +6,13 @@ class PedidosModel {
     function __construct(){
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_delivery;charset=utf8', 'root', '');
     }
+    
+    // Devuelve una tabla con la cantidad de pedidos
+    function getCantidadPedidos(){
+        $sentencia = $this->db->prepare('SELECT COUNT(*) as cantidad from pedido');
+        $sentencia->execute();
+        return $sentencia->fetch(PDO::FETCH_OBJ);
+    }
     // Devuelve una tabla con todos los datos de TODOS los pedidos y una columna extra con el nombre del producto
     function getPedidos(){
         //$sql='';
@@ -25,7 +32,15 @@ class PedidosModel {
         //    $sql='SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where pedido.id_usuario=? order by cliente asc';        
         //} //continuar casos 5, 6 y 7
         //$sentencia = $this->db->prepare($sql);
-        $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario order by cliente asc'); 
+        $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario'); 
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getPedidosPorPagina($inicio, $fin){
+        $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario LIMIT :inicio, :fin'); 
+        $sentencia->bindParam(':inicio', $inicio, PDO::PARAM_INT); // Representa el tipo de dato INTEGER de SQL -> https://www.php.net/manual/es/pdo.constants.php
+        $sentencia->bindParam(':fin', $fin, PDO::PARAM_INT); // Representa el tipo de dato INTEGER de SQL -> https://www.php.net/manual/es/pdo.constants.php
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }

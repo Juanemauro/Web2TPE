@@ -9,13 +9,15 @@ class PedidosView{
         $this->smarty->assign('basehref', BASE_URL);
     }
     // Muestra los pedidos
-    function showPedidosView($pedidos, $productos, $loggeado, $usuario = " ", $admin){
+    function showPedidosView($pedidos, $productos, $loggeado, $usuario = " ", $admin, $cant_paginas, $pagina){
         $this->smarty->assign('titulo', "Pedidos");
         $this->smarty->assign('pedidos', $pedidos);
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('admin', $admin);
         $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('cant_paginas', $cant_paginas);
+        $this->smarty->assign('pagina', $pagina);
         $this->smarty->display('templates/Pedidos/pedidos.tpl');
     }
 
