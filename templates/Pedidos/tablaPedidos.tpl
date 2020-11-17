@@ -1,5 +1,6 @@
 <table class="pedidos_tabla">
     <thead>
+        <td>id pedido</td>
         <td>Usuario</td>
         <td>Recibió</td>
         <td>Producto</td>    
@@ -8,7 +9,8 @@
     </thead>
     {foreach  from=$pedidos item=pedido}
         <tr>
-            <td>{$pedido->alias}</td>
+            <td>{$pedido->id_pedido}</td>
+            <td>{$pedido->alias}</td>            
             <td>{$pedido->cliente}</td>
             <td>{$pedido->nombre}</td>
             <td>{$pedido->direccion}</td>

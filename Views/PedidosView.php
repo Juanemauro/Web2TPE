@@ -21,6 +21,16 @@ class PedidosView{
         $this->smarty->display('templates/Pedidos/pedidos.tpl');
     }
 
+    function showPedidosPublico($pedidos, $productos, $loggeado, $usuario, $admin){
+        $this->smarty->assign('titulo', "Pedidos");
+        $this->smarty->assign('pedidos', $pedidos);
+        $this->smarty->assign('productos', $productos);
+        $this->smarty->assign('loggeado', $loggeado);
+        $this->smarty->assign('admin', $admin);
+        $this->smarty->assign('usuario', $usuario);
+        $this->smarty->display('templates/Pedidos/pedidosPublico.tpl');
+    }
+
     // Mostrar pedidos del usuario que está loggeado
     function showMyPedidos($loggeado, $usuario, $pedidosByUser, $admin, $productos){
         $this->smarty->assign('titulo', "Mis Pedidos");
@@ -40,6 +50,29 @@ class PedidosView{
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
         $this->smarty->display('templates/Pedidos/pedidosFiltrados.tpl');
+    }
+
+    // Mostrar form para búsqueda avanzada
+    function showFormBusquedaAvanzada($loggeado, $usuario, $admin, $usuarios, $productos){
+        $this->smarty->assign('titulo', "Búsqueda avanzada");
+        $this->smarty->assign('loggeado', $loggeado);
+        $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('usuarios', $usuarios);
+        $this->smarty->assign('admin', $admin);
+        $this->smarty->assign('productos', $productos);
+        $this->smarty->display('templates/Pedidos/formBusquedaAvanzada.tpl');
+    }
+
+    function showBusquedaAvanzada($loggeado, $usuario, $admin, $usuarios, $productos, $pedidos, $pagina_anterior){
+        $this->smarty->assign('titulo', "Búsqueda avanzada");
+        $this->smarty->assign('loggeado', $loggeado);
+        $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('usuarios', $usuarios);
+        $this->smarty->assign('admin', $admin);
+        $this->smarty->assign('productos', $productos);
+        $this->smarty->assign('pedidos', $pedidos);
+        $this->smarty->assign('pagina_anterior', $pagina_anterior);
+        $this->smarty->display('templates/Pedidos/busquedaAvanzada.tpl');
     }
 
     // Muestra form para realizar un nuevo pedido

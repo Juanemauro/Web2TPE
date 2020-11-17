@@ -40,7 +40,6 @@ class HomeController{
         } 
         $this->view->showFaq($this->loggeado, $usuario, $this->admin);
     }
-
     // MENÚ ADMIN
     function showMenuAdmin(){
         if ($this->admin){
@@ -57,8 +56,6 @@ class HomeController{
             $seccion = "a Home";
             $this->view->showError("No existen otros usuarios, deberías promocionar la página..", "showHome", $seccion, $this->loggeado, $usuario, $this->admin);
         }
-            
-        
     }
     // MUESTRA EL FORM PARA LOGGEARSE
     function loginForm(){
@@ -69,7 +66,6 @@ class HomeController{
             $this->usersView->showLogin($this->loggeado, $usuario, $this->admin); 
         }        
     }
-
     // MUESTRA FORM PARA REGISTRARSE
     function registroForm(){
         if ($this->loggeado){

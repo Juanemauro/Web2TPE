@@ -34,8 +34,12 @@
             </div>
             <div>
                 <label>Agregar imágenes</label>
-                <input type="file" REQUIRED name="image[]" multiple>
+                <input type="file" name="image[]" multiple>
                 <input type="hidden" name="id_pedido" value="{$id_pedido}">
+                <div>
+                    <label>Descripción de la/s imágenes</label>
+                <input name="descripcion" value="">
+            </div> 
             </div> 
         <button type="submit" class="btn btn-primary">Editar Pedido</button> 
     </form>

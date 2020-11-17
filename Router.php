@@ -45,7 +45,6 @@ $r->addRoute("verImagenes/:ID", "GET", "ImagenesController", "verImagenesPedido"
 $r->addRoute("agregarImagenes", "POST", "ImagenesController", "agregarImagenes"); // Agregar una imagen a un pedido
 $r->addRoute("eliminarImagen/:ID", "GET", "ImagenesController", "borrarImagen"); // Borrar una imagen
 
-
 // RUTAS PEDIDOS
 $r->addRoute("showMyPedidos", "GET", "PedidosController", "showMyPedidos"); // muestra todos los pedidos que realizó el usuario que está loggeado en ese momento
 $r->addRoute("Pedidos", "GET", "PedidosController", "Pedidos"); //-> varía para usuario público
@@ -61,6 +60,8 @@ $r->addRoute("deletePedido/:ID", "GET", "PedidosController", "deletePedido"); //
 $r->addRoute("showOrderedPedidosByProductoDesc", "GET", "PedidosController", "showOrderedPedidosByProductoDesc");// Ver pedidos ordenados por id_producto desc
 $r->addRoute("showOrderedPedidosByProductoAsc", "GET", "PedidosController", "showOrderedPedidosByProductoAsc"); // Ver pedidos ordenados por id_producto asc
 $r->addRoute("showOrderedPedidosByClienteDesc", "GET", "PedidosController", "showOrderedPedidosByClienteDesc"); // Ver pedidos ordenados por cliente desc
+$r->addRoute("showBusquedaAvanzadaForm", "GET", "PedidosController", "menuBusqueda"); // Form búsqueda avanzada 
+$r->addRoute("busquedaAvanzada", "POST", "PedidosController", "busquedaAvanzada"); // Búsqueda avanzada
 
 // RUTAS PRODUCTOS
 $r->addRoute("Productos", "GET", "ProductosController", "Productos"); //-> varía para usuario público
@@ -71,9 +72,6 @@ $r->addRoute("editProducto/:ID", "GET", "ProductosController", "editProducto"); 
 $r->addRoute("refreshProducto", "POST", "ProductosController", "showEditedProducto"); //
 $r->addRoute("menuDeleteProducto", "GET", "ProductosController", "menuDeleteProducto"); // Menu para seleccionar el pedido a borrar
 $r->addRoute("deleteProducto/:ID", "GET", "ProductosController", "deleteProducto"); // Borra el pedido de la BDD
-$r->addRoute("showOrderedProductosByNameDesc", "GET", "ProductosController", "showOrderedProductosByNameDesc"); // Ver pedidos ordenados por nombre desc
-$r->addRoute("showOrderedProductosByPriceDesc", "GET", "ProductosController", "showOrderedProductosByPriceDesc"); // Ver pedidos ordenados por precio desc
-$r->addRoute("showOrderedProductosByPriceAsc", "GET", "ProductosController", "showOrderedProductosByPriceAsc"); // Ver pedidos ordenados por precio asc
 
 // Default
 $r->setDefaultRoute("HomeController", "showHome");

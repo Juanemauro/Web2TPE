@@ -13,48 +13,89 @@ class PedidosModel {
         $sentencia->execute();
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
-    // Devuelve una tabla con todos los datos de TODOS los pedidos y una columna extra con el nombre del producto
+    // Devuelve una tabla con todos los pedidos
     function getPedidos(){
-        //$sql='';
-        //$cliente='todos';
-        //$id_usuario ='todos';
-        //$producto ='toosad';
-
-        //'todos' sería cuando al usuario no le importa un valor en específico
-        //'valor_id_usuario', 'valor_id_producto' y cliente son los falores que vendría del form
-        //if ($cliente='todos' && $id_usuario='todos' && $producto='todos'){ //1
-        //    $sql='SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto order by cliente asc';
-        //}else if ($cliente='todos' && $id_usuario=$valor_id_usuario && $producto=$valor_id_producto){ //2
-        //    $sql='SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where pedido.id_usuario=? and producto.id_producto=? order by cliente asc';
-        //}else if($cliente='todos' && $id_usuario='todos' && $producto=$valor_id_producto){ //3
-        //    $sql='SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where producto.id_producto=? order by cliente asc';
-        //}else if($cliente='todos' && $id_usuario=$valor_id_usuario && $producto='todos'){ //4
-        //    $sql='SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where pedido.id_usuario=? order by cliente asc';        
-        //} //continuar casos 5, 6 y 7
-        //$sentencia = $this->db->prepare($sql);
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario'); 
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+    // Devuelve una tabla con todos los datos de TODOS los pedidos y una columna extra con el nombre del producto
+    function getPedidosBusquedaAvanzada($usuarioBusqueda, $producto, $estado){
+        $sql='';        
+        // Filtrar por un valor de c/u + 6 combinaciones + elije todos de todos los filtros = 8 combinaciones
+        // Caso 1 - Filtra por usuario, producto y estado
+        // Caso 2 - Filtra por usuario y producto; estado = todos
+        // Caso 3 - Filtra por producto; usuario y estado = todos
+        // Caso 4 - Filtra por usuario; producto y estado = todos
+        // Caso 5 - Filtra por producto y estado; usuario = todos
+        // Caso 6 - Filtra por estado; usuario y producto = todos
+        // Caso 7 - Filtra por usuario y estado; producto = todos
+        // Caso 8 - Selecciona "todos" en todos los campos
+        if(($usuarioBusqueda!=='Todos') && ($producto!=='Todos') && ($estado!=='Todos')){ // Caso 1
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario 
+            WHERE (pedido.id_usuario =? AND pedido.id_producto = ? AND pedido.estado = ?)';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute(array($usuarioBusqueda, $producto, $estado));
+        }else if(($usuarioBusqueda!=='Todos') && ($producto!=='Todos')){ // Caso 2
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario 
+            WHERE (pedido.id_usuario =? AND pedido.id_producto = ?)';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute(array($usuarioBusqueda, $producto));
+        }else if(($usuarioBusqueda!=='Todos') && ($estado!=='Todos')) { // Caso 7
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario 
+            WHERE (pedido.id_usuario =? AND pedido.estado = ?)';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute(array($usuarioBusqueda, $estado)); 
+        }else if (($producto!=='Todos') && ($estado!=='Todos')){ // Caso 5
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario 
+            WHERE (pedido.id_producto =? AND pedido.estado = ?)';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute(array($producto, $estado));   
+        }else if($producto!=='Todos'){ // Caso 3
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario 
+            WHERE (pedido.id_producto = ?)';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute(array($producto));
+        }else if ($usuarioBusqueda!=='Todos'){ /// Caso 4
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario 
+            WHERE (pedido.id_usuario = ?)';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute(array($usuarioBusqueda));        
+        }else if ($estado!=='Todos'){ // Caso 6
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario 
+            WHERE (pedido.estado =?)';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute(array($estado));
+        }else{ // Caso 8
+            $sql = 'SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias 
+            FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario';
+            $sentencia = $this->db->prepare($sql); 
+            $sentencia->execute();
+        }          
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
 
-    function getPedidosPorPagina($inicio, $fin){
+    // Devuelve una tabla con los pedidos que van en cada página de la paginación
+    function getPedidosPorPagina($inicio, $fin){ 
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario LIMIT :inicio, :fin'); 
         $sentencia->bindParam(':inicio', $inicio, PDO::PARAM_INT); // Representa el tipo de dato INTEGER de SQL -> https://www.php.net/manual/es/pdo.constants.php
         $sentencia->bindParam(':fin', $fin, PDO::PARAM_INT); // Representa el tipo de dato INTEGER de SQL -> https://www.php.net/manual/es/pdo.constants.php
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
-
-    
-
     // Devuelve una tabla con los pedidos del usuario que está loggeado
     function getPedidosByUser($usuario){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.id_usuario, pedido.cantidad, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario where pedido.id_usuario = ? order by cliente asc'); 
         $sentencia->execute(array($usuario));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
-
-
     // Devuelve una tabla con todos los pedidos filtrados por NOMBRE de producto
     function getPedidosByProducto($producto){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario WHERE producto.nombre=?');

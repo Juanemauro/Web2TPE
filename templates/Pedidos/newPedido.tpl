@@ -60,7 +60,7 @@
         {if $admin}
             <div>
                 <label>Agregar imágenes</label>
-                <input type="file" REQUIRED name="image[]" multiple>
+                <input type="file" name="image[]" multiple>
             </div>
             <div>
                 <label>Descripción de la/s imágenes</label>
