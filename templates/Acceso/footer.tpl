@@ -21,10 +21,10 @@
             <div class="col-md-3 mb-md-0 mb-3">
             <h5 class="text-uppercase">REDES SOCIALES</h5>
                 <ul class="list-unstyled">
-                    <li> <a href="http://www.twitter.com/elazuleniocomidas"><img src="images/logotwitter.png" class="logosredes"> Twitter </a></li>
-                    <li> <a href="http://www.instagram.com/elazuleniocomidas"><img src="images/logoinstagram.png" class="logosredes"> Instagram </a></li>
-                    <li> <a href="http://www.Facebook.com/elazuleniocomidas"><img src="images/logofacebook.png" class="logosredes"> Facebook </a></li>
-                    <li> <a href="http://www.Youtube.com/elazuleniocomidas"><img src="images/logoyoutube.png" class="logosredes"> Youtube </a></li>
+                    <li> <a href="http://www.twitter.com/elazuleniocomidas"><img src="imagenes/logotwitter.png" class="logosredes"> Twitter </a></li>
+                    <li> <a href="http://www.instagram.com/elazuleniocomidas"><img src="imagenes/logoinstagram.png" class="logosredes"> Instagram </a></li>
+                    <li> <a href="http://www.Facebook.com/elazuleniocomidas"><img src="imagenes/logofacebook.png" class="logosredes"> Facebook </a></li>
+                    <li> <a href="http://www.Youtube.com/elazuleniocomidas"><img src="imagenes/logoyoutube.png" class="logosredes"> Youtube </a></li>
                 </ul>
             </div>
         </div>

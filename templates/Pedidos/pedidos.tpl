@@ -6,6 +6,7 @@
         {if ($loggeado == true and $admin == false)}
             {include 'templates/Pedidos/pedidosLoggeado.tpl'}
             {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
+            {include 'templates/Pedidos/formCantPedidosPaginacion.tpl'}
             {include 'templates/Pedidos/tablaPedidos.tpl'}
         {else} 
             {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
@@ -21,7 +22,7 @@
                 {else if}
                     <li class="page-item">
                 {/if}  
-                    <a class="page-link" href="Pedidos?pagina={$pagina-1}">Página anterior</a>
+                    <a class="page-link" href="Pedidos?pagina={$pagina-1}&items={$pedidos_por_pagina}">Página anterior</a>
                 </li>
                 {*cantidad de páginas*}
                 {for $i=1 to $cant_paginas}
@@ -30,7 +31,7 @@
                     {else if}
                         <li class="page-item">
                     {/if}
-                        <a class="page-link" href="Pedidos?pagina={$i}">{$i}</a>
+                        <a class="page-link" href="Pedidos?pagina={$i}&items={$pedidos_por_pagina}">{$i}</a>
                     </li>
                 {/for}
                 {*siguiente*}  
@@ -39,7 +40,7 @@
                 {else if}
                     <li class="page-item">
                 {/if}                       
-                    <a class="page-link" href="Pedidos?pagina={$pagina+1}">Página siguiente</a>
+                    <a class="page-link" href="Pedidos?pagina={$pagina+1}&items={$pedidos_por_pagina}">Página siguiente</a>
                 </li>
             </ul>
         </nav>

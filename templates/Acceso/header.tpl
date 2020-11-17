@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="contenedor">
-        <div class="logo"><img src="images/logo.png" alt="El Azuleño" class="logo"></div>
+        <div class="logo"><img src="imagenes/logo.png" alt="El Azuleño" class="logo"></div>
         <div class="navbar">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
