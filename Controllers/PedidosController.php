@@ -37,30 +37,29 @@ class PedidosController {
     function Pedidos(){
         $productos = $this->productosModel->getProductos();                 
         if ($this->loggeado){
+            ///// ------------ PAGINACIÓN -> CANTIDAD DE PEDIDOS POR PÁGINA ------------
             $cant_pedidos = $this->pedidosModel->getCantidadPedidos(); 
-            $usuario = $_SESSION["ALIAS"];            
-            // OBTENGO LA CANT DE PEDIDOS QUE QUIERO MOSTRAR POR PÁGINA
             if ($_GET['items'] == null || ($_GET['items'] <= 0) || ($_GET['items'] > $cant_pedidos)){
-                $pedidos_por_pagina = 5; // si entro por primera vez a Pedidos o el usuario quiere entrar a un núm de página inválida, redirige a la 1
+                $pedidos_por_pagina = 5; // si entro por primera vez la cantidad default es 5
             }else{
-                $pedidos_por_pagina = $_GET['items']; // obtener página actual -> opcional paginación
+                $pedidos_por_pagina = $_GET['items']; // cantidad ingresada por el usuario
             } 
-            //$pedidos_por_pagina = 5; // opcional paginación  
-            // opcional paginación
-            $cant_paginas = ceil($cant_pedidos->cantidad/$pedidos_por_pagina); // función techo -> opcional paginación
-            // VERIFICO LA PÁGINA A LA QUE DEBE REDIRIGIRSE
+            ///// ------------ PAGINACIÓN -> PÁGINA ACTUAL ------------
+            $cant_paginas = ceil($cant_pedidos->cantidad/$pedidos_por_pagina); // función techo
+            // Verifico a la página que debe redirigirse
             if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas)){
-                header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina); // si entro por primera vez a Pedidos o el usuario quiere entrar a un núm de página inválida, redirige a la 1
+                header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina); // primer ingreso o página inválida, redirige a la primera página
             }else{
-                $pagina = $_GET['pagina']; // obtener página actual -> opcional paginación
+                $pagina = $_GET['pagina']; // página actual
             } 
-            // DETERMINO LA CANTIDAD DE PEDIDOS POR PAGINA Y CON ESO, EL PRIMER Y ÚLTIMO PEDIDO DE CADA PÁGINA
+            // Determino la cantidad de pedidos por páginas para establecer el intervalo de pedidos
             $inicio = (($pagina-1)*$pedidos_por_pagina); // primer pedido de cada página
             $pedidos = $this->pedidosModel->getPedidosPorPagina($inicio, $pedidos_por_pagina); 
+            $usuario = $_SESSION["ALIAS"]; // Para manejar lo que hace el usuario loggeado + haeader
             $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina);  
         }else{
             $usuario = "";
-            $pedidos=$this->pedidosModel->getPedidos();
+            $pedidos=$this->pedidosModel->getPedidos(); // TODOS los pedidos para cuando nadie se loggeó
             $this->pedidosView->showPedidosPublico($pedidos, $productos, $this->loggeado, $usuario, $this->admin);         
         }
     }
