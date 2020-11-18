@@ -1,6 +1,5 @@
-{include 'templates/Acceso/header.tpl'}
 <div class="slide">
-    <form method= "POST" action="busquedaAvanzada" class="form">
+    <form method= "GET" action="Pedidos" class="form">
         <h2>Búsqueda avanzada</h2>
         <label for="inputName4">Elija un usuario </label> {* filtro de la primera entrega*}
         <select class="form-control" name="usuario" id="usuario">
@@ -29,4 +28,3 @@
         <button type="submit" class="btn btn-warning">Filtrar</button>
     </form>
 </div>
-{include 'templates/Acceso/footer.tpl'}

@@ -5,6 +5,7 @@
         <td>Recibió</td>
         <td>Producto</td>    
         <td>Dirección</td>
+        <td>Estado</td>
         <td>Detalle</td>
     </thead>
     {foreach  from=$pedidos item=pedido}
@@ -14,6 +15,7 @@
             <td>{$pedido->cliente}</td>
             <td>{$pedido->nombre}</td>
             <td>{$pedido->direccion}</td>
+            <td>{$pedido->estado}</td>
             <td><a href="detailPedido/{$pedido->id_pedido}" class="btn btn-info">Detalle</a></td>
         </tr>
     {/foreach}

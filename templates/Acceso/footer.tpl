@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-3">
                 <h5 class="text-uppercase">EL AZULEÑO</h5>
-                <p>Sitio realizado por Diego Vásquez y Juan Mauro.</p>
+                <p>Sitio realizado por Juan Mauro.</p>
                 <p>Web 2 - Cursada 2020 - TUDAI </p>
                 <p>Facultad de Ciencias Exactas - UNCPBA</p>
             </div>

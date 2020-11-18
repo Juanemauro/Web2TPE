@@ -60,8 +60,6 @@ $r->addRoute("deletePedido/:ID", "GET", "PedidosController", "deletePedido"); //
 $r->addRoute("showOrderedPedidosByProductoDesc", "GET", "PedidosController", "showOrderedPedidosByProductoDesc");// Ver pedidos ordenados por id_producto desc
 $r->addRoute("showOrderedPedidosByProductoAsc", "GET", "PedidosController", "showOrderedPedidosByProductoAsc"); // Ver pedidos ordenados por id_producto asc
 $r->addRoute("showOrderedPedidosByClienteDesc", "GET", "PedidosController", "showOrderedPedidosByClienteDesc"); // Ver pedidos ordenados por cliente desc
-$r->addRoute("showBusquedaAvanzadaForm", "GET", "PedidosController", "menuBusqueda"); // Form búsqueda avanzada 
-$r->addRoute("busquedaAvanzada", "POST", "PedidosController", "busquedaAvanzada"); // Búsqueda avanzada
 
 // RUTAS PRODUCTOS
 $r->addRoute("Productos", "GET", "ProductosController", "Productos"); //-> varía para usuario público

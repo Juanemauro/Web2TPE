@@ -8,20 +8,25 @@ class PedidosView{
         $this->smarty = new Smarty();
         $this->smarty->assign('basehref', BASE_URL);
     }
-    // Muestra los pedidos
-    function showPedidosView($pedidos, $productos, $loggeado, $usuario = " ", $admin, $cant_paginas, $pagina, $pedidos_por_pagina){
+    // Muestra los pedidos a los usuarios loggeados
+    function showPedidosView($pedidos, $productos, $loggeado, $usuario = " ", $admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos){
         $this->smarty->assign('titulo', "Pedidos");
         $this->smarty->assign('pedidos', $pedidos);
         $this->smarty->assign('productos', $productos);
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('admin', $admin);
         $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('usuarios', $usuarios);
         $this->smarty->assign('cant_paginas', $cant_paginas);
         $this->smarty->assign('pagina', $pagina);
+        $this->smarty->assign('usuarioBusqueda', $usuarioBusqueda);
+        $this->smarty->assign('producto', $producto);
+        $this->smarty->assign('estado', $estado);
+        $this->smarty->assign('cant_pedidos', $cant_pedidos);
         $this->smarty->assign('pedidos_por_pagina', $pedidos_por_pagina);
         $this->smarty->display('templates/Pedidos/pedidos.tpl');
     }
-
+    // Pedidos visitante (público)
     function showPedidosPublico($pedidos, $productos, $loggeado, $usuario, $admin){
         $this->smarty->assign('titulo', "Pedidos");
         $this->smarty->assign('pedidos', $pedidos);
@@ -31,7 +36,6 @@ class PedidosView{
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->display('templates/Pedidos/pedidosPublico.tpl');
     }
-
     // Mostrar pedidos del usuario que está loggeado
     function showMyPedidos($loggeado, $usuario, $pedidosByUser, $admin, $productos){
         $this->smarty->assign('titulo', "Mis Pedidos");
@@ -40,7 +44,6 @@ class PedidosView{
         $this->smarty->assign('loggeado', $loggeado);
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->assign('admin', $admin);
-        //$this->smarty->assign('imagenes', $imagenes);
         $this->smarty->display('templates/Pedidos/misPedidos.tpl');
     }
     // Muestra pedidos filtrados por producto
@@ -52,30 +55,6 @@ class PedidosView{
         $this->smarty->assign('admin', $admin);
         $this->smarty->display('templates/Pedidos/pedidosFiltrados.tpl');
     }
-
-    // Mostrar form para búsqueda avanzada
-    function showFormBusquedaAvanzada($loggeado, $usuario, $admin, $usuarios, $productos){
-        $this->smarty->assign('titulo', "Búsqueda avanzada");
-        $this->smarty->assign('loggeado', $loggeado);
-        $this->smarty->assign('usuario', $usuario);
-        $this->smarty->assign('usuarios', $usuarios);
-        $this->smarty->assign('admin', $admin);
-        $this->smarty->assign('productos', $productos);
-        $this->smarty->display('templates/Pedidos/formBusquedaAvanzada.tpl');
-    }
-
-    function showBusquedaAvanzada($loggeado, $usuario, $admin, $usuarios, $productos, $pedidos, $pagina_anterior){
-        $this->smarty->assign('titulo', "Búsqueda avanzada");
-        $this->smarty->assign('loggeado', $loggeado);
-        $this->smarty->assign('usuario', $usuario);
-        $this->smarty->assign('usuarios', $usuarios);
-        $this->smarty->assign('admin', $admin);
-        $this->smarty->assign('productos', $productos);
-        $this->smarty->assign('pedidos', $pedidos);
-        $this->smarty->assign('pagina_anterior', $pagina_anterior);
-        $this->smarty->display('templates/Pedidos/busquedaAvanzada.tpl');
-    }
-
     // Muestra form para realizar un nuevo pedido
     function showPedidoForm($pedidos, $productos, $loggeado, $usuario, $admin){
         $this->smarty->assign('titulo', "Nuevo Pedido");

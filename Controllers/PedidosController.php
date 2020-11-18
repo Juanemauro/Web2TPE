@@ -31,32 +31,57 @@ class PedidosController {
         $this->imagenesController = new ImagenesController();
         $this->loggeado = $this->autenticacion->checkLoggedIn();
         $this->admin = $this->autenticacion->checkAdmin();
+    }
+
+    // Calcula la cantidad de pedidos según el iltro que ingresa el usuario
+    function contarPedidos($pedidos){
+        $cantidad = 0;
+        foreach($pedidos as $pedido){
+            $cantidad++;
+        }
+        return $cantidad;
     } 
-    // ------------------------ MÉTODOS 
+
     // MOSTRAR PEDIDOS
     function Pedidos(){
         $productos = $this->productosModel->getProductos();                 
         if ($this->loggeado){
+            ///// BÚSQUEDA AVANZADA
+            $usuarioBusqueda = $_GET["usuario"]; 
+            $producto = $_GET["producto"]; 
+            $estado = $_GET["estado"];
+            if (empty($usuarioBusqueda)){ // Casos donde no se ingresa nada en el form o en la primera vez que ingresa a Pedidos
+                $usuarioBusqueda = "Todos";
+            }
+            if (empty($producto)){
+                $producto = "Todos";
+            }
+            if (empty($estado)){
+                $estado = "Todos";
+            }
             ///// ------------ PAGINACIÓN -> CANTIDAD DE PEDIDOS POR PÁGINA ------------
-            $cant_pedidos = $this->pedidosModel->getCantidadPedidos(); 
+            // cuento los pedidos que vienen de la consulta según el filtro que se indica
+            $cant_pedidos = $this->contarPedidos($this->pedidosModel->getCantidadPedidos($usuarioBusqueda, $producto, $estado)); 
             if ($_GET['items'] == null || ($_GET['items'] <= 0) || ($_GET['items'] > $cant_pedidos)){
                 $pedidos_por_pagina = 5; // si entro por primera vez la cantidad default es 5
             }else{
                 $pedidos_por_pagina = $_GET['items']; // cantidad ingresada por el usuario
-            } 
+            }
             ///// ------------ PAGINACIÓN -> PÁGINA ACTUAL ------------
-            $cant_paginas = ceil($cant_pedidos->cantidad/$pedidos_por_pagina); // función techo
+            $cant_paginas = ceil($cant_pedidos/$pedidos_por_pagina); // función techo
             // Verifico a la página que debe redirigirse
             if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas)){
-                header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina); // primer ingreso o página inválida, redirige a la primera página
+                // primer ingreso o página inválida, redirige a la primera página
+                header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina . '&usuario='. $usuarioBusqueda . '&producto='.$producto.'&estado='.$estado ); 
             }else{
                 $pagina = $_GET['pagina']; // página actual
-            } 
+            }             
             // Determino la cantidad de pedidos por páginas para establecer el intervalo de pedidos
             $inicio = (($pagina-1)*$pedidos_por_pagina); // primer pedido de cada página
-            $pedidos = $this->pedidosModel->getPedidosPorPagina($inicio, $pedidos_por_pagina); 
+            $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); // obtengo los pedidos filtrados
             $usuario = $_SESSION["ALIAS"]; // Para manejar lo que hace el usuario loggeado + haeader
-            $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina);  
+            $usuarios = $this->usersModel->getAllUsuarios(); // traigo todos los usuarios para el form
+            $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);  
         }else{
             $usuario = "";
             $pedidos=$this->pedidosModel->getPedidos(); // TODOS los pedidos para cuando nadie se loggeó
@@ -95,39 +120,6 @@ class PedidosController {
             $this->homeView->showError("Faltan campos obligatorios.", "Pedidos", $seccion, $this->loggeado, $usuario, $this->admin);
         }           
     }
-    // MOSTRAR FORM PARA BÚSQUEDA AVANZADA
-    function menuBusqueda(){
-        $productos = $this->productosModel->getProductos();
-        $usuarios = $this->usersModel->getAllUsuarios(); 
-        if ($this->loggeado || $this->adin){
-            $usuario = $_SESSION["ALIAS"];
-            $this->pedidosView->showFormBusquedaAvanzada($this->loggeado, $usuario, $this->admin, $usuarios, $productos);
-        }else{
-            header("Location: " . PEDIDOS);
-        }        
-    }   
-    // MOSTRAR PEDIDOS BÚSQUEDA AVANZADA
-    function busquedaAvanzada(){
-        $usuarioBusqueda = $_POST["usuario"]; 
-        $producto = $_POST["producto"]; 
-        $estado = $_POST["estado"];   
-        $productos = $this->productosModel->getProductos();
-        $usuarios = $this->usersModel->getAllUsuarios();        
-        if ($this->loggeado || $this->adin){
-            $usuario = $_SESSION["ALIAS"];
-            if (!empty($usuarioBusqueda) && !empty($producto) && !empty($estado)){
-                $pedidos = $this->pedidosModel->getPedidosBusquedaAvanzada($usuarioBusqueda, $producto, $estado); // pedidos filtrados con búsqueda avanzada
-                $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
-                $pagina_anterior = $_SESSION['url'];
-                $this->pedidosView->showBusquedaAvanzada($this->loggeado, $usuario, $this->admin, $usuarios, $productos, $pedidos, $pagina_anterior);
-            }else{
-                $seccion = "a realizar una búsqueda avanzada";  
-                $this->homeView->showError("Faltan campos obligatorios.", "showBusquedaAvanzadaForm", $seccion, $this->loggeado, $usuario, $this->admin);
-            }
-        }else{
-            header("Location: " . PEDIDOS);
-        }
-    }
     // NEW PEDIDO
     function newPedido(){
         $pedidos = $this->pedidosModel->getPedidos();
@@ -148,7 +140,7 @@ class PedidosController {
         $direccion=$_POST["inputAddress"];
         $producto=$_POST["inputPedido"];
         $cantidad=$_POST["inputCantidad"];
-        $estado = "En preparación.";
+        $estado = "En preparación";
         $id_usuario = $_SESSION['ID_USUARIO'];
         $descripcion=$_POST["descripcion"];  
         //echo $id_usuario;
