@@ -11,6 +11,7 @@
                     <th>Usuario</th>
                     <th>Comentario</th>
                     <th>Puntaje</th>
+                    <th>id_comentario</th>
                     <th v-if="admin == 'true'">Eliminar</th>
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                     <td>{{ comentario.alias }}</td>
                     <td>{{ comentario.texto }}</td>
                     <td>{{ comentario.puntaje}}</td>
+                    <td>{{ comentario.id_comentario}}</td>
                     <td v-if="admin == 'true'">
                         <button type="button" class="btn btn-danger" @click="remove(comentario.id_comentario)"> Eliminar</button>
                     </td> 

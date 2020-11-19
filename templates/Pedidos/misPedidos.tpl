@@ -18,7 +18,7 @@
                 <td><a href="detailPedido/{$pedido->id_pedido}" class="btn btn-info">Detalle</a></td>
             </tr>
         {/foreach}
-</table>
+    </table>
 <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
 </div>
 {include 'templates/Acceso/footer.tpl'}

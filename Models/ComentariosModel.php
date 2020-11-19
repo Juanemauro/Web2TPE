@@ -13,7 +13,7 @@ class ComentariosModel {
     }
     // Devuelve una tabla con los datos de un comentario x
     function getComentariosBypedido($id) {
-        $sentencia = $this->db->prepare('SELECT comentario.texto, comentario.puntaje, usuario.alias AS alias FROM comentario JOIN usuario ON comentario.id_usuario = usuario.id_usuario WHERE id_pedido = ?');
+        $sentencia = $this->db->prepare('SELECT comentario.id_comentario, comentario.texto, comentario.puntaje, usuario.alias AS alias FROM comentario JOIN usuario ON comentario.id_usuario = usuario.id_usuario WHERE id_pedido = ?');
         $sentencia->execute(array($id));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }

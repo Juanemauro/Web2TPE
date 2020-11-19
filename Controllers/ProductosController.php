@@ -2,6 +2,7 @@
 require_once './Models/ProductosModel.php';
 require_once './Views/ProductosView.php';
 require_once './Views/PedidosView.php';
+require_once './Views/HomeView.php';
 require_once './Controllers/AutenticacionController.php';
 class ProductosController{
     // DECLARACIÓN DE ATRIBUTOS
@@ -32,7 +33,12 @@ class ProductosController{
             $usuario = "";
         }            
         $mensaje = '';
-        $this->productosView->showProductosView($productos, $this->loggeado, $usuario, $mensaje, $this->admin);
+        if (!empty($productos)){
+            $this->productosView->showProductosView($productos, $this->loggeado, $usuario, $mensaje, $this->admin);
+        }else{
+            $seccion = "Agregar un producto";  
+            $this->homeView->showError("Esta página no tiene productos cargados.", "newProducto", $seccion, $this->loggeado, $usuario, $this->admin);
+        }        
     }
     // MUESTRA FORM PARA AGREGAR UN PRODUCTO
     function newProducto(){
@@ -131,50 +137,6 @@ class ProductosController{
         }else{
             header("Location: " . PRODUCTOS);
         }
-    }
-    // MOSTRAR PRODUCTOS EN FORMA DESCENDENTE SEGÚN NOMBRE DE CLIENTE DESC
-    function showOrderedProductosByNameDesc(){
-        $usuario = $_SESSION["ALIAS"];
-        if ($this->loggeado){
-            $productos = $this->model->getOrderedProductosByNameDesc();
-            $mensaje = '';
-            $this->productosView->showProductosView($productos, $this->loggeado, $usuario, $mensaje, $this->admin);
-        }else{
-            header("Location: " . PRODUCTOS);
-        }
-    }    
-    // MOSTRAR PRODUCTOS EN FORMA DESCENDENTE SEGÚN NOMBRE DE CLIENTE ASC
-    function showOrderedProductosByNameAsc(){        
-        $usuario = $_SESSION["ALIAS"];
-        if ($this->loggeado){
-            $productos = $this->model->getOrderedProductosByNameAsc();
-            $mensaje = '';
-            $this->productosView->showProductosView($productos, $this->loggeado, $usuario, $mensaje, $this->admin);
-        }else{
-            header("Location: " . PRODUCTOS);
-        }   
-    }
-    /// MOSTRAR PRODUCTOS EN FORMA DESCENDENTE SEGÚN ID_PRODUCTO DESC
-    function showOrderedProductosByPriceDesc(){        
-        $usuario = $_SESSION["ALIAS"];
-        if ($this->loggeado){
-            $productos = $this->model->getOrderedProductosByPriceDesc();
-            $mensaje = '';
-            $this->productosView->showProductosView($productos, $this->loggeado, $usuario, $mensaje, $this->admin);
-        }else{
-            header("Location: " . PRODUCTOS);
-        }  
-    }
-    // MOSTRAR PRODUCTOS EN FORMA ASCENDENTE SEGÚN ID_PRODUCTO ASC
-    function showOrderedProductosByPriceAsc(){
-        $usuario = $_SESSION["ALIAS"];
-        if ($this->loggeado){
-            $productos = $this->model->getOrderedProductosByPriceAsc();
-            $mensaje = '';
-            $this->productosView->showProductosView($productos, $this->loggeado, $usuario, $mensaje, $this->admin);
-        }else{
-            header("Location: " . PRODUCTOS);
-        }
-    }    
+    }   
 }
 ?>

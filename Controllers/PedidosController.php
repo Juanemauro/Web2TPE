@@ -32,25 +32,18 @@ class PedidosController {
         $this->loggeado = $this->autenticacion->checkLoggedIn();
         $this->admin = $this->autenticacion->checkAdmin();
     }
-
-    // Calcula la cantidad de pedidos según el iltro que ingresa el usuario
-    function contarPedidos($pedidos){
-        $cantidad = 0;
-        foreach($pedidos as $pedido){
-            $cantidad++;
-        }
-        return $cantidad;
-    } 
-
     // MOSTRAR PEDIDOS
     function Pedidos(){
-        $productos = $this->productosModel->getProductos();                 
+        $productos = $this->productosModel->getProductos();                        
         if ($this->loggeado){
+            $usuario = $_SESSION["ALIAS"]; // Para manejar lo que hace el usuario loggeado + haeader (siempre va a haber al menos uno, el admin "padre")
+            $usuarios = $this->usersModel->getAllUsuarios(); // traigo todos los usuarios para el form 
             ///// BÚSQUEDA AVANZADA
+
             $usuarioBusqueda = $_GET["usuario"]; 
             $producto = $_GET["producto"]; 
             $estado = $_GET["estado"];
-            if (empty($usuarioBusqueda)){ // Casos donde no se ingresa nada en el form o en la primera vez que ingresa a Pedidos
+            if (empty($usuarioBusqueda)){ // Casos donde no se ingresa nada en el form o es la primera vez que ingresa a Pedidos
                 $usuarioBusqueda = "Todos";
             }
             if (empty($producto)){
@@ -60,29 +53,33 @@ class PedidosController {
                 $estado = "Todos";
             }
             ///// ------------ PAGINACIÓN -> CANTIDAD DE PEDIDOS POR PÁGINA ------------
-            // cuento los pedidos que vienen de la consulta según el filtro que se indica
-            $cant_pedidos = $this->contarPedidos($this->pedidosModel->getCantidadPedidos($usuarioBusqueda, $producto, $estado)); 
-            if ($_GET['items'] == null || ($_GET['items'] <= 0) || ($_GET['items'] > $cant_pedidos)){
-                $pedidos_por_pagina = 5; // si entro por primera vez la cantidad default es 5
+            $cant_pedidos = $this->pedidosModel->getCantidadPedidos($usuarioBusqueda, $producto, $estado); // Cantidad de pedidos según consulta del filtro que se indica                 
+            if ($cant_pedidos == 0){ // Caso en el que no hay pedidos con esos valores o no hay pedidos
+                $cant_paginas = 0; 
+                $pagina = 0;
+                $pedidos_por_pagina = 0;
+                $inicio = 0; 
+                $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); 
+                $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);
             }else{
-                $pedidos_por_pagina = $_GET['items']; // cantidad ingresada por el usuario
-            }
-            ///// ------------ PAGINACIÓN -> PÁGINA ACTUAL ------------
-            $cant_paginas = ceil($cant_pedidos/$pedidos_por_pagina); // función techo
-            // Verifico a la página que debe redirigirse
-            if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas)){
-                // primer ingreso o página inválida, redirige a la primera página
-                header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina . '&usuario='. $usuarioBusqueda . '&producto='.$producto.'&estado='.$estado ); 
-            }else{
-                $pagina = $_GET['pagina']; // página actual
-            }             
-            // Determino la cantidad de pedidos por páginas para establecer el intervalo de pedidos
-            $inicio = (($pagina-1)*$pedidos_por_pagina); // primer pedido de cada página
-            $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); // obtengo los pedidos filtrados
-            $usuario = $_SESSION["ALIAS"]; // Para manejar lo que hace el usuario loggeado + haeader
-            $usuarios = $this->usersModel->getAllUsuarios(); // traigo todos los usuarios para el form
-            $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);  
-        }else{
+                if ($_GET['items'] == null || ($_GET['items'] <= 0) || ($_GET['items'] > $cant_pedidos)){ 
+                    $pedidos_por_pagina = 5; // si entro por primera vez la cantidad default es 5 -> [inicio, pedidos por página]
+                }else{
+                    $pedidos_por_pagina = $_GET['items']; // cantidad ingresada por el usuario
+                }
+                ///// ------------ PAGINACIÓN -> PÁGINA ACTUAL ------------ 
+                $cant_paginas = ceil($cant_pedidos/$pedidos_por_pagina); // función techo                      
+                if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas )){ // Verifico a la página que debe redirigirse
+                    // primer ingreso o página inválida, redirige a la primera página
+                    header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina . '&usuario='. $usuarioBusqueda . '&producto='.$producto.'&estado='.$estado ); 
+                }else{
+                    $pagina = $_GET['pagina']; // página actual
+                }             
+                $inicio = (($pagina-1)*$pedidos_por_pagina); // primer pedido de cada página -> [inicio, pedidos por página]
+                $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); // obtengo los pedidos filtrados
+                $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);  
+            }    
+        }else{ // USUARIO PÚBLICO
             $usuario = "";
             $pedidos=$this->pedidosModel->getPedidos(); // TODOS los pedidos para cuando nadie se loggeó
             $this->pedidosView->showPedidosPublico($pedidos, $productos, $this->loggeado, $usuario, $this->admin);         
@@ -95,7 +92,12 @@ class PedidosController {
             $id_usuario = $_SESSION["ID_USUARIO"];
             $pedidosByUser = $this->pedidosModel->getPedidosByUser($id_usuario); // ACOMODAR CON INNER JOIN CUANDO HAGA LA RELACIÓN
             $productos = $this->productosModel->getProductos();
-            $this->pedidosView->showMyPedidos($this->loggeado, $usuario, $pedidosByUser, $this->admin, $productos);
+            if (!empty($pedidosByUser)){
+                $this->pedidosView->showMyPedidos($this->loggeado, $usuario, $pedidosByUser, $this->admin, $productos);
+            }else{
+                $seccion = "a Home";  
+                $this->homeView->showError("Usted no tiene pedidos..", "showHome", $seccion, $this->loggeado, $usuario, $this->admin);  
+            }                      
         }else{
             $usuario = "";
             header("Location: " . PEDIDOS); 
@@ -109,9 +111,7 @@ class PedidosController {
             $usuario = "";
         } 
         $productos = $this->productosModel->getProductos();
-        $nombreProducto = $_GET["nombreProductoParaFiltrar"];  
-        //var_dump($nombreProducto);
-        //die();      
+        $nombreProducto = $_GET["nombreProductoParaFiltrar"];    
         if(!empty($nombreProducto)){            
             $pedidos = $this->pedidosModel->getPedidosByProducto($nombreProducto);
             $this->pedidosView->showPedidosFiltradosProducto($pedidos, $this->loggeado, $usuario, $this->admin);
@@ -143,15 +143,11 @@ class PedidosController {
         $estado = "En preparación";
         $id_usuario = $_SESSION['ID_USUARIO'];
         $descripcion=$_POST["descripcion"];  
-        //echo $id_usuario;
-        //die();
         //Verifico que ingrese todos los datos en el formulario
         if (!empty($cliente) && !empty($direccion) && !empty($producto) && !empty($cantidad)){
             $id_pedido = $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario); // retorno el id del último pedido para asociar las imágenes
-            if ($this->admin && (!empty($_FILES['image']))){  
-                echo 'entra';      
+            if ($this->admin && (!empty($_FILES['image']))){       
                 $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
-                echo 'sale e inserta';
             }
             header("Location: " . PEDIDOS);
         }else{
@@ -166,7 +162,13 @@ class PedidosController {
         $productos = $this->productosModel->getProductos();
         if ($this->admin){
             $usuario = $_SESSION["ALIAS"];
-            $this->pedidosView->showMenuEditPedido($pedidos, $productos, $this->loggeado, $usuario, $this->admin);
+            if (!empty($pedidos)){
+                $this->pedidosView->showMenuEditPedido($pedidos, $productos, $this->loggeado, $usuario, $this->admin);
+            }else{
+                $seccion = "Pedidos";  
+                $this->homeView->showError("No hay pedidos para editar..", "Pedidos", $seccion, $this->loggeado, $usuario, $this->admin);
+            }
+            
         }else{
             header("Location: " . PEDIDOS);
         }    
@@ -214,7 +216,6 @@ class PedidosController {
     function detailPedido($params=null){
         $id = $params[':ID'];
         $pedido = $this->pedidosModel->getPedido($id);
-        //$imagenes = $this->imagenesController->getImagenes();
         if (!empty($pedido)){
             if ($this->loggeado){
                 $usuario = $_SESSION["ALIAS"];
@@ -234,7 +235,12 @@ class PedidosController {
         $productos = $this->productosModel->getProductos();
         if ($this->admin){
             $usuario = $_SESSION["ALIAS"];
-            $this->pedidosView->showMenuDeletePedido($pedidos, $productos, $this->loggeado, $usuario, $this->admin);
+            if (!empty($pedidos)){
+                $this->pedidosView->showMenuDeletePedido($pedidos, $productos, $this->loggeado, $usuario, $this->admin);            
+            }else{
+                $seccion = "Pedidos";  
+                $this->homeView->showError("No hay pedidos para eliminar..", "Pedidos", $seccion, $this->loggeado, $usuario, $this->admin);
+            }
         }else{
             header("Location: " . PEDIDOS);
         }    

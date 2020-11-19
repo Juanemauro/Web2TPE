@@ -2,11 +2,13 @@
 require_once './Models/ImagenesModel.php';
 require_once './Models/PedidosModel.php';
 require_once './Views/PedidosView.php';
+require_once './Views/HomeView.php';
 //require_once "/path/to/file";
 
 class ImagenesController {
     private $imagenesModel;
     private $pedidosView; 
+    private $homeView;
     private $pedidosModel; 
     private $loggeado;
     private $admin;
@@ -17,6 +19,7 @@ class ImagenesController {
         $this->imagenesModel = new ImagenesModel();
         $this->pedidosModel = new PedidosModel();
         $this->pedidosView = new PedidosView();
+        $this->homeView = new Homeview();
         $this->autenticacion = new AutenticacionController();
         $this->loggeado = $this->autenticacion->checkLoggedIn();
         $this->admin = $this->autenticacion->checkAdmin();
@@ -24,15 +27,14 @@ class ImagenesController {
 
     // AGREGAR IMÁGENES 
     function verImagenesPedido($params = null){
-        $id_pedido = $params[':ID'];
- 
+        $id_pedido = $params[':ID']; 
         if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"];
         }else{
             $usuario = "";           
         }
         $imagenes = $this->imagenesModel->getImagenesPorPedido($id_pedido);
-        $this->pedidosView->showImagenesPedido($id_pedido, $imagenes, $this->loggeado, $usuario, $this->admin);        
+        $this->pedidosView->showImagenesPedido($id_pedido, $imagenes, $this->loggeado, $usuario, $this->admin);            
     }
 
     // INSERTAR IMÁGENES -> obtener datos de los archivos
