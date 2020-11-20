@@ -39,7 +39,9 @@ class PedidosController {
             $usuario = $_SESSION["ALIAS"]; // Para manejar lo que hace el usuario loggeado + haeader (siempre va a haber al menos uno, el admin "padre")
             $usuarios = $this->usersModel->getAllUsuarios(); // traigo todos los usuarios para el form 
             ///// BÚSQUEDA AVANZADA
-
+            //if (!isset('usuario')){
+            //    $usuarioBusqueda = "Todos";
+            //}
             $usuarioBusqueda = $_GET["usuario"]; 
             $producto = $_GET["producto"]; 
             $estado = $_GET["estado"];

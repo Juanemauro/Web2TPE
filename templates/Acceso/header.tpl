@@ -22,7 +22,8 @@
                         <a class="nav-link" href="Home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Pedidos">Pedidos</a>
+                        <a class="nav-link" href="http://localhost/Proyectos/Entrega2/Pedidos?usuario=Todos&producto=Todos&estado=Todos">Pedidos</a>
+                        {*<a class="nav-link" href="http://localhost/Proyectos/Web2TPE/Pedidos?usuario=Todos&producto=Todos&estado=Todos">Pedidos</a>*}
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Productos">Productos</a>

@@ -84,8 +84,13 @@ class ImagenesController {
             $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
             $this->imagenesModel->deleteImagen($id_imagen);
             unlink($imagen->ruta); // Elimina el archivo de la carpeta             
-            $url_galeria = 'http://localhost/Proyectos/Entrega1/verImagenes/'. $pedido->id_pedido; // modificar cuando lo abra desde la carpeta local del repo (¿+ crear carpeta images?)     
+           
+            $url_galeria = 'http://localhost/Proyectos/Entrega1/verImagenes/'. $pedido->id_pedido; // modificar cuando lo abra desde la carpeta local del repo (¿+ crear carpeta images?)
+            //$url_galeria = 'http://localhost/Proyectos/Web2TPE/verImagenes/'. $pedido->id_pedido; 
+            
             $url_edit_pedido = 'http://localhost/Proyectos/Entrega1/editPedido/'. $pedido->id_pedido; // modificar cuando lo abra desde la carpeta local del repo 
+            //$url_edit_pedido = 'http://localhost/Proyectos/Web2TPE/editPedido/'. $pedido->id_pedido;
+             
             if ($_SESSION['url'] == $url_galeria){
                 header('Location: ' . VERIMAGENES . $pedido->id_pedido);
             }else if($_SESSION['url'] == $url_edit_pedido){
