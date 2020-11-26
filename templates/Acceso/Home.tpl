@@ -22,6 +22,6 @@
     </a>
     </div>
 </div>
-<div class="pedidos"><a href="Pedidos"><img src="imagenes/pedidos.jpg" alt="Pedidos" class="pedidos"></a></div>
+<div class="pedidos"><a href="http://localhost/Proyectos/Entrega2/Pedidos?usuario=Todos&producto=Todos&estado=Todos"><img src="imagenes/pedidos.jpg" alt="Pedidos" class="pedidos"></a></div>
 <div class="productos"><a href="Productos"><img src="imagenes/productos.jpg" alt="Productos" class="pedidos"></a></div>
 {include 'templates/Acceso/footer.tpl'}

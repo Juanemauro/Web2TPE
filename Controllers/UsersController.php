@@ -1,7 +1,8 @@
 <?php
-include_once './Models/UsersModel.php';
-include_once './Views/UsersView.php';
+
 require_once './Controllers/AutenticacionController.php';
+require_once './Models/UsersModel.php';
+require_once './Views/UsersView.php';
 
 class UsersController {
     // DECLARACIÓN DE ATRIBUTOS
@@ -140,7 +141,7 @@ class UsersController {
                 }else{                 
                     $password = password_hash($password1, PASSWORD_DEFAULT);
                     $this->usersModel->updatePassword($password, $user->id_usuario);
-                    header("Location: " . HOME);
+                    header("Location: " . LOGIN);
                 }
             }else{
                 $error = 'Faltan campos obligatorios.';
@@ -151,45 +152,62 @@ class UsersController {
 
     // Otorga permisos de admin a un usuario que no lo es
     function updatePermiso($params = null){
-        $id = $params[':ID'];
-        if ($this->admin){
-            $existe = $this->usersModel->getUserById($id);
-            if ($existe){
-                if ($existe->admin == 1){
-                    $permiso = 0;
-                }else{
-                    $permiso = 1; 
-                }                
-                $this->usersModel->updatePermiso($permiso, $id);
-                $usuario = $_SESSION["ALIAS"];
-                $usuarios = $this->usersModel->getUsuarios($usuario);                
-                header("Location: " . MENUADMIN);
-            }else{
-                $seccion = "al Menú Administrador";
-                $this->homeView->showError("No existe el usuario con ese ID.", "showMenuAdmin", $seccion, $this->loggeado, $usuario, $this->admin);
-            }
+        if ($this->loggeado){
+            $usuario = $_SESSION["ALIAS"];
         }else{
-            header("Location: " . HOME);
+            $usuario = '';
         }        
+        if(isset($params[':ID'])){
+            $id = $params[':ID'];
+            if ($this->admin){
+                $existe = $this->usersModel->getUserById($id);
+                if ($existe){
+                    if ($existe->admin == 1){
+                        $permiso = 0;
+                    }else{
+                        $permiso = 1; 
+                    }                
+                    $this->usersModel->updatePermiso($permiso, $id);
+                    $usuarios = $this->usersModel->getUsuarios($usuario);                
+                    header("Location: " . MENUADMIN);
+                }else{
+                    $seccion = "al Menú Administrador";
+                    $this->homeView->showError("No existe el usuario con ese ID.", "showMenuAdmin", $seccion, $this->loggeado, $usuario, $this->admin);
+                }
+            }else{
+                header("Location: " . HOME);
+            }   
+        }else{
+            $seccion = "a Home";  
+            $this->homeView->showError("La página a la que intentas ingresar no existe..", "Home", $seccion, $this->loggeado, $usuario, $this->admin);
+        }                 
     }
 
     // Eliminar usuario
     function deleteUsuario($params = null){
-        $id = $params[':ID'];
-        if ($this->admin){
-            $existe = $this->usersModel->getUserById($id);
-            if ($existe){
-                $this->usersModel->deleteUsuario($id);
-                $usuario = $_SESSION["ALIAS"];
-                $usuarios = $this->usersModel->getUsuarios($usuario);                
-                $this->homeView->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
+        if ($this->loggeado){
+            $usuario = $_SESSION["ALIAS"];
+        }else{
+            $usuario = '';
+        } 
+        if(isset($params[':ID'])){
+            $id = $params[':ID'];
+            if ($this->admin){
+                $existe = $this->usersModel->getUserById($id);
+                if ($existe){
+                    $this->usersModel->deleteUsuario($id);                    
+                    $usuarios = $this->usersModel->getUsuarios($usuario);                
+                    $this->homeView->showMenuAdmin($this->loggeado, $usuarios, $usuario, $this->admin);
+                }else{
+                    $seccion = "al Menú Administrador";
+                    $this->homeView->showError("No existe el usuario con ese ID.", "showMenuAdmin", $seccion, $this->loggeado, $usuario, $this->admin);
+                }
             }else{
-                $seccion = "al Menú Administrador";
-                $usuario = $_SESSION["ALIAS"];
-                $this->homeView->showError("No existe el usuario con ese ID.", "showMenuAdmin", $seccion, $this->loggeado, $usuario, $this->admin);
+                header("Location: " . HOME);
             }
         }else{
-            header("Location: " . HOME);
-        }
+            $seccion = "a Home";  
+            $this->homeView->showError("La página a la que intentas ingresar no existe..", "Home", $seccion, $this->loggeado, $usuario, $this->admin);
+        }            
     }
 }

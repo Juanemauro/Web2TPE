@@ -44,25 +44,27 @@
         <button type="submit" class="btn btn-primary">Editar Pedido</button> 
     </form>
     {*Eliminar imágenes del pedido*}
-    <h2>Eliminar imágenes del pedido</h2>
-    <table class="pedidos_tabla">
-        <thead>
-            <td>Imagen</td>
-            {if $admin}   
-                <td>Eliminar</td>
-            {/if}
-        </thead>
-        {foreach from=$imagenes item=imagen}
-            <tr>
-                <td><img src="{$imagen->ruta}" width="200px" height="250px"></td>
-                
+    {if $imagenes|@count gt 0}
+        <h2>Eliminar imágenes del pedido</h2>
+        <table class="pedidos_tabla">
+            <thead>
+                <td>Imagen</td>
                 {if $admin}   
-                    <td><a href="eliminarImagen/{$imagen->id_imagen}" class="btn btn-danger">Eliminar</a></td>
+                    <td>Eliminar</td>
                 {/if}
-            </tr>         
-        {/foreach}
-        
-    </table>
+            </thead>
+            {foreach from=$imagenes item=imagen}
+                <tr>
+                    <td><img src="{$imagen->ruta}" width="200px" height="250px"></td>
+                    
+                    {if $admin}   
+                        <td><a href="eliminarImagen/{$imagen->id_imagen}" class="btn btn-danger">Eliminar</a></td>
+                    {/if}
+                </tr>         
+            {/foreach}
+            
+        </table>
+    {/if}
     <a href="Pedidos" class="btn btn-info">Volver a Pedidos</a>
  </div>
 {include 'templates/Acceso/footer.tpl'}

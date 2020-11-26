@@ -32,8 +32,10 @@ $r->addRoute("selectUser", "GET", "UsersController", "selectUser"); // Mostrar f
 $r->addRoute("verificarUsuario", "POST", "UsersController", "verificarUsuario"); // Mostrar form para verificar la pregunta secreta del usuario
 $r->addRoute("verificarPregunta", "POST", "UsersController", "verificarPregunta"); // Mostrar form para verificar la pregunta secreta del usuario
 $r->addRoute("updatePassword", "POST", "UsersController", "updatePassword"); // Mostrar form para verificar la pregunta secreta del usuario
-$r->addRoute("updatePermiso/:ID", "GET", "UsersController", "updatePermiso"); // hacer admin a un usuario
-$r->addRoute("deleteUsuario/:ID", "GET", "UsersController", "deleteUsuario"); // hacer admin a un usuario
+$r->addRoute("updatePermiso/", "GET", "UsersController", "updatePermiso"); // Error updatePermiso
+$r->addRoute("updatePermiso/:ID", "GET", "UsersController", "updatePermiso"); // Hacer admin a un usuario
+$r->addRoute("deleteUsuario/", "GET", "UsersController", "deleteUsuario"); // Error deleteUsuario
+$r->addRoute("deleteUsuario/:ID", "GET", "UsersController", "deleteUsuario"); // Borrar un usuario
 
 // HOME & FAQ
 $r->addRoute("home", "GET", "HomeController", "showHome"); // Mostrar Home
@@ -41,8 +43,10 @@ $r->addRoute("showFaq", "GET", "HomeController", "showFaq"); // Mostrar FAQ
 $r->addRoute("showMenuAdmin", "GET", "HomeController", "showMenuAdmin"); // Mostrar FAQ
 
 // IMÁGENES
+$r->addRoute("verImagenes/", "GET", "ImagenesController", "verImagenesPedido"); // Error verImagenes
 $r->addRoute("verImagenes/:ID", "GET", "ImagenesController", "verImagenesPedido"); // Ver imágenes de un pedido
 $r->addRoute("agregarImagenes", "POST", "ImagenesController", "agregarImagenes"); // Agregar una imagen a un pedido
+$r->addRoute("eliminarImagen/", "GET", "ImagenesController", "borrarImagen"); // Error eliminarImagen
 $r->addRoute("eliminarImagen/:ID", "GET", "ImagenesController", "borrarImagen"); // Borrar una imagen
 
 // RUTAS PEDIDOS
@@ -52,23 +56,25 @@ $r->addRoute("showFiltroPedidos", "GET", "PedidosController", "showPedidosFiltra
 $r->addRoute("newPedido", "GET", "PedidosController", "newPedido"); // Agregar nuevo pedido a través de un form
 $r->addRoute("addPedido", "POST", "PedidosController", "addPedido"); // Agrega el pedido a la BDD
 $r->addRoute("menuEditPedido", "GET", "PedidosController", "menuEditPedido"); // Menu para seleccionar el pedido a editar
+$r->addRoute("editPedido/", "GET", "PedidosController", "editPedido"); // Error página editPedido
 $r->addRoute("editPedido/:ID", "GET", "PedidosController", "editPedido"); // Form para editar el pedido X
 $r->addRoute("refreshPedido", "POST", "PedidosController", "showEditedPedido"); // 
+$r->addRoute("detailPedido/", "GET", "PedidosController", "detailPedido"); // Error página deteailPedido
 $r->addRoute("detailPedido/:ID", "GET", "PedidosController", "detailPedido"); // Ver detalle de un pedido
 $r->addRoute("menuDeletePedido", "GET", "PedidosController", "menuDeletePedido"); // Menu para seleccionar el pedido a borrar
+$r->addRoute("deletePedido/", "GET", "PedidosController", "deletePedido"); // Error página deletePedido
 $r->addRoute("deletePedido/:ID", "GET", "PedidosController", "deletePedido"); // Borra el pedido de la BDD
-$r->addRoute("showOrderedPedidosByProductoDesc", "GET", "PedidosController", "showOrderedPedidosByProductoDesc");// Ver pedidos ordenados por id_producto desc
-$r->addRoute("showOrderedPedidosByProductoAsc", "GET", "PedidosController", "showOrderedPedidosByProductoAsc"); // Ver pedidos ordenados por id_producto asc
-$r->addRoute("showOrderedPedidosByClienteDesc", "GET", "PedidosController", "showOrderedPedidosByClienteDesc"); // Ver pedidos ordenados por cliente desc
 
 // RUTAS PRODUCTOS
 $r->addRoute("Productos", "GET", "ProductosController", "Productos"); //-> varía para usuario público
 $r->addRoute("newProducto", "GET", "ProductosController", "newProducto"); // Agregar nuevo producto a través de un form
 $r->addRoute("addProducto", "POST", "ProductosController", "addProductos"); // Agrega el producto a la BDD
 $r->addRoute("menuEditProducto", "GET", "ProductosController", "menuEditProducto"); // Menu para seleccionar el producto a editar
+$r->addRoute("editProducto/", "GET", "ProductosController", "editProducto"); // Error editProducto
 $r->addRoute("editProducto/:ID", "GET", "ProductosController", "editProducto"); // Form para editar el producto X
 $r->addRoute("refreshProducto", "POST", "ProductosController", "showEditedProducto"); //
 $r->addRoute("menuDeleteProducto", "GET", "ProductosController", "menuDeleteProducto"); // Menu para seleccionar el pedido a borrar
+$r->addRoute("deleteProducto/", "GET", "ProductosController", "deleteProducto"); // Error deleteProducto
 $r->addRoute("deleteProducto/:ID", "GET", "ProductosController", "deleteProducto"); // Borra el pedido de la BDD
 
 // Default

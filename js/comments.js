@@ -54,21 +54,21 @@ function addComentario(){
         body: JSON.stringify(comentario)
     })
     .then(response => {
-        getComentarios(comentario.id_pedido); // Está bien hacer esto?
+        getComentarios(comentario.id_pedido);
+        document.querySelector("#campo").value=""; // El campo se vuelve al "valor original"
     })
     .catch(error => console.log(error));
 }
 
 // DELETE COMENTARIO
 function deleteComentario(id_comentario) {
-    //e.preventDefault(); Es necesario?
     let id_pedido = document.querySelector("input[name=id_pedido]").value;
     fetch('api/comentario/' + id_comentario, {
         method: 'DELETE',
         headers: {"Content-Type": "application/json"},
     })
     .then(response => {
-        getComentarios(id_pedido); // Está bien hacer esto?
+        getComentarios(id_pedido); 
     })
     .catch(error => console.log(error));
 }

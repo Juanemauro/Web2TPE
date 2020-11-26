@@ -40,7 +40,7 @@
                     <form id="form-comentario" method="POST">
                         <div class="form-group shadow-textarea">
                             <h3>Tu opinión nos interesa..</h3>
-                            <textarea class="form-control z-depth-1" name="texto" rows="4" cols="12" placeholder="Dejanos aquí tu comentario.." required></textarea>                        
+                            <textarea id="campo" class="form-control z-depth-1" name="texto" rows="4" cols="12" placeholder="Dejanos aquí tu comentario.." required></textarea>                        
                         </div>
                         <h6>Puntaje:  
                         <select id="puntaje" class="form-control">

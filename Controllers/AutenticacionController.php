@@ -1,20 +1,21 @@
 <?php 
 
 class AutenticacionController {
+
+    // CONSTRUCTOR
     function __construct() {
         if(session_status() !== PHP_SESSION_ACTIVE){
             session_start();
         }   
     }
 
-     // VERIFICA QUE SE HAYA INICIADO UNA SESIÓN
-
+    // VERIFICA QUE SE HAYA INICIADO UNA SESIÓN
     function login($usuarioLoggeado){
         session_start();
         $_SESSION["ALIAS"] = $usuarioLoggeado->alias;
         $_SESSION['ADMINISTRADOR'] = $usuarioLoggeado->admin;
         $_SESSION['ID_USUARIO'] = $usuarioLoggeado->id_usuario;
-    } 
+    }
 
     // VERIFICA SI HAY UNA SESIÓN ABIERTA
     function checkLoggedIn(){
@@ -24,11 +25,11 @@ class AutenticacionController {
             }else{
                 return true;
             }
-    } 
+    }
 
     // VERIFICA SI EL USUARIO LOGGEADO ES ADMIN O ES UN USUARIO REGISTRADO
     function checkAdmin(){
-        if (isset($_SESSION['ALIAS'])) {
+        if ($this->checkLoggedIn()){ 
             if ($_SESSION['ADMINISTRADOR'] == 1)
                 return true;
             else{
@@ -43,7 +44,6 @@ class AutenticacionController {
         session_destroy();
         header("Location: ". LOGIN);
     }
-
 }
 ?>
 
