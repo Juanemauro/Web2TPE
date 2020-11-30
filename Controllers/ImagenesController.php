@@ -13,6 +13,7 @@ class ImagenesController {
     private $loggeado;
     private $admin;
     private $autenticacion;
+    private $errorImagenes;
 
     // CONSTRUCTOR
     function __construct(){
@@ -23,6 +24,7 @@ class ImagenesController {
         $this->autenticacion = new AutenticacionController();
         $this->loggeado = $this->autenticacion->checkLoggedIn();
         $this->admin = $this->autenticacion->checkAdmin();
+        $this->errorImagenes = array();
     }
 
     // AGREGAR IMÁGENES 
@@ -59,7 +61,15 @@ class ImagenesController {
                 $usuario = "";           
             }
             $imagenes = $this->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
-            header('Location: '.BASE_URL.'verImagenes/'. $id_pedido);
+            if (!empty($imagenes)){ // Si alguna imagen no pudo subirse, esto va a tener al menos un elemento y va a mostrar el template con el error
+                $seccion1 = "Editar pedido";
+                $seccion2 = "imágenes del pedido";  
+                $redireccion1 = BASE_URL.'editPedido/'. $id_pedido;
+                $redireccion2 = BASE_URL.'verImagenes/'. $id_pedido; 
+                $this->homeView->showErrorImagen("Las siguientes imágenes no pudieron cargarse: ", $imagenes, $redireccion1, $redireccion2, $seccion1, $seccion2, $this->loggeado, $usuario, $this->admin);
+            }else{
+                header('Location: '.BASE_URL.'verImagenes/'. $id_pedido);
+            }  
         }              
     }
 
@@ -72,8 +82,11 @@ class ImagenesController {
                 $nombre_tmp = $images['tmp_name'][$i]; // nombre que va a tener en la carpeta temporal     
                 $imagen = $this->moverImagen($nombre, $nombre_tmp); // mover imagen a la carpeta temporal
                 $this->imagenesModel->addImages($id_pedido, $imagen, $descripcion); // agregar imagen a la BDD
+            }else{
+                array_push($this->errorImagenes, $images['name'][$i]);
             } 
         }
+        return $this->errorImagenes;  
     }
 
     // MOVER IMÁGENES A LA CARPETA TEMPORAL
@@ -98,14 +111,9 @@ class ImagenesController {
                 if (!empty($imagen)){
                     $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
                     $this->imagenesModel->deleteImagen($id_imagen);
-                    unlink($imagen->ruta); // Elimina el archivo (la imagen) de la carpeta             
-                
-                    $url_galeria = 'http://localhost/Proyectos/Entrega2/verImagenes/'. $pedido->id_pedido; // modificar cuando lo abra desde la carpeta local del repo (¿+ crear carpeta images?)
-                    //$url_galeria = 'http://localhost/Proyectos/Web2TPE/verImagenes/'. $pedido->id_pedido; 
-                    
-                    $url_edit_pedido = 'http://localhost/Proyectos/Entrega2/editPedido/'. $pedido->id_pedido; // modificar cuando lo abra desde la carpeta local del repo 
-                    //$url_edit_pedido = 'http://localhost/Proyectos/Web2TPE/editPedido/'. $pedido->id_pedido;
-                    
+                    unlink($imagen->ruta); // Elimina el archivo (la imagen) de la carpeta           
+                    $url_galeria = 'http://localhost/Proyectos/Web2TPE/verImagenes/'. $pedido->id_pedido;                     
+                    $url_edit_pedido = 'http://localhost/Proyectos/Web2TPE/editPedido/'. $pedido->id_pedido;                    
                     if ($_SESSION['url'] == $url_galeria){
                         header('Location: ' . VERIMAGENES . $pedido->id_pedido);
                     }else if($_SESSION['url'] == $url_edit_pedido){

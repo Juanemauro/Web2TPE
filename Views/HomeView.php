@@ -35,6 +35,22 @@ class HomeView {
         $this->smarty->assign('redireccion', $redireccion);
         $this->smarty->display('templates/Acceso/error.tpl');
     }
+
+    function showErrorImagen($mensajeError, $errorImagenes, $redireccion1, $redireccion2, $seccion1, $seccion2, $loggeado, $usuario, $admin){
+        $this->smarty->assign('titulo', "Error!");
+        $this->smarty->assign('loggeado', $loggeado);
+        $this->smarty->assign('usuario', $usuario);
+        $this->smarty->assign('mensajeError', $mensajeError);
+        $this->smarty->assign('seccion1', $seccion1);
+        $this->smarty->assign('seccion2', $seccion2);
+        $this->smarty->assign('admin', $admin);
+        $this->smarty->assign('errorImagenes', $errorImagenes);
+        $this->smarty->assign('redireccion1', $redireccion1);
+        $this->smarty->assign('redireccion2', $redireccion2);
+        $this->smarty->display('templates/Acceso/errorImagenes.tpl');
+    }
+
+
     // Muestra el menú para el ABM de usuario
     function showMenuAdmin($loggeado, $usuarios, $usuario, $admin){
         $this->smarty->assign('titulo', "Menú Admin");

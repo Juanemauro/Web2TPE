@@ -169,9 +169,17 @@ class PedidosController {
         if (!empty($cliente) && !empty($direccion) && !empty($producto) && !empty($cantidad)){ //Verifico que ingrese todos los datos en el formulario
             $id_pedido = $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario); // Retorno el id del último pedido para asociar las imágenes
             if ($this->admin && (!empty($_FILES['image']))){       
-                $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
-            }
-            header("Location: " . PEDIDOS);
+                $insert = $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
+                if (!empty($insert)){ // Si alguna imagen no pudo subirse, esto va a tener al menos un elemento y va a mostrar el template con el error
+                    $seccion1 = "Editar pedido";
+                    $seccion2 = "imágenes del pedido";  
+                    $redireccion1 = BASE_URL.'editPedido/'. $id_pedido;
+                    $redireccion2 = BASE_URL.'verImagenes/'. $id_pedido; 
+                    $this->homeView->showErrorImagen("Las siguientes imágenes no pudieron cargarse: ", $insert, $redireccion1, $redireccion2, $seccion1, $seccion2, $this->loggeado, $usuario, $this->admin);
+                }else{
+                    header("Location: " . PEDIDOS);
+                }                     
+            }           
         }else{
             $seccion = "agregar pedido";  
             $this->homeView->showError("Faltan campos obligatorios.", "newPedido", $seccion, $this->loggeado, $usuario, $this->admin);
@@ -237,8 +245,16 @@ class PedidosController {
         $descripcion=$_POST["descripcion"];         
         if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($estado) && !empty($id_producto)){ //Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
             $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido);
-            $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
-            header("Location: ".detailPedido.'/'.$id_pedido);
+            $insert = $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
+                if (!empty($insert)){ // Si alguna imagen no pudo subirse, esto va a tener al menos un elemento y va a mostrar el template con el error
+                    $seccion1 = "Editar pedido";
+                    $seccion2 = "imágenes del pedido";  
+                    $redireccion1 = BASE_URL.'editPedido/'. $id_pedido;
+                    $redireccion2 = BASE_URL.'verImagenes/'. $id_pedido; 
+                    $this->homeView->showErrorImagen("Las siguientes imágenes no pudieron cargarse: ", $insert, $redireccion1, $redireccion2, $seccion1, $seccion2, $this->loggeado, $usuario, $this->admin);
+                }else{
+                    header("Location: ".detailPedido.'/'.$id_pedido);
+                }    
         }else{
             $seccion = "seleccionar un pedido";    
             $this->homeView->showError("Faltan campos obligatorios.", "menuEditPedido", $seccion, $this->loggeado, $usuario, $this->admin);
