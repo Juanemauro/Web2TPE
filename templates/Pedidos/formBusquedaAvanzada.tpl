@@ -25,6 +25,6 @@
                     <option value="En preparación">En preparación</option>
                     <option value="En camino">En camino</option>
                 </select>
-        <button type="submit" class="btn btn-warning">Filtrar</button>
+        <button type="submit" class="btn btn-warning">Realizar búsqueda avanzada</button>
     </form>
 </div>

@@ -83,7 +83,9 @@ class ImagenesController {
                 $imagen = $this->moverImagen($nombre, $nombre_tmp); // mover imagen a la carpeta temporal
                 $this->imagenesModel->addImages($id_pedido, $imagen, $descripcion); // agregar imagen a la BDD
             }else{
-                array_push($this->errorImagenes, $images['name'][$i]);
+                if ($images['name'][$i] !== ""){ // Caso en el que no se agregan imágenes 
+                    array_push($this->errorImagenes, $images['name'][$i]); // Agrego nombre de imágenes al array
+                }                
             } 
         }
         return $this->errorImagenes;  
@@ -111,9 +113,9 @@ class ImagenesController {
                 if (!empty($imagen)){
                     $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
                     $this->imagenesModel->deleteImagen($id_imagen);
-                    unlink($imagen->ruta); // Elimina el archivo (la imagen) de la carpeta           
+                    unlink($imagen->ruta); // Elimina el archivo (la imagen) de la carpeta             
                     $url_galeria = 'http://localhost/Proyectos/Web2TPE/verImagenes/'. $pedido->id_pedido;                     
-                    $url_edit_pedido = 'http://localhost/Proyectos/Web2TPE/editPedido/'. $pedido->id_pedido;                    
+                    $url_edit_pedido = 'http://localhost/Proyectos/Web2TPE/editPedido/'. $pedido->id_pedido;     
                     if ($_SESSION['url'] == $url_galeria){
                         header('Location: ' . VERIMAGENES . $pedido->id_pedido);
                     }else if($_SESSION['url'] == $url_edit_pedido){

@@ -6,8 +6,5 @@
                 <option value="{$producto->nombre}"> {$producto->nombre}</option>
             {/foreach}            
     </select>
-    <button type="submit" class="btn btn-primary" id="filtrarPedidos">Filtrar</button>
-    {if ($admin == true or $loggeado == true)}
-    <a href="showBusquedaAvanzadaForm"type="submit" class="btn btn-warning" id="filtrarPedidos">Búsqueda Avanzada</a>
-{/if}
+    <button type="submit" class="btn btn-primary" id="filtrarPedidos">Filtrar</button> 
 </form>

@@ -3,18 +3,20 @@
     {if $admin == true}
         {include 'templates/Pedidos/pedidosAdmin.tpl'}  
     {else} 
-        {if ($loggeado == true and $admin == false)}
+        {if ($loggeado == true)}
             {include 'templates/Pedidos/pedidosLoggeado.tpl'}
-            {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
+            {*{include 'templates/Pedidos/filtroPedidosProducto.tpl'}
             {include 'templates/Pedidos/formBusquedaAvanzada.tpl'}
-            {include 'templates/Pedidos/formCantPedidosPaginacion.tpl'}
+            {include 'templates/Pedidos/formCantPedidosPaginacion.tpl'}*}            
+        {*{else} 
             
-        {else} 
-            {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
-            {include 'templates/Pedidos/tablaPedidos.tpl'}    
+            {include 'templates/Pedidos/tablaPedidos.tpl'}*}    
         {/if}
-    {/if}     
-    {if ($admin == true or $loggeado == true)}
+    {/if}
+    {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
+    {include 'templates/Pedidos/formBusquedaAvanzada.tpl'}
+    {include 'templates/Pedidos/formCantPedidosPaginacion.tpl'}     
+    {*{if ($admin == true or $loggeado == true)}*}
         {if {$pagina} eq 0}
             <h1>No existen pedidos con esos datos</h1>            
         {else}
@@ -53,6 +55,6 @@
                 </ul>
             </nav>
         {/if}
-    {/if}
+    {*{/if}*}
 </div>
 {include 'templates/Acceso/footer.tpl'}

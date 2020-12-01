@@ -53,7 +53,7 @@ class PedidosModel {
         }          
         return $sentencia->fetchColumn();
     }
-    // Devuelve una tabla con todos los pedidos (para usuario público)
+    // Devuelve una tabla con todos los pedidos 
     function getPedidos(){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario'); 
         $sentencia->execute();

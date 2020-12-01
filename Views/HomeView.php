@@ -24,7 +24,7 @@ class HomeView {
         $this->smarty->assign('usuario', $usuario);
         $this->smarty->display('templates/Acceso/faq.tpl');
     }
-    // Muestra un mensaje de error al usuario cuando no completó todos los campos del formulario o accedo a algún lugar con tablas vacías, etc
+    // Muestra un mensaje de error al usuario cuando no completó todos los campos del formulario, página inválida, etc
     function showError($mensajeError, $redireccion, $seccion, $loggeado, $usuario, $admin){
         $this->smarty->assign('titulo', "Error!");
         $this->smarty->assign('loggeado', $loggeado);
@@ -36,6 +36,7 @@ class HomeView {
         $this->smarty->display('templates/Acceso/error.tpl');
     }
 
+    // Muestra un mensaje de error cuando el usuario sube una o más imágenes con un formato no válido
     function showErrorImagen($mensajeError, $errorImagenes, $redireccion1, $redireccion2, $seccion1, $seccion2, $loggeado, $usuario, $admin){
         $this->smarty->assign('titulo', "Error!");
         $this->smarty->assign('loggeado', $loggeado);
@@ -49,7 +50,6 @@ class HomeView {
         $this->smarty->assign('redireccion2', $redireccion2);
         $this->smarty->display('templates/Acceso/errorImagenes.tpl');
     }
-
 
     // Muestra el menú para el ABM de usuario
     function showMenuAdmin($loggeado, $usuarios, $usuario, $admin){

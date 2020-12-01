@@ -41,57 +41,60 @@ class PedidosController {
         $productos = $this->productosModel->getProductos();                        
         if ($this->loggeado){
             $usuario = $_SESSION["ALIAS"]; // Para manejar lo que hace el usuario loggeado + haeader (siempre va a haber al menos uno, el admin "padre")
-            $usuarios = $this->usersModel->getAllUsuarios(); // Traigo todos los usuarios para el filtro de búsqueda avanzada
-            $usuarioBusqueda = $_GET["usuario"]; 
-            $producto = $_GET["producto"]; 
-            $estado = $_GET["estado"];
-            if (empty($usuarioBusqueda)){ // Casos donde no se ingresa nada en el form o es la primera vez que ingresa a Pedidos
-                $usuarioBusqueda = "Todos";
-            }
-            if (empty($producto)){
-                $producto = "Todos";
-            }
-            if (empty($estado)){
-                $estado = "Todos";
-            }
-            ///// ------------ PAGINACIÓN -> CANTIDAD DE PEDIDOS POR PÁGINA ------------
-            $cant_pedidos = $this->pedidosModel->getCantidadPedidos($usuarioBusqueda, $producto, $estado); // Cantidad de pedidos según consulta del filtro que se indica                 
-            if ($cant_pedidos == 0){ // Caso en el que no hay pedidos con esos valores o no hay pedidos
-                $cant_paginas = 0; 
-                $pagina = 0;
-                $pedidos_por_pagina = 0;
-                $inicio = 0; 
-                $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); 
-                $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);
-            }else{
-                if ($_GET['items'] == null || ($_GET['items'] <= 0) || ($_GET['items'] > $cant_pedidos)){ 
-                    $pedidos_por_pagina = 5; // Si entro por primera vez la cantidad default es 5 -> [inicio, pedidos por página]
-                }else{
-                    $pedidos_por_pagina = $_GET['items']; // Cantidad ingresada por el usuario
-                }
-
-                ///// ------------ PAGINACIÓN -> PÁGINA ACTUAL ------------ 
-                $cant_paginas = ceil($cant_pedidos/$pedidos_por_pagina); // Función techo                      
-                if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas )){ // Verifico a la página que debe redirigirse
-                    // Primer ingreso o página inválida, redirige a la primera página
-                    header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina . '&usuario='. $usuarioBusqueda . '&producto='.$producto.'&estado='.$estado ); 
-                }else{
-                    $pagina = $_GET['pagina']; // Página actual
-                }             
-                $inicio = (($pagina-1)*$pedidos_por_pagina); // Primer pedido de cada página -> [inicio, pedidos por página]
-                $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); // Obtengo los pedidos filtrados
-                $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);  
-            }    
-        }else{ // USUARIO PÚBLICO
+        }else{
             $usuario = "";
-            $pedidos=$this->pedidosModel->getPedidos(); // TODOS los pedidos para cuando nadie se loggeó
-            if (!empty($pedidos)){
-                $this->pedidosView->showPedidosPublico($pedidos, $productos, $this->loggeado, $usuario, $this->admin);     
-            }else{
-                $seccion = "a Home";  
-                $this->homeView->showError("Aún no se realizaron pedidos.", "Pedidos", $seccion, $this->loggeado, $usuario, $this->admin);
-            }                
         }
+        $usuarios = $this->usersModel->getAllUsuarios(); // Traigo todos los usuarios para el filtro de búsqueda avanzada
+        $usuarioBusqueda = $_GET["usuario"]; 
+        $producto = $_GET["producto"]; 
+        $estado = $_GET["estado"];
+        if (empty($usuarioBusqueda)){ // Casos donde no se ingresa nada en el form o es la primera vez que ingresa a Pedidos
+            $usuarioBusqueda = "Todos";
+        }
+        if (empty($producto)){
+            $producto = "Todos";
+        }
+        if (empty($estado)){
+            $estado = "Todos";
+        }
+        ///// ------------ PAGINACIÓN -> CANTIDAD DE PEDIDOS POR PÁGINA ------------
+        $cant_pedidos = $this->pedidosModel->getCantidadPedidos($usuarioBusqueda, $producto, $estado); // Cantidad de pedidos según consulta del filtro que se indica                 
+        if ($cant_pedidos == 0){ // Caso en el que no hay pedidos con esos valores o no hay pedidos
+            $cant_paginas = 0; 
+            $pagina = 0;
+            $pedidos_por_pagina = 0;
+            $inicio = 0; 
+            $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); 
+            $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);
+        }else{
+            if ($_GET['items'] == null || ($_GET['items'] <= 0) || ($_GET['items'] > $cant_pedidos)){ 
+                $pedidos_por_pagina = 5; // Si entro por primera vez la cantidad default es 5 -> [inicio, pedidos por página]
+            }else{
+                $pedidos_por_pagina = $_GET['items']; // Cantidad ingresada por el usuario
+            }
+
+            ///// ------------ PAGINACIÓN -> PÁGINA ACTUAL ------------ 
+            $cant_paginas = ceil($cant_pedidos/$pedidos_por_pagina); // Función techo                      
+            if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas )){ // Verifico a la página que debe redirigirse
+                // Primer ingreso o página inválida, redirige a la primera página
+                header('Location: ' . PEDIDOS. '?pagina=1&items='.$pedidos_por_pagina . '&usuario='. $usuarioBusqueda . '&producto='.$producto.'&estado='.$estado ); 
+            }else{
+                $pagina = $_GET['pagina']; // Página actual
+            }             
+            $inicio = (($pagina-1)*$pedidos_por_pagina); // Primer pedido de cada página -> [inicio, pedidos por página]
+            $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); // Obtengo los pedidos filtrados
+            $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);  
+        }    
+        //}else{ // USUARIO PÚBLICO
+        //    $usuario = "";
+        //    $pedidos=$this->pedidosModel->getPedidos(); // TODOS los pedidos para cuando nadie se loggeó
+        //    if (!empty($pedidos)){
+        //        $this->pedidosView->showPedidosPublico($pedidos, $productos, $this->loggeado, $usuario, $this->admin);     
+        //    }else{
+        //        $seccion = "a Home";  
+        //        $this->homeView->showError("Aún no se realizaron pedidos.", "Pedidos", $seccion, $this->loggeado, $usuario, $this->admin);
+        //    }                
+        //}
     }
 
     // MOSTRAR PEDIDOS DEL USUARIO QUE ESTÁ LOGGEADO EN ESTE MOMENTO
@@ -164,11 +167,11 @@ class PedidosController {
         $producto=$_POST["inputPedido"];
         $cantidad=$_POST["inputCantidad"];
         $estado = "En preparación";
-        $id_usuario = $_SESSION['ID_USUARIO'];
-        $descripcion=$_POST["descripcion"];          
+        $id_usuario = $_SESSION['ID_USUARIO'];                
         if (!empty($cliente) && !empty($direccion) && !empty($producto) && !empty($cantidad)){ //Verifico que ingrese todos los datos en el formulario
-            $id_pedido = $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario); // Retorno el id del último pedido para asociar las imágenes
-            if ($this->admin && (!empty($_FILES['image']))){       
+            $id_pedido = $this->pedidosModel->addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario); // Retorno el id del último pedido para asociar las imágenes   
+            if ($this->admin && (!empty($_FILES['image']))){      
+                $descripcion=$_POST["descripcion"];   
                 $insert = $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
                 if (!empty($insert)){ // Si alguna imagen no pudo subirse, esto va a tener al menos un elemento y va a mostrar el template con el error
                     $seccion1 = "Editar pedido";
@@ -177,13 +180,15 @@ class PedidosController {
                     $redireccion2 = BASE_URL.'verImagenes/'. $id_pedido; 
                     $this->homeView->showErrorImagen("Las siguientes imágenes no pudieron cargarse: ", $insert, $redireccion1, $redireccion2, $seccion1, $seccion2, $this->loggeado, $usuario, $this->admin);
                 }else{
-                    header("Location: " . PEDIDOS);
-                }                     
-            }           
+                    header("Location: " . PEDIDOS);   
+                }                
+            }else{
+                header("Location: " . PEDIDOS);  
+            }         
         }else{
             $seccion = "agregar pedido";  
             $this->homeView->showError("Faltan campos obligatorios.", "newPedido", $seccion, $this->loggeado, $usuario, $this->admin);
-        }
+        }       
     }
 
     // MUESTRA TABLA CON LOS PEDIDOS
@@ -241,24 +246,24 @@ class PedidosController {
         $cantidad = $_POST["cantidadPedidoEditado"];
         $estado = $_POST["estadoPedidoEditado"];
         $id_pedido = $_POST["idPedidoEditado"];
-        $id_producto = $_POST["idProductoEditado"];
-        $descripcion=$_POST["descripcion"];         
+        $id_producto = $_POST["idProductoEditado"];                
         if (!empty($cliente) && !empty($direccion) && !empty($cantidad) && !empty($estado) && !empty($id_producto)){ //Verifico que los parámetros (campos del form de editar el pedido) no estén vacíos
             $this->pedidosModel->updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido);
-            $insert = $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);
-                if (!empty($insert)){ // Si alguna imagen no pudo subirse, esto va a tener al menos un elemento y va a mostrar el template con el error
-                    $seccion1 = "Editar pedido";
-                    $seccion2 = "imágenes del pedido";  
-                    $redireccion1 = BASE_URL.'editPedido/'. $id_pedido;
-                    $redireccion2 = BASE_URL.'verImagenes/'. $id_pedido; 
-                    $this->homeView->showErrorImagen("Las siguientes imágenes no pudieron cargarse: ", $insert, $redireccion1, $redireccion2, $seccion1, $seccion2, $this->loggeado, $usuario, $this->admin);
-                }else{
-                    header("Location: ".detailPedido.'/'.$id_pedido);
-                }    
+            $descripcion=$_POST["descripcion"]; 
+            $insert = $this->imagenesController->insertarImagenes($_FILES['image'], $id_pedido, $this->loggeado, $this->admin, $usuario, $descripcion);            
+            if (!empty($insert)){ // Si alguna imagen no pudo subirse, esto va a tener al menos un elemento y va a mostrar el template con el error            
+                $seccion1 = "Editar pedido";
+                $seccion2 = "imágenes del pedido";  
+                $redireccion1 = BASE_URL.'editPedido/'. $id_pedido;
+                $redireccion2 = BASE_URL.'verImagenes/'. $id_pedido; 
+                $this->homeView->showErrorImagen("Las siguientes imágenes no pudieron cargarse: ", $insert, $redireccion1, $redireccion2, $seccion1, $seccion2, $this->loggeado, $usuario, $this->admin);
+            }else{
+               header("Location: ".detailPedido.'/'.$id_pedido);
+            }
         }else{
             $seccion = "seleccionar un pedido";    
             $this->homeView->showError("Faltan campos obligatorios.", "menuEditPedido", $seccion, $this->loggeado, $usuario, $this->admin);
-        }
+        }         
     } 
 
     // VER DETALLE DE PEDIDO
