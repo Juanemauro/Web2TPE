@@ -12,6 +12,6 @@ $router->addRoute('comentario/:ID', 'DELETE', 'ComentariosController', 'borrarCo
 $router->addRoute('comentario', 'POST', 'ComentariosController', 'agregarComentario');
 $router->addRoute('comentario/:ID', 'PUT', 'ComentariosController', 'updateComentario');
 
-
  //run
 $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']); 
+?>

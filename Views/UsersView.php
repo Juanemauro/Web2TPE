@@ -1,12 +1,17 @@
 <?php
+
 require_once "./libs/smarty/Smarty.class.php";
+
 class UsersView{
+
     // DECLARACIÓN DE ATRIBUTOS
     private $smarty;
+
     // CONSTRUCTOR
     function __construct() {
         $this->smarty = new Smarty();
     }
+
     // Muestra form para loggearse
     function showLogin($aviso = "", $loggeado, $admin){
         $this->smarty->assign('titulo', "Login");
@@ -15,6 +20,7 @@ class UsersView{
         $this->smarty->assign('admin', $admin);
         $this->smarty->display('templates/Acceso/login.tpl');
     }
+
     // Muestra form para registrarse
     function showRegistro($aviso = "", $loggeado, $admin){
         $this->smarty->assign('titulo', "Registro");
@@ -24,6 +30,7 @@ class UsersView{
         $this->smarty->display('templates/Acceso/registro.tpl');
     }
 
+    // Muestra un form para escribir el nombre de usuario para recuperar la contraseña
     function showSelectUser($error, $loggeado, $admin){
         $this->smarty->assign('titulo', "Recuperar contraseña");
         $this->smarty->assign('error', $error);
@@ -32,6 +39,7 @@ class UsersView{
         $this->smarty->display('templates/Acceso/usuarioRecuperar.tpl');
     }
 
+    // Muestra un form para verificar la pregunta y respuesta
     function showPreguntasForm($aviso, $loggeado, $usuario, $admin){
         $this->smarty->assign('titulo', "Preguntas secretas del usuario");
         $this->smarty->assign('aviso', $aviso);
@@ -41,6 +49,7 @@ class UsersView{
         $this->smarty->display('templates/Acceso/Preguntas.tpl');
     }
 
+    // Muestra un form para escribir la nueva contraseña
     function showNewPasswordForm($error, $loggeado, $alias, $admin){
         $this->smarty->assign('titulo', "Actualizar contraseña");
         $this->smarty->assign('error', $error);

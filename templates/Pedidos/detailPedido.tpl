@@ -37,23 +37,23 @@
         {*form add comentario*}
         <div>      
             {if $loggeado == true or $admin == true}                
-                    <form id="form-comentario" method="POST">
-                        <div class="form-group shadow-textarea">
-                            <h3>Tu opinión nos interesa..</h3>
-                            <textarea id="campo" class="form-control z-depth-1" name="texto" rows="4" cols="12" placeholder="Dejanos aquí tu comentario.." required></textarea>                        
-                        </div>
-                        <h6>Puntaje:  
-                        <select id="puntaje" class="form-control">
-                                <option value="1" name="puntos">1</option>
-                                <option value="2" name="puntos">2</option>
-                                <option value="3" name="puntos">3</option>
-                                <option value="4" name="puntos">4</option>
-                                <option value="5" name="puntos">5</option>
-                        </select>
-                        </h6>
-                        <input name="id_usuario" type="hidden" value="{$id_usuario}">
-                        <button type="submit" class="btn btn-primary">Agregar comentario</button>
-                    </form>                
+                <form id="form-comentario" method="POST">
+                    <div class="form-group shadow-textarea">
+                        <h3>Tu opinión nos interesa..</h3>
+                        <textarea id="campo" class="form-control z-depth-1" name="texto" rows="4" cols="12" placeholder="Dejanos aquí tu comentario.." required></textarea>                        
+                    </div>
+                    <h6>Puntaje:  
+                    <select id="puntaje" class="form-control">
+                            <option value="1" name="puntos">1</option>
+                            <option value="2" name="puntos">2</option>
+                            <option value="3" name="puntos">3</option>
+                            <option value="4" name="puntos">4</option>
+                            <option value="5" name="puntos">5</option>
+                    </select>
+                    </h6>
+                    <input name="id_usuario" type="hidden" value="{$id_usuario}">
+                    <button type="submit" class="btn btn-primary">Agregar comentario</button>
+                </form>                
             {/if} 
         </div>  
 </div>

@@ -6,6 +6,7 @@ require_once './Views/PedidosView.php';
 require_once './Views/HomeView.php';
 
 class ImagenesController {
+
     private $imagenesModel;
     private $pedidosView; 
     private $homeView;
@@ -134,3 +135,4 @@ class ImagenesController {
         }                    
     }    
 }
+?>

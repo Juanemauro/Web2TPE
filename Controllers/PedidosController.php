@@ -72,7 +72,6 @@ class PedidosController {
             }else{
                 $pedidos_por_pagina = $_GET['items']; // Cantidad ingresada por el usuario
             }
-
             ///// ------------ PAGINACIÓN -> PÁGINA ACTUAL ------------ 
             $cant_paginas = ceil($cant_pedidos/$pedidos_por_pagina); // Función techo                      
             if ($_GET['pagina'] == null || ($_GET['pagina'] <= 0) || ($_GET['pagina'] > $cant_paginas )){ // Verifico a la página que debe redirigirse
@@ -85,16 +84,6 @@ class PedidosController {
             $pedidos = $this->pedidosModel->getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $pedidos_por_pagina); // Obtengo los pedidos filtrados
             $this->pedidosView->showPedidosView($pedidos, $productos, $this->loggeado, $usuario, $this->admin, $cant_paginas, $pagina, $pedidos_por_pagina, $usuarios, $usuarioBusqueda, $producto, $estado, $cant_pedidos);  
         }    
-        //}else{ // USUARIO PÚBLICO
-        //    $usuario = "";
-        //    $pedidos=$this->pedidosModel->getPedidos(); // TODOS los pedidos para cuando nadie se loggeó
-        //    if (!empty($pedidos)){
-        //        $this->pedidosView->showPedidosPublico($pedidos, $productos, $this->loggeado, $usuario, $this->admin);     
-        //    }else{
-        //        $seccion = "a Home";  
-        //        $this->homeView->showError("Aún no se realizaron pedidos.", "Pedidos", $seccion, $this->loggeado, $usuario, $this->admin);
-        //    }                
-        //}
     }
 
     // MOSTRAR PEDIDOS DEL USUARIO QUE ESTÁ LOGGEADO EN ESTE MOMENTO

@@ -53,12 +53,14 @@ class PedidosModel {
         }          
         return $sentencia->fetchColumn();
     }
+
     // Devuelve una tabla con todos los pedidos 
     function getPedidos(){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.cantidad, pedido.id_usuario, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario'); 
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }             
+    }    
+
     // Devuelve una tabla con los pedidos que van en cada página de la paginación
     function getPedidosPorPagina($usuarioBusqueda, $producto, $estado, $inicio, $fin){ 
         // Filtrar por un valor de c/u + 6 combinaciones + elije todos de todos los filtros = 8 combinaciones  
@@ -140,59 +142,69 @@ class PedidosModel {
         }          
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
     // Devuelve una tabla con los pedidos del usuario que está loggeado
     function getPedidosByUser($usuario){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.estado, pedido.id_usuario, pedido.cantidad, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario where pedido.id_usuario = ? order by cliente asc'); 
         $sentencia->execute(array($usuario));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
     // Devuelve una tabla con todos los pedidos filtrados por NOMBRE de producto
     function getPedidosByProducto($producto){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre, usuario.alias as alias FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto JOIN usuario ON pedido.id_usuario = usuario.id_usuario WHERE producto.nombre=?');
         $sentencia->execute(array($producto));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
     // Devuelve una tabla con todos los pedidos filtrados por ID de producto -> utilizado para el restrict
     function getPedidosByIdProducto($id_producto){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto WHERE producto.id_producto=?');
         $sentencia->execute(array($id_producto));
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
     // Devuelve una tabla con todos los datos de los pedidos (ORDENADOS POR ID_PRODUCTO EN FORMA ASCENDENTE) y una columna extra con el nombre del producto
     function getPedidosOrdenadosByProductoDesc(){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto ORDER BY producto.nombre desc');
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
     // Devuelve una tabla con todos los datos de los pedidos (ORDENADOS POR ID_PRODUCTO EN FORMA DESCENDENTE) y una columna extra con el nombre del producto
     function getPedidosOrdenadosByProductoAsc(){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto ORDER BY producto.nombre asc');
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
     // Devuelve una tabla con todos los datos de los pedidos (ORDENADOS POR CLIENTE EN FORMA DESCENDENTE) y una columna extra con el nombre del producto
     function getPedidosOrdenadosByClienteDesc(){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto ORDER BY cliente desc');
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
-    }    
+    } 
+
     // Devuelve una tabla con todos los datos de UN DETERMINADO PRODUCTO y una columna extra con el nombre del producto
     function getPedido($id){
         $sentencia = $this->db->prepare('SELECT pedido.id_pedido, pedido.id_producto, pedido.direccion, pedido.cliente, pedido.cantidad, pedido.id_usuario, pedido.estado, producto.nombre FROM pedido JOIN producto ON pedido.id_producto = producto.id_producto where id_pedido= ?');
         $sentencia->execute(array($id));
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
+
     // Agrega un pedido a la tabla
     function addPedido($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario){
         $sentencia = $this->db->prepare('INSERT INTO pedido(cliente, direccion, id_producto, cantidad, estado, id_usuario) VALUES(?,?,?,?,?,?)');
         $sentencia->execute(array($cliente, $direccion, $producto, $cantidad, $estado, $id_usuario));
         return $this->db->lastInsertId();
     }
+
     // Actualiza un pedido
     function updatePedido($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido){
         $sentencia = $this->db->prepare('UPDATE pedido SET cliente=?, direccion=?, cantidad=?, estado=?, id_producto=? WHERE id_pedido = ?');
         $sentencia->execute(array($cliente, $direccion, $cantidad, $estado, $id_producto, $id_pedido));
-    }    
+    } 
+      
     // Borra un pedido
     function deletePedido($id){
         $sentencia = $this->db->prepare('DELETE FROM pedido WHERE pedido.id_pedido = ?' );

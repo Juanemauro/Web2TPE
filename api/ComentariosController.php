@@ -1,9 +1,11 @@
 <?php
+
 require_once './Models/ComentariosModel.php';
 require_once 'ApiController.php';
 require_once './Models/PedidosModel.php';
 
 class ComentariosController extends ApiController {
+
     // CONSTRUCTOR  
     function __construct() {
         parent::__construct();
@@ -11,11 +13,13 @@ class ComentariosController extends ApiController {
         $this->pedidosModel = new PedidosModel();
         $this->apiView = new APIView();
     }
+
     // OBTENER COMENTARIOS
     function getComentarios($params = null) {
         $comentarios = $this->comentariosModel->getComentarios();
         $this->apiView->response($comentarios, 200);
     }
+
     // OBTENER UN COMENTARIO DETERMINADO POR EL ID
     function getComentariosPedido($params = null) {
         $id = $params[':ID']; 
@@ -23,7 +27,6 @@ class ComentariosController extends ApiController {
         if (!empty($id_pedido)){ // Verifico que exista el pedido con ese id
             $comentarios = $this->comentariosModel->getComentariosBypedido($id);
             $this->apiView->response($comentarios, 200); // Verifico que exista el comentario
-            
             //if (!empty($comentarios)){
             //    $this->apiView->response($comentarios, 200); // Verifico que exista el comentario
             //}else{
@@ -33,6 +36,7 @@ class ComentariosController extends ApiController {
             $this->apiView->response("El pedido con id=$id no existe.", 404);
         }        
     }
+
     // BORRAR UN COMENTARIO SEGÚN SU ID
     function borrarComentario($params = null) {
         $id = $params[':ID'];
@@ -42,6 +46,7 @@ class ComentariosController extends ApiController {
         else
             $this->apiView->response("El comentario con el id=$id no existe.", 404);
     }
+
     // AGREGAR COMENTARIO
     function agregarComentario($params = null){
         $body = $this->getData();
@@ -51,6 +56,7 @@ class ComentariosController extends ApiController {
         else
             $this->apiView->response("El comentario no se pudo insertar.", 404);
     }
+
     // ACTUALIZAR COMENTARIO -> no hay que implementarlo
     function updateComentario($params = null){
         $id = $params[':ID'];

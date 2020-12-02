@@ -1,5 +1,7 @@
 <?php
+
     class ImagenesModel{
+
         private $db;
         // CONSTRUCTOR
         function __construct(){

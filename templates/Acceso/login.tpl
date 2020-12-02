@@ -16,6 +16,5 @@
                 {$aviso}
             </div>
         {/if}
-
 </div>
 {include 'templates/Acceso/footer.tpl'}

@@ -4,19 +4,12 @@
         {include 'templates/Pedidos/pedidosAdmin.tpl'}  
     {else} 
         {if ($loggeado == true)}
-            {include 'templates/Pedidos/pedidosLoggeado.tpl'}
-            {*{include 'templates/Pedidos/filtroPedidosProducto.tpl'}
-            {include 'templates/Pedidos/formBusquedaAvanzada.tpl'}
-            {include 'templates/Pedidos/formCantPedidosPaginacion.tpl'}*}            
-        {*{else} 
-            
-            {include 'templates/Pedidos/tablaPedidos.tpl'}*}    
+            {include 'templates/Pedidos/pedidosLoggeado.tpl'}  
         {/if}
     {/if}
     {include 'templates/Pedidos/filtroPedidosProducto.tpl'}
     {include 'templates/Pedidos/formBusquedaAvanzada.tpl'}
     {include 'templates/Pedidos/formCantPedidosPaginacion.tpl'}     
-    {*{if ($admin == true or $loggeado == true)}*}
         {if {$pagina} eq 0}
             <h1>No existen pedidos con esos datos</h1>            
         {else}
