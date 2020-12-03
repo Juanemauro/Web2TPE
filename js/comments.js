@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function getComentarios(id_pedido) {
     fetch('api/comentarios/' + id_pedido)
         .then(response => response.json())    
-        .then(comments => app.comentarios = comments)  
+        .then(comments => app.comentarios = comments)  // Sería como hacer el "assign en Smarty"
         .catch(error => console.log(error));
 }
 

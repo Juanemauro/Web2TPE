@@ -8,6 +8,12 @@ class ComentariosModel {
         $this->db = new PDO('mysql:host=localhost;dbname=db_delivery;charset=utf8', 'root', '');
     }
 
+    // Devuelve todos los datos de un comentario
+    function getComentario($id) {
+        $sentencia = $this->db->prepare('SELECT * FROM comentario WHERE comentario.id_comentario =?');
+        $sentencia->execute(array($id));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
     // Devuelve una tabla con los datos de todos los comentarios
     function getComentarios() {
         $sentencia = $this->db->prepare('SELECT * FROM comentario');
